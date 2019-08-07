@@ -1,21 +1,68 @@
 package modelo;
 import java.util.Date;
+import javax.persistence.Entity;
 
+
+@Entity
+@Table (name="preguntas")
 public class Pregunta {
-
+        
+        @Id
 	private int idPregunta;
 	private String pregunta;
 	private String descripcion;
 	private Date fechaPublicacion;
 
-	/**
-	 * 
-	 * @param unaRespuesta
-	 */
-	public void añadirRespuesta(Respuesta unaRespuesta) {
-		// TODO - implement Pregunta.añadirRespuesta
-		throw new UnsupportedOperationException();
-	}
+        public Pregunta() {
+        }
+
+        public Pregunta(String pregunta, String descripcion, Date fechaPublicacion) {
+            this.pregunta = pregunta;
+            this.descripcion = descripcion;
+            this.fechaPublicacion = fechaPublicacion;
+        }
+
+        public int getIdPregunta() {
+            return idPregunta;
+        }
+
+        public void setIdPregunta(int idPregunta) {
+            this.idPregunta = idPregunta;
+        }
+
+        public String getPregunta() {
+            return pregunta;
+        }
+
+        public void setPregunta(String pregunta) {
+            this.pregunta = pregunta;
+        }
+
+        public String getDescripcion() {
+            return descripcion;
+        }
+
+        public void setDescripcion(String descripcion) {
+            this.descripcion = descripcion;
+        }
+
+        public Date getFechaPublicacion() {
+            return fechaPublicacion;
+        }
+
+        public void setFechaPublicacion(Date fechaPublicacion) {
+            this.fechaPublicacion = fechaPublicacion;
+        }
+
+
+        /**
+         * 
+         * @param unaRespuesta
+         */
+        public void añadirRespuesta(Respuesta unaRespuesta) {
+                // TODO - implement Pregunta.añadirRespuesta
+                throw new UnsupportedOperationException();
+        }
 
 	/**
 	 * 
