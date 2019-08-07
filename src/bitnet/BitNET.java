@@ -7,6 +7,8 @@ package bitnet;
 
 import controlador.Controlador;
 import controlador.Persistencia;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *

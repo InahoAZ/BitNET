@@ -1,6 +1,15 @@
 package modelo;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 
 @Entity
@@ -8,10 +17,24 @@ import javax.persistence.Entity;
 public class Pregunta {
         
         @Id
+        @SequenceGenerator(name="sec_idPregunta", initialValue=1, allocationSize=1)
+        @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="sec_idPregunta")
 	private int idPregunta;
+        
 	private String pregunta;
 	private String descripcion;
+        
+        @Temporal(javax.persistence.TemporalType.DATE)
 	private Date fechaPublicacion;
+        
+        @ManyToOne
+        private Foro foro;
+        
+        @OneToMany(mappedBy = "pregunta")
+        private List<Respuesta> respuestas;
+        
+        @OneToMany(mappedBy = "pregunta")
+        private List<Reporte> reportes;
 
         public Pregunta() {
         }

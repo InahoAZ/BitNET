@@ -1,12 +1,26 @@
 package modelo;
+
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
 @Entity
 @Table(name="foro")
 public class Foro {
         @Id
+        @SequenceGenerator(name="sec_idForo", initialValue=1, allocationSize=1)
+        @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="sec_idForo")
 	private int idForo;
 	private String titulo;
 	private String descripcion;
-
+        @OneToMany(mappedBy = "foro")
+        private List<Pregunta> preguntas;
+        
         public Foro() {
         }
 
@@ -14,7 +28,16 @@ public class Foro {
             this.titulo = titulo;
             this.descripcion = descripcion;
         }        
-              
+
+        public List<Pregunta> getPreguntas() {
+            return preguntas;
+        }
+
+        public void setPreguntas(List<Pregunta> preguntas) {
+            this.preguntas = preguntas;
+        }
+        
+        
         
 	/**
 	 * 
