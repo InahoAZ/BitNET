@@ -9,6 +9,10 @@ import modelo.Usuario;
 
 public class Controlador {
 
+    public Controlador(Persistencia p) {
+        
+    }
+
 	/**
 	 * 
 	 * @param unForo

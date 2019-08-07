@@ -1,6 +1,8 @@
 package modelo;
+@Entity
+@Table(name="foro")
 public class Foro {
-
+        @Id
 	private int idForo;
 	private String titulo;
 	private String descripcion;
