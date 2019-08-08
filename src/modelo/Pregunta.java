@@ -57,6 +57,38 @@ public class Pregunta {
             
         }
 
+        public Foro getForo() {
+            return foro;
+        }
+
+        public void setForo(Foro foro) {
+            this.foro = foro;
+        }
+
+        public List<Respuesta> getRespuestas() {
+            return respuestas;
+        }
+
+        public void setRespuestas(List<Respuesta> respuestas) {
+            this.respuestas = respuestas;
+        }
+
+        public List<Reporte> getReportes() {
+            return reportes;
+        }
+
+        public void setReportes(List<Reporte> reportes) {
+            this.reportes = reportes;
+        }
+
+        public Usuario getUsuario() {
+            return usuario;
+        }
+
+        public void setUsuario(Usuario usuario) {
+            this.usuario = usuario;
+        }
+
         public int getIdPregunta() {
             return idPregunta;
         }

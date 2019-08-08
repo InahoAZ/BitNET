@@ -32,15 +32,20 @@ public class Respuesta {
         @OneToMany(mappedBy = "respuesta")
         private List<Reporte> reportes;
         
+        @ManyToOne
+        private Usuario usuario;
+        
         public Respuesta(){
         
         }
         
-        public Respuesta(String respuesta, int puntaje, Date fechaPublicacion) {
-            this.respuesta = respuesta;
-            this.puntaje = puntaje;
-            this.fechaPublicacion = fechaPublicacion;
-        }
+
+        public Respuesta(String respuesta, Pregunta unaPregunta, Usuario unUsuario) {
+            this.respuesta=respuesta;
+            this.pregunta=unaPregunta;
+            this.usuario=unUsuario;
+            this.fechaPublicacion=new Date();
+        }   
 
         
 	/**
@@ -51,6 +56,63 @@ public class Respuesta {
 		// TODO - implement Respuesta.añadirReporte
 		throw new UnsupportedOperationException();
 	}
+
+    public int getIdRespuesta() {
+        return idRespuesta;
+    }
+
+    public void setIdRespuesta(int idRespuesta) {
+        this.idRespuesta = idRespuesta;
+    }
+
+    public String getRespuesta() {
+        return respuesta;
+    }
+
+    public void setRespuesta(String respuesta) {
+        this.respuesta = respuesta;
+    }
+
+    public int getPuntaje() {
+        return puntaje;
+    }
+
+    public void setPuntaje(int puntaje) {
+        this.puntaje = puntaje;
+    }
+
+    public Date getFechaPublicacion() {
+        return fechaPublicacion;
+    }
+
+    public void setFechaPublicacion(Date fechaPublicacion) {
+        this.fechaPublicacion = fechaPublicacion;
+    }
+
+    public Pregunta getPregunta() {
+        return pregunta;
+    }
+
+    public void setPregunta(Pregunta pregunta) {
+        this.pregunta = pregunta;
+    }
+
+    public List<Reporte> getReportes() {
+        return reportes;
+    }
+
+    public void setReportes(List<Reporte> reportes) {
+        this.reportes = reportes;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+        
 
     @Override
     public String toString() {

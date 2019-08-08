@@ -1,10 +1,19 @@
 package vista;
 
-public class VistaPreguntas extends javax.swing.JFrame {
+import controlador.Controlador;
+import javax.swing.JFrame;
+import modelo.Usuario;
 
-    public VistaPreguntas() {
+public class VistaPreguntas extends javax.swing.JFrame {
+    Controlador c;
+    JFrame vistaAnterior;
+    Usuario usuarioActual;
+    public VistaPreguntas(Controlador c,JFrame vistaAnterior,Usuario usuarioActual) {
         initComponents();
         this.setVisible(true);
+        this.c=c;
+        this.vistaAnterior=vistaAnterior;
+        this.usuarioActual=usuarioActual;
     }
 
     @SuppressWarnings("unchecked")

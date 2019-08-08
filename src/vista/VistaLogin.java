@@ -1,9 +1,19 @@
 package vista;
 
-public class VistaLogin extends javax.swing.JFrame {
+import controlador.Controlador;
+import javax.swing.JFrame;
+import modelo.Usuario;
 
-    public VistaLogin() {
+public class VistaLogin extends javax.swing.JFrame {
+    Controlador c;
+    JFrame vistaAnterior;
+    Usuario usuarioActual;
+    public VistaLogin(Controlador c,JFrame vistaAnterior,Usuario usuarioActual) {
         initComponents();
+        this.setVisible(true);
+        this.c=c;
+        this.vistaAnterior=vistaAnterior;
+        this.usuarioActual=usuarioActual;
     }
 
     @SuppressWarnings("unchecked")
@@ -15,7 +25,7 @@ public class VistaLogin extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        btnIniciarSesion = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
@@ -59,14 +69,14 @@ public class VistaLogin extends javax.swing.JFrame {
         getContentPane().add(jPasswordField1);
         jPasswordField1.setBounds(90, 180, 230, 24);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/flecha.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnIniciarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/flecha.png"))); // NOI18N
+        btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnIniciarSesionActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(170, 230, 60, 42);
+        getContentPane().add(btnIniciarSesion);
+        btnIniciarSesion.setBounds(170, 230, 60, 42);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/wallpapers_tecnologia_computacion_by_madboxpc-1.png"))); // NOI18N
         jLabel3.setText("jLabel3");
@@ -80,13 +90,13 @@ public class VistaLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
+        VistaPrincipal vp= new VistaPrincipal(this.c,this,this.usuarioActual);
+    }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnIniciarSesion;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
