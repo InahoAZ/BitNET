@@ -1,10 +1,31 @@
 package vista;
 
+import controlador.Controlador;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import modelo.Pregunta;
+import modelo.Respuesta;
+import modelo.Usuario;
+
 public class VistaCargaReporte extends javax.swing.JFrame {
 
+    Controlador c;
+    JFrame vistaAnterior;
+    Usuario usuarioActual;
+    Respuesta unaRespuesta=null;
+    Pregunta unaPregunta=null;
     
-    public VistaCargaReporte() {
+    public VistaCargaReporte(Controlador c, JFrame vistaAnterior, Usuario usuarioActual,Object reportado) {
         initComponents();
+        this.c=c;
+        this.vistaAnterior = vistaAnterior;
+        this.usuarioActual = usuarioActual;
+        if(reportado.getClass().equals(this.unaRespuesta.getClass())){
+            this.unaRespuesta=(Respuesta) reportado;
+        }
+         if(reportado.getClass().equals(this.unaPregunta.getClass())){
+            this.unaPregunta=(Pregunta) reportado;
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -22,10 +43,13 @@ public class VistaCargaReporte extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtOtro = new javax.swing.JTextField();
         btnReportar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
+        btnVolver = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(330, 280));
+        setMinimumSize(new java.awt.Dimension(330, 280));
+        setPreferredSize(new java.awt.Dimension(330, 280));
         getContentPane().setLayout(null);
 
         opt1.setBackground(new java.awt.Color(0, 0, 0));
@@ -65,24 +89,77 @@ public class VistaCargaReporte extends javax.swing.JFrame {
         txtOtro.setBounds(99, 207, 167, 19);
 
         btnReportar.setText("Reportar");
+        btnReportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnReportar);
-        btnReportar.setBounds(150, 240, 76, 25);
+        btnReportar.setBounds(240, 250, 76, 25);
 
-        btnCancelar.setText("Cancelar");
-        getContentPane().add(btnCancelar);
-        btnCancelar.setBounds(243, 240, 80, 25);
+        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/restart_back_left_arrow_6022.png"))); // NOI18N
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnVolver);
+        btnVolver.setBounds(0, 250, 66, 30);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Diseño sin título.png"))); // NOI18N
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(-570, 0, 910, 290);
+        jLabel3.setBounds(-580, 0, 910, 330);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        
+        this.dispose();
+    }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void btnReportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportarActionPerformed
+        if(this.opt1.isSelected()||this.opt2.isSelected()||this.opt3.isSelected()||this.opt4.isSelected()||this.opt4.isSelected()||this.opt5.isSelected()||(!this.txtOtro.getText().isEmpty())){
+            String causa="";
+            if(this.opt1.isSelected()){
+                causa = this.opt1.getText();
+                this.txtOtro.setEditable(false);
+            }
+            if(this.opt2.isSelected()){
+                causa = this.opt2.getText();
+                this.txtOtro.setEditable(false);
+            }
+            if(this.opt3.isSelected()){
+                causa = this.opt3.getText();
+                this.txtOtro.setEditable(false);
+            }
+            if(this.opt4.isSelected()){
+                causa =  this.opt4.getText();
+                this.txtOtro.setEditable(false);
+            }
+            if(this.opt5.isSelected()){
+                causa=this.opt5.getText();
+                this.txtOtro.setEditable(false);
+            }
+            if(causa.isEmpty()){
+                causa=this.txtOtro.getText();
+            }
+            if(this.unaPregunta==null){
+                if(this.unaRespuesta==null){
+                    JOptionPane.showMessageDialog(null,"No se que cosa cargaron ahi en object XD");
+                }else{
+                    this.c.reportarRespuesta(causa, unaRespuesta, usuarioActual);
+                }
+            }else{
+                this.c.reportarPregunta(causa, unaPregunta, usuarioActual);
+            }
+        }
+    }//GEN-LAST:event_btnReportarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnReportar;
+    private javax.swing.JButton btnVolver;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;

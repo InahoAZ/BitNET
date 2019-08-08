@@ -132,6 +132,7 @@ public class VistaAgregarForo extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTituloFocusGained
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        this.vistaAnterior.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
