@@ -7,8 +7,12 @@ package bitnet;
 
 import controlador.Controlador;
 import controlador.Persistencia;
+import java.util.Date;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import modelo.Rol;
+import modelo.Usuario;
+import vista.VistaPreguntas;
 import vista.VistaPrincipal;
 
 /**

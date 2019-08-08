@@ -1,5 +1,6 @@
 package modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,8 +14,8 @@ import javax.persistence.Table;
 @Table(name="rol")
 public class Rol {
     @Id
-    @SequenceGenerator(name="sec_idRol", initialValue=1, allocationSize=1)
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="sec_idRol")
+    @SequenceGenerator(name="sec_idrol", initialValue=1, allocationSize=1)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="sec_idrol")
     private int idRol;
     
     private String nombre;
@@ -23,11 +24,12 @@ public class Rol {
     private List<Usuario> usuarios;
 
     public Rol() {
-        
+        this.usuarios = new ArrayList<>();        
     }
 
     public Rol(String nombre) {
         this.nombre = nombre;
+        this.usuarios = new ArrayList<>();
     }
 
     public String getNombre() {
@@ -37,6 +39,30 @@ public class Rol {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    
+    public void añadirUsuario(Usuario unUsuario){
+        this.usuarios.add(unUsuario);
+        unUsuario.setRol(this);
+    }
+    
+    public void eliminarUsuario(Usuario unUsuario){
+        this.usuarios.remove(unUsuario);        
+    }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
+
+    
+    @Override
+    public String toString() {
+        return "" + nombre;
+    }
+    
     
     
 }

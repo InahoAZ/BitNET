@@ -1,4 +1,5 @@
 package modelo;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
@@ -17,8 +18,8 @@ import javax.persistence.Temporal;
 public class Pregunta {
         
         @Id
-        @SequenceGenerator(name="sec_idPregunta", initialValue=1, allocationSize=1)
-        @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="sec_idPregunta")
+        @SequenceGenerator(name="sec_idpregunta", initialValue=1, allocationSize=1)
+        @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="sec_idpregunta")
 	private int idPregunta;
         
 	private String pregunta;
@@ -35,14 +36,25 @@ public class Pregunta {
         
         @OneToMany(mappedBy = "pregunta")
         private List<Reporte> reportes;
+        
+        @ManyToOne
+        private Usuario usuario;
 
         public Pregunta() {
+            this.respuestas = new ArrayList<>();
+            this.reportes = new ArrayList<>();
         }
 
-        public Pregunta(String pregunta, String descripcion, Date fechaPublicacion) {
+        public Pregunta(String pregunta, String descripcion, Foro unForo, Usuario unUsuario) {
+            this.respuestas = new ArrayList<>();
+            this.reportes = new ArrayList<>();
             this.pregunta = pregunta;
             this.descripcion = descripcion;
-            this.fechaPublicacion = fechaPublicacion;
+            this.fechaPublicacion = new Date();
+            this.foro = unForo;            
+            this.usuario = unUsuario;
+            
+            
         }
 
         public int getIdPregunta() {
@@ -124,5 +136,12 @@ public class Pregunta {
 		// TODO - implement Pregunta.compararDescripcion
 		throw new UnsupportedOperationException();
 	}
+
+    @Override
+    public String toString() {
+        return "" + pregunta + "  " + descripcion + "  " + fechaPublicacion;
+    }
+        
+        
 
 }

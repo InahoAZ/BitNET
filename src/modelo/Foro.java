@@ -1,5 +1,6 @@
 package modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,8 +14,8 @@ import javax.persistence.Table;
 @Table(name="foro")
 public class Foro {
         @Id
-        @SequenceGenerator(name="sec_idForo", initialValue=1, allocationSize=1)
-        @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="sec_idForo")
+        @SequenceGenerator(name="sec_idforo", initialValue=1, allocationSize=1)
+        @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="sec_idforo")
 	private int idForo;
 	private String titulo;
 	private String descripcion;
@@ -22,11 +23,13 @@ public class Foro {
         private List<Pregunta> preguntas;
         
         public Foro() {
+            this.preguntas = new ArrayList<>();
         }
 
         public Foro(String titulo, String descripcion) {
             this.titulo = titulo;
             this.descripcion = descripcion;
+            this.preguntas = new ArrayList<>();
         }        
 
         public List<Pregunta> getPreguntas() {
@@ -36,16 +39,15 @@ public class Foro {
         public void setPreguntas(List<Pregunta> preguntas) {
             this.preguntas = preguntas;
         }
-        
-        
-        
+                
 	/**
 	 * 
 	 * @param unaPregunta
 	 */
 	public void añadirPregunta(Pregunta unaPregunta) {
-		// TODO - implement Foro.añadirPregunta
-		throw new UnsupportedOperationException();
+            System.out.print("añadirPregunta Foro: ");
+            this.preguntas.add(unaPregunta);
+            System.out.println("OK");
 	}
 
 	/**
@@ -80,7 +82,13 @@ public class Foro {
         public void setIdForo(int idForo) {
             this.idForo = idForo;
         }
-             
+
+        @Override
+        public String toString() {
+            return "" + titulo + "  " + descripcion;
+        }
+        
+        
         
         
 

@@ -1,11 +1,14 @@
 package modelo;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -15,7 +18,7 @@ import javax.persistence.Temporal;
 
 public class Usuario {
         @Id
-	private long legajo;
+	private String legajo;
         
 	private String nombre;
 	private String apellido;
@@ -29,17 +32,26 @@ public class Usuario {
         @ManyToOne
         private Rol rol;
         
-        public Usuario(){       
+        @OneToMany(mappedBy = "usuario")
+        private List<Pregunta> preguntas;
         
+        private String password;
+        
+        public Usuario(){
+            this.preguntas = new ArrayList<>();
+                  
         }
         
-        public Usuario(long legajo, String nombre, String apellido, Date fechaNac, String correo, float reputacion) {
+        public Usuario(String legajo, String nombre, String apellido, Date fechaNac, String correo, String password, Rol rol) {
             this.legajo = legajo;
             this.nombre = nombre;
             this.apellido = apellido;
             this.fechaNac = fechaNac;
             this.correo = correo;
-            this.reputacion = reputacion;
+            this.password = password;
+            this.preguntas = new ArrayList<>();
+            this.rol = rol;
+            
         }
 
         
@@ -48,8 +60,9 @@ public class Usuario {
 	 * @param unaPregunta
 	 */
 	public void añadirPregunta(Pregunta unaPregunta) {
-		// TODO - implement Usuario.añadirPregunta
-		throw new UnsupportedOperationException();
+                System.out.print("añadirPregunta Usuario: ");
+                this.preguntas.add(unaPregunta);
+                System.out.println("OK");
 	}
 
 	/**
@@ -107,12 +120,17 @@ public class Usuario {
 		// TODO - implement Usuario.compararApellido
 		throw new UnsupportedOperationException();
 	}
+        
+        public boolean compararPassword(String password){
+                return password.equals(this.password);        
+        }
+        
 
-        public long getLegajo() {
+        public String getLegajo() {
             return legajo;
         }
 
-        public void setLegajo(long legajo) {
+        public void setLegajo(String legajo) {
             this.legajo = legajo;
         }
 
@@ -162,6 +180,21 @@ public class Usuario {
 
         public void setRol(Rol rol) {
             this.rol = rol;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+        
+        
+
+        @Override
+        public String toString() {
+            return "" + nombre + "  " + apellido + "  " + fechaNac + "  " + correo + "  " + reputacion;
         }
         
         
