@@ -14,8 +14,8 @@ import javax.persistence.Temporal;
 @Table (name="reporte")
 public class Reporte {
         @Id
-        @SequenceGenerator(name="sec_idReporte", initialValue=1, allocationSize=1)
-        @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="sec_idReporte")
+        @SequenceGenerator(name="sec_idreporte", initialValue=1, allocationSize=1)
+        @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="sec_idreporte")
 	private int idReporte;
         
 	private String causa;
@@ -59,6 +59,11 @@ public class Reporte {
 
     public void setBorrado(boolean borrado) {
         this.borrado = borrado;
+    }
+
+    @Override
+    public String toString() {
+        return "" + causa + "  " + fechaReporte;
     }
     
     

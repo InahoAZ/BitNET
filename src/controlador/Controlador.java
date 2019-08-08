@@ -1,31 +1,32 @@
 package controlador;
 
+import java.util.Date;
 import java.util.List;
 import modelo.Foro;
 import modelo.Pregunta;
 import modelo.Reporte;
 import modelo.Respuesta;
+import modelo.Rol;
 import modelo.Usuario;
 
 public class Controlador {
-
-    public Controlador(Persistencia p) {
-        
-    }
+    private Persistencia p;
+    
+        public Controlador(Persistencia p) {
+            this.p = p;
+        }
 
 	/**
 	 * 
 	 * @param unForo
          * @return 
 	 */
-	public List<Pregunta> verListadoDePreguntas(int unForo) {
-		// TODO - implement Controlador.verListadoDePreguntas
-		throw new UnsupportedOperationException();
+	public List<Pregunta> verListadoDePreguntas(Foro unForo) {
+                return unForo.getPreguntas();		
 	}
 
 	public List<Foro> verListadoDeForos() {
-		// TODO - implement Controlador.verListadoDeForos
-		throw new UnsupportedOperationException();
+		return this.p.buscarTodos(Foro.class);
 	}
 
 	/**
@@ -36,8 +37,24 @@ public class Controlador {
 	 * @param unUsuario
 	 */
 	public void añadirPregunta(String pregunta, String descripcion, Foro unForo, Usuario unUsuario) {
-		// TODO - implement Controlador.añadirPregunta
-		throw new UnsupportedOperationException();
+            try{
+                this.p.iniciarTransaccion();
+                System.out.println("1");
+                Pregunta unaPregunta = new Pregunta(pregunta, descripcion, unForo, unUsuario);
+                System.out.println("1.1");
+                System.out.println("forito: " + unForo);
+                unForo.añadirPregunta(unaPregunta);
+                System.out.println("2");
+                //unUsuario.añadirPregunta(unaPregunta);
+                System.out.println("3");
+                this.p.insertar(unaPregunta);
+                System.out.println("insert");
+                this.p.confirmarTransaccion();
+            }catch(Exception e){
+                System.out.println("errorcito: " + e.getMessage());
+                this.p.descartarTransaccion();
+                
+            }
 	}
 
 	/**
@@ -95,7 +112,17 @@ public class Controlador {
 	 */
 	public void añadirForo(String titulo, String descripcion) {
 		// TODO - implement Controlador.añadirForo
-		throw new UnsupportedOperationException();
+		try{
+                    this.p.iniciarTransaccion();
+                    Foro unForo = new Foro(titulo, descripcion);
+                    this.p.insertar(unForo);
+                    this.p.confirmarTransaccion();
+                }catch(Exception e){
+                    System.out.println(e.getMessage());
+                    this.p.descartarTransaccion();
+                }
+                
+                
 	}
 
 	/**
@@ -118,13 +145,32 @@ public class Controlador {
 
 	/**
 	 * 
-	 * @param unUsuario
+     * @param legajo
+     * @param nombre
+     * @param apellido
+     * @param fechaNac
+     * @param correo
+     * @param password
+     * @param rol
 	 */
-	public void añadirUsuario(Usuario unUsuario) {
-		// TODO - implement Controlador.añadirUsuario
-		throw new UnsupportedOperationException();
+	public void añadirUsuario(String legajo, String nombre, String apellido, Date fechaNac, String correo, String password, Rol rol) {
+            try{
+                this.p.iniciarTransaccion();
+                Usuario unUsuario = new Usuario(legajo, nombre, apellido, fechaNac, correo, password, rol);
+                rol.añadirUsuario(unUsuario);
+                this.p.modificar(rol);
+                this.p.insertar(unUsuario);
+                this.p.confirmarTransaccion();
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+                this.p.descartarTransaccion();
+            }
 	}
 
+        public List<Rol> verListadoDeRoles(){     
+            return this.p.buscarTodos(Rol.class);        
+        }
+        
 	/**
 	 * 
 	 * @param unaBusqueda
@@ -193,5 +239,24 @@ public class Controlador {
 		// TODO - implement Controlador.verReportesRespuestas
 		throw new UnsupportedOperationException();
 	}
+        
+        public Usuario iniciarSesion(String legajo, String password){
+            try{
+                this.p.iniciarTransaccion();
+                System.out.println("Inician2 Sesion");
+                Usuario unUsuario = this.p.buscar(Usuario.class, legajo);
+                if (unUsuario.compararPassword(password)) {
+                    System.out.println("Inicio un espectaculo");
+                    return unUsuario;                
+                }else{
+                    System.out.println("no inicio nada");
+                    return null;
+                }                
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+                this.p.descartarTransaccion();
+            }
+        return null;
+        }
 
 }

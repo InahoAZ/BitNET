@@ -7,8 +7,12 @@ package bitnet;
 
 import controlador.Controlador;
 import controlador.Persistencia;
+import java.util.Date;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import modelo.Rol;
+import modelo.Usuario;
+import vista.VistaPreguntas;
 
 /**
  *
@@ -24,6 +28,13 @@ public class BitNET {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("BitNETPU");
         Persistencia p = new Persistencia(emf);
         Controlador c1 = new Controlador(p);
+        Date fechita = new Date();
+        
+        
+        //System.out.println(rol.getUsuarios().get(0));
+        
+        VistaPreguntas vp = new VistaPreguntas(c1,null, null);
+        
         
     }
     

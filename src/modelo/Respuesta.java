@@ -16,8 +16,8 @@ import javax.persistence.Temporal;
 public class Respuesta {
         
         @Id
-        @SequenceGenerator(name="sec_idRespuesta", initialValue=1, allocationSize=1)
-        @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="sec_idRespuesta")
+        @SequenceGenerator(name="sec_idrespuesta", initialValue=1, allocationSize=1)
+        @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="sec_idrespuesta")
 	private int idRespuesta;
 	private String respuesta;
 	private int puntaje;
@@ -51,6 +51,11 @@ public class Respuesta {
 		// TODO - implement Respuesta.añadirReporte
 		throw new UnsupportedOperationException();
 	}
+
+    @Override
+    public String toString() {
+        return "" + respuesta + "  " + puntaje + " puntos  " + fechaPublicacion;
+    }
 
          
 }
