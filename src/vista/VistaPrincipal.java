@@ -1,9 +1,13 @@
 package vista;
  
+import controlador.Controlador;
+
 public class VistaPrincipal extends javax.swing.JFrame {
-    
-    public VistaPrincipal() {
+    Controlador c;
+    public VistaPrincipal(Controlador c) {
         initComponents();
+        this.c=c;
+        this.ListaForos.setListData(this.c.verListadoDeForos().toArray());
         this.setVisible(true);
     }
 
@@ -36,11 +40,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        ListaPreguntas = new javax.swing.JList();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        ListaRespuestas = new javax.swing.JList();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
@@ -85,12 +89,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-pregunta-48.png"))); // NOI18N
         jLabel3.setText("Preguntas");
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane4.setViewportView(jList2);
+        jScrollPane4.setViewportView(ListaPreguntas);
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -98,14 +97,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(51, 0, 102));
         jLabel2.setText("Responde Estas Preguntas!");
 
-        jList1.setBackground(java.awt.SystemColor.control);
-        jList1.setForeground(java.awt.SystemColor.textHighlight);
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        ListaRespuestas.setBackground(java.awt.SystemColor.control);
+        ListaRespuestas.setForeground(java.awt.SystemColor.textHighlight);
+        ListaRespuestas.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "pregunta 1", "pregunta 2", "pregunta 3", "te quiero bb" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(jList1);
+        jScrollPane2.setViewportView(ListaRespuestas);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -248,6 +247,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList ListaForos;
+    private javax.swing.JList ListaPreguntas;
+    private javax.swing.JList ListaRespuestas;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnUsuarios;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -260,8 +261,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JList jList1;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
