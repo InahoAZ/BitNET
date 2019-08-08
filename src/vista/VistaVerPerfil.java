@@ -1,10 +1,17 @@
 package vista;
 
+import controlador.Controlador;
+import javax.swing.JFrame;
+import modelo.Usuario;
+
 public class VistaVerPerfil extends javax.swing.JFrame {
-
-
-    public VistaVerPerfil() {
+    Controlador c;
+    JFrame vistaAnterior;
+    public VistaVerPerfil(Controlador c,JFrame vistaAnterior,Usuario usuarioActual) {
         initComponents();
+        this.setVisible(true);
+        this.c=c;
+        this.vistaAnterior=vistaAnterior;
     }
 
     

@@ -1,5 +1,6 @@
 package controlador;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -66,8 +67,19 @@ public class Controlador {
 	 * @param unaPregunta
 	 */
 	public void eliminarPregunta(Pregunta unaPregunta) {
-		// TODO - implement Controlador.eliminarPregunta
-		throw new UnsupportedOperationException();
+		try{
+                    this.p.iniciarTransaccion();
+                    Foro unForo= unaPregunta.getForo();
+                    unForo.eliminarPregunta(unaPregunta);
+                    Usuario unUsuario = unaPregunta.getUsuario();
+                    unUsuario.eliminarPregunta(unaPregunta);
+                    this.p.modificar(unForo);
+                    this.p.modificar(unUsuario);
+                    this.p.confirmarTransaccion();
+                }catch(Exception e){
+                    System.out.println(e.getMessage());
+                    this.p.descartarTransaccion();
+                }
 	}
 
 	/**
@@ -75,10 +87,34 @@ public class Controlador {
 	 * @param unaBusqueda
 	 */
 	public List<Pregunta> buscarPregunta(String unaBusqueda) {
-		// TODO - implement Controlador.buscarPregunta
-		throw new UnsupportedOperationException();
-	}
-
+		try{
+                    List<Foro> foro=new ArrayList<>();
+                    List<Pregunta>ResultadoPregunta=new ArrayList<>();
+                    int i=0;
+                    while(foro.get(i)!=null){
+                        Foro unForo = foro.get(i);
+                        List<Pregunta> pregunta=unForo.getPreguntas();
+                        int j=0;
+                        while(pregunta.get(j)!=null){
+                            Pregunta unaPregunta = pregunta.get(j);
+                            boolean retorno1=unaPregunta.compararPregunta(unaBusqueda);
+                            boolean retorno2=unaPregunta.compararDescripcion(unaBusqueda);
+                            if(retorno1||retorno2){
+                                ResultadoPregunta.add(unaPregunta);
+                            }
+                        }    
+                    }
+                    if(ResultadoPregunta.isEmpty()){
+                        JOptionPane.showMessageDialog(null,"No se encontraron coincidencias de Preguntas");
+                        return null;
+                    }else{
+                        return ResultadoPregunta;
+                    }
+                }catch(Exception e){
+                    System.out.println(e.getMessage());
+                    return null;
+                }
+        }
 	/**
 	 * 
 	 * @param respuesta
@@ -86,8 +122,17 @@ public class Controlador {
 	 * @param unUsuario
 	 */
 	public void añadirRespuesta(String respuesta, Pregunta unaPregunta, Usuario unUsuario) {
-		// TODO - implement Controlador.añadirRespuesta
-		throw new UnsupportedOperationException();
+		try{
+                    this.p.iniciarTransaccion();
+                    Respuesta unaRespuesta= new Respuesta(respuesta,unaPregunta,unUsuario);
+                    unaPregunta.añadirRespuesta(unaRespuesta);
+                    unUsuario.añadirRespuesta(unaRespuesta);
+                    this.p.insertar(unaRespuesta);
+                    this.p.confirmarTransaccion();
+                }catch(Exception e){
+                    System.out.println(e.getMessage());
+                    this.p.descartarTransaccion();
+                }
 	}
 
 	/**
@@ -95,8 +140,20 @@ public class Controlador {
 	 * @param unaRespuesta
 	 */
 	public void eliminarRespuesta(Respuesta unaRespuesta) {
-		// TODO - implement Controlador.eliminarRespuesta
-		throw new UnsupportedOperationException();
+		try{
+                    this.p.iniciarTransaccion();
+                    Pregunta unaPregunta=unaRespuesta.getPregunta();
+                    unaPregunta.eliminarRespuesta(unaRespuesta);
+                    Usuario unUsuario = unaRespuesta.getUsuario();
+                    unUsuario.eliminarRespuesta(unaRespuesta);
+                    this.p.modificar(unaPregunta);
+                    this.p.modificar(unUsuario);
+                    this.p.confirmarTransaccion();
+                }catch(Exception e){
+                    System.out.println(e.getMessage());
+                    this.p.descartarTransaccion();
+                }
+                
 	}
 
 	/**
@@ -105,8 +162,25 @@ public class Controlador {
 	 * @param positivo
 	 */
 	public void puntuarRespuesta(Respuesta unaRespuesta, boolean positivo) {
-		// TODO - implement Controlador.puntuarRespuesta
-		throw new UnsupportedOperationException();
+		try{
+                     this.p.iniciarTransaccion();
+                     Usuario unUsuario=unaRespuesta.getUsuario();
+                     if(positivo=true){
+                        int puntaje = unaRespuesta.getPuntaje();
+                        unaRespuesta.setPuntaje(puntaje + 1);
+                        float reputacion=unUsuario.getReputacion();
+                        unUsuario.setReputacion(reputacion + 1);
+                     }else{
+                        int puntaje = unaRespuesta.getPuntaje();
+                        unaRespuesta.setPuntaje(puntaje - 1);
+                        float reputacion=unUsuario.getReputacion();
+                        unUsuario.setReputacion(reputacion - 1);
+                     }
+                     this.p.confirmarTransaccion();
+                }catch(Exception e){
+                    System.out.println(e.getMessage());
+                    this.p.descartarTransaccion();
+                }
 	}
 
 	/**
@@ -134,8 +208,14 @@ public class Controlador {
 	 * @param unForo
 	 */
 	public void modificarForo(Foro unForo) {
-		// TODO - implement Controlador.modificarForo
-		throw new UnsupportedOperationException();
+		try{
+                    this.p.iniciarTransaccion();
+                    this.p.modificar(unForo);
+                    this.p.confirmarTransaccion();
+                }catch(Exception e){
+                    System.out.println(e.getMessage());
+                    this.p.descartarTransaccion();
+                }
 	}
 
 	/**
@@ -143,8 +223,14 @@ public class Controlador {
 	 * @param unForo
 	 */
 	public void eliminarForo(Foro unForo) {
-		// TODO - implement Controlador.eliminarForo
-		throw new UnsupportedOperationException();
+		try{
+                    this.p.iniciarTransaccion();
+                    this.p.eliminar(unForo);
+                    this.p.confirmarTransaccion();
+                }catch(Exception e){
+                    System.out.println(e.getMessage());
+                    this.p.descartarTransaccion();
+                }
 	}
 
 	/**
@@ -181,8 +267,31 @@ public class Controlador {
          * @return 
 	 */
 	public List<Usuario> buscarUsuario(String unaBusqueda) {
-		// TODO - implement Controlador.buscarUsuario
-		throw new UnsupportedOperationException();
+		//no esta igual en el diagrama, hay que actualizar DSD
+                try{
+                    List<Usuario>ListaUsuario=new ArrayList<>();
+                    List<Usuario> usuario = this.p.buscarTodos(Usuario.class);//no esta en dsd
+                    int i = 0;
+                    while(usuario.get(i)!=null){
+                        Usuario unUsuario=usuario.get(i);
+                        boolean retorno1=unUsuario.compararNombre(unaBusqueda);
+                        boolean retorno2=unUsuario.compararApellido(unaBusqueda);
+                        if(retorno1||retorno2){
+                            ListaUsuario.add(unUsuario);
+                        }
+                        i++;
+                    }
+                    if(ListaUsuario.isEmpty()){//a partir de aca no esta en dsd
+                        JOptionPane.showMessageDialog(null,"No se encontraron coincidencias");
+                         return null;
+                    }else{
+                        return ListaUsuario;
+                    }
+                }catch(Exception e){
+                    System.out.println(e.getMessage());
+                     return null;
+                }
+       
 	}
 
 	/**
@@ -190,8 +299,14 @@ public class Controlador {
 	 * @param unUsuario
 	 */
 	public void modificarUsuario(Usuario unUsuario) {
-		// TODO - implement Controlador.modificarUsuario
-		throw new UnsupportedOperationException();
+		try{
+                    this.p.iniciarTransaccion();
+                    this.p.modificar(unUsuario);
+                    this.p.confirmarTransaccion();
+                }catch(Exception e){
+                    System.out.println(e.getMessage());
+                    this.p.descartarTransaccion();
+                }
 	}
 
 	/**
@@ -199,8 +314,14 @@ public class Controlador {
 	 * @param unUsuario
 	 */
 	public void eliminarUsuario(Usuario unUsuario) {
-		// TODO - implement Controlador.eliminarUsuario
-		throw new UnsupportedOperationException();
+		try{
+                    this.p.iniciarTransaccion();
+                    this.p.eliminar(unUsuario);
+                    this.p.confirmarTransaccion();
+                }catch(Exception e){
+                    System.out.println(e.getMessage());
+                    this.p.descartarTransaccion();
+                }
 	}
 
 	/**
@@ -210,8 +331,19 @@ public class Controlador {
 	 * @param unUsuario
 	 */
 	public void reportarPregunta(String causa, Pregunta unaPregunta, Usuario unUsuario) {
-		// TODO - implement Controlador.reportarPregunta
-		throw new UnsupportedOperationException();
+		try{
+                    this.p.iniciarTransaccion();
+                    Reporte reporte= new Reporte(causa,unaPregunta,unUsuario);
+                    unaPregunta.añadirReporte(reporte);
+                    unUsuario.añadirReporte(reporte);
+                    this.p.modificar(unaPregunta);
+                    this.p.modificar(unUsuario);
+                    this.p.confirmarTransaccion();
+                }catch(Exception e){
+                    System.out.println(e.getMessage());
+                    this.p.descartarTransaccion();
+                }
+            
 	}
 
 	/**
@@ -221,13 +353,42 @@ public class Controlador {
 	 * @param unUsuario
 	 */
 	public void reportarRespuesta(String causa, Respuesta unaRespuesta, Usuario unUsuario) {
-		// TODO - implement Controlador.reportarRespuesta
-		throw new UnsupportedOperationException();
+		try{
+                    this.p.iniciarTransaccion();
+                    Reporte reporte= new Reporte(causa,unaRespuesta,unUsuario);
+                    unaRespuesta.añadirReporte(reporte);
+                    unUsuario.añadirReporte(reporte);
+                    this.p.modificar(unaRespuesta);
+                    this.p.modificar(unUsuario);
+                    this.p.confirmarTransaccion();
+                }catch(Exception e){
+                    System.out.println(e.getMessage());
+                    this.p.descartarTransaccion();
+                }
 	}
 
 	public List<Reporte> verReportesPreguntas() {
-		// TODO - implement Controlador.verReportesPreguntas
-		throw new UnsupportedOperationException();
+		//no esta igual que en diagrama
+                try{
+                    List<Reporte>ListaReportes=new ArrayList<>();
+                    List<Pregunta> preguntas = this.p.buscarTodos(Pregunta.class);//no esta en dsd
+                    int i = 0;
+                    while(preguntas.get(i)!=null){
+                        Pregunta unaPregunta=preguntas.get(i);
+                        Reporte Reportes=unaPregunta.getReportes().get(i);
+                        ListaReportes.add(Reportes);
+                        i++;
+                    }
+                    if(ListaReportes.isEmpty()){
+                        JOptionPane.showMessageDialog(null,"No se encontraron Reportes de Preguntas");
+                         return null;
+                    }else{
+                        return ListaReportes;
+                    }
+                }catch(Exception e){
+                    System.out.println(e.getMessage());
+                     return null;
+                }
 	}
 
 	/**
@@ -235,13 +396,39 @@ public class Controlador {
 	 * @param unReporte
 	 */
 	public void rechazarReporte(Reporte unReporte) {
-		// TODO - implement Controlador.rechazarReporte
-		throw new UnsupportedOperationException();
+		try{
+                    this.p.iniciarTransaccion();
+                    unReporte.setBorrado(true);
+                    this.p.modificar(unReporte);
+                    this.p.confirmarTransaccion();
+                }catch(Exception e){
+                    System.out.println(e.getMessage());
+                    this.p.descartarTransaccion();
+                }
 	}
 
 	public List<Reporte> verReportesRespuestas() {
-		// TODO - implement Controlador.verReportesRespuestas
-		throw new UnsupportedOperationException();
+		//no esta igual que en diagrama
+                try{
+                    List<Reporte>ListaReportes=new ArrayList<>();
+                    List<Respuesta> respuestas = this.p.buscarTodos(Respuesta.class);//no esta en dsd
+                    int i = 0;
+                    while(respuestas.get(i)!=null){
+                        Respuesta unaRespuesta=respuestas.get(i);
+                        Reporte Reportes=unaRespuesta.getReportes().get(i);
+                        ListaReportes.add(Reportes);
+                        i++;
+                    }
+                    if(ListaReportes.isEmpty()){
+                        JOptionPane.showMessageDialog(null,"No se encontraron Reportes de Respuestas");
+                         return null;
+                    }else{
+                        return ListaReportes;
+                    }
+                }catch(Exception e){
+                    System.out.println(e.getMessage());
+                     return null;
+                }
 	}
         
         public Usuario iniciarSesion(String legajo, String password){

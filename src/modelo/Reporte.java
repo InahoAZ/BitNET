@@ -30,12 +30,27 @@ public class Reporte {
         @ManyToOne
         private Respuesta respuesta;
         
+        @ManyToOne
+        private Usuario usuario;
+        
     public Reporte() {
     }
 
     public Reporte(String causa) {
         this.causa = causa;
     }
+
+    public Reporte(String causa, Pregunta unaPregunta, Usuario unUsuario) {
+        this.causa=causa;
+        this.pregunta=unaPregunta;
+        this.usuario = unUsuario;
+        this.fechaReporte=new Date();
+        this.borrado=false;
+    }
+    public Reporte(String causa, Respuesta unaRespuesta, Usuario unUsuario) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 
     public int getIdReporte() {
         return idReporte;
