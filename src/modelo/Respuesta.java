@@ -52,10 +52,10 @@ public class Respuesta {
 		throw new UnsupportedOperationException();
 	}
 
-    @Override
-    public String toString() {
-        return "" + respuesta + "  " + puntaje + " puntos  " + fechaPublicacion;
-    }
+        @Override
+        public String toString() {
+            return "" + respuesta + "  " + puntaje + " puntos  " + fechaPublicacion;
+        }
 
          
 }

@@ -1,14 +1,23 @@
 package vista;
  
 import controlador.Controlador;
+import javax.swing.JFrame;
+import modelo.Usuario;
 
 public class VistaPrincipal extends javax.swing.JFrame {
     Controlador c;
-    public VistaPrincipal(Controlador c) {
+    JFrame vistaAnterior;
+    Usuario usuarioActual;
+    
+    public VistaPrincipal(Controlador c, JFrame vistaAnterior, Usuario usuarioActual) {
         initComponents();
         this.c=c;
+        this.vistaAnterior = vistaAnterior;
+        this.usuarioActual = usuarioActual;
         this.ListaForos.setListData(this.c.verListadoDeForos().toArray());
         this.setVisible(true);
+        this.lblNombre.setText(usuarioActual.getNombre() + usuarioActual.getApellido());
+        this.lblRol.setText(usuarioActual.getRol().toString());
     }
 
     
@@ -241,7 +250,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
-       // VistaPreguntas vp= new VistaPreguntas();
+       VistaUsuarios vUsuarios = new VistaUsuarios(this.c, this, this.usuarioActual);
+       
         
     }//GEN-LAST:event_btnUsuariosActionPerformed
   

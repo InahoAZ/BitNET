@@ -122,7 +122,9 @@ public class Usuario {
 	}
         
         public boolean compararPassword(String password){
-                return password.equals(this.password);        
+                System.out.println("pwd recibido: " + password);
+                System.out.println("pwd compara2: " + this.password);
+                return this.password.equals(password);       
         }
         
 

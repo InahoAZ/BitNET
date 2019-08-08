@@ -12,6 +12,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import modelo.Rol;
 import modelo.Usuario;
+import vista.VistaLogin;
 import vista.VistaPreguntas;
 import vista.VistaPrincipal;
 
@@ -29,8 +30,7 @@ public class BitNET {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("BitNETPU");
         Persistencia p = new Persistencia(emf);
         Controlador c1 = new Controlador(p);
-        VistaPrincipal vp = new VistaPrincipal();
-        
+        VistaLogin vp = new VistaLogin(c1);     
     }
     
 }

@@ -10,6 +10,7 @@ public class VistaReportes extends javax.swing.JFrame {
 
     public VistaReportes() {
         initComponents();
+        
     }
 
     /**

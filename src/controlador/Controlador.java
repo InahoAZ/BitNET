@@ -2,6 +2,7 @@ package controlador;
 
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import modelo.Foro;
 import modelo.Pregunta;
 import modelo.Reporte;
@@ -28,7 +29,10 @@ public class Controlador {
 	public List<Foro> verListadoDeForos() {
 		return this.p.buscarTodos(Foro.class);
 	}
-
+        
+        public List<Usuario> verListadoDeUsuarios(){
+            return this.p.buscarTodos(Usuario.class);
+        }
 	/**
 	 * 
 	 * @param pregunta
@@ -241,8 +245,7 @@ public class Controlador {
 	}
         
         public Usuario iniciarSesion(String legajo, String password){
-            try{
-                this.p.iniciarTransaccion();
+            try{                
                 System.out.println("Inician2 Sesion");
                 Usuario unUsuario = this.p.buscar(Usuario.class, legajo);
                 if (unUsuario.compararPassword(password)) {
@@ -253,8 +256,9 @@ public class Controlador {
                     return null;
                 }                
             }catch(Exception e){
-                System.out.println(e.getMessage());
-                this.p.descartarTransaccion();
+                System.out.println("errorcito: " + e.getMessage());
+                JOptionPane.showMessageDialog(null, "Usuario Incorrecto");
+                
             }
         return null;
         }
