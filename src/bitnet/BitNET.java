@@ -13,6 +13,7 @@ import javax.persistence.Persistence;
 import modelo.Rol;
 import modelo.Usuario;
 import vista.VistaPreguntas;
+import vista.VistaPrincipal;
 
 /**
  *
@@ -28,13 +29,7 @@ public class BitNET {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("BitNETPU");
         Persistencia p = new Persistencia(emf);
         Controlador c1 = new Controlador(p);
-        Date fechita = new Date();
-        
-        
-        //System.out.println(rol.getUsuarios().get(0));
-        
-        VistaPreguntas vp = new VistaPreguntas(c1,null, null);
-        
+        VistaPrincipal vp = new VistaPrincipal();
         
     }
     
