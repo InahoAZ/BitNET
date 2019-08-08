@@ -9,6 +9,7 @@ import controlador.Controlador;
 import controlador.Persistencia;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import vista.VistaPrincipal;
 
 /**
  *
@@ -24,6 +25,7 @@ public class BitNET {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("BitNETPU");
         Persistencia p = new Persistencia(emf);
         Controlador c1 = new Controlador(p);
+        VistaPrincipal vp = new VistaPrincipal();
         
     }
     
