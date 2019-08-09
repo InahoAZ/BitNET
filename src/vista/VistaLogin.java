@@ -114,6 +114,8 @@ public class VistaLogin extends javax.swing.JFrame {
         if(usuarioActual != null){
             this.dispose();
             VistaPrincipal vPrincipal = new VistaPrincipal(this.c, this, usuarioActual);
+            
+            
         }else{
             JOptionPane.showMessageDialog(null, "Contraseña Incorrecta");
         }
