@@ -42,6 +42,10 @@ public class VistaLogin extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(400, 325));
+        setMinimumSize(new java.awt.Dimension(400, 325));
+        setPreferredSize(new java.awt.Dimension(400, 325));
+        setSize(new java.awt.Dimension(400, 325));
         getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 48)); // NOI18N
@@ -75,7 +79,7 @@ public class VistaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtLegajo);
-        txtLegajo.setBounds(90, 130, 230, 26);
+        txtLegajo.setBounds(90, 130, 230, 24);
 
         txtPassword.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         txtPassword.setText("Contraseña");
@@ -85,7 +89,7 @@ public class VistaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtPassword);
-        txtPassword.setBounds(90, 180, 230, 26);
+        txtPassword.setBounds(90, 180, 230, 24);
 
         btnIngresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/flecha.png"))); // NOI18N
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
@@ -94,12 +98,12 @@ public class VistaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnIngresar);
-        btnIngresar.setBounds(170, 230, 60, 41);
+        btnIngresar.setBounds(170, 230, 60, 42);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/wallpapers_tecnologia_computacion_by_madboxpc-1.png"))); // NOI18N
         jLabel3.setText("jLabel3");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(0, 0, 400, 330);
+        jLabel3.setBounds(0, 0, 390, 330);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
