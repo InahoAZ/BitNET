@@ -1,2 +1,5 @@
 /build/
 /dist/
+src/META-INF/
+
+nbproject/private/private\.properties

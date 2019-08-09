@@ -9,10 +9,10 @@
     <class>modelo.Rol</class>
     <class>modelo.Usuario</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5433/BitNET"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/BitNET"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="41.788.499"/>
+      <property name="javax.persistence.jdbc.password" value="postgres"/>
       <property name="eclipselink.logging.level" value="FINE"/>
     </properties>
   </persistence-unit>
