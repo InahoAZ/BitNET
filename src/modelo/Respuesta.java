@@ -1,4 +1,6 @@
 package modelo;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
@@ -88,7 +90,12 @@ public class Respuesta {
     public void setFechaPublicacion(Date fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
     }
-
+    
+    public String getFechaPublicacionLinda(){
+            Format formatter = new SimpleDateFormat("dd/MM/yyyy");
+            return formatter.format(this.fechaPublicacion);            
+        }
+    
     public Pregunta getPregunta() {
         return pregunta;
     }
@@ -116,7 +123,7 @@ public class Respuesta {
 
     @Override
     public String toString() {
-        return "" + respuesta + "  " + puntaje + " puntos  " + fechaPublicacion;
+        return "" + this.respuesta + "  " + this.puntaje + " puntos  " + this.getFechaPublicacionLinda();
     }
 
          

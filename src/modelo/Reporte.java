@@ -1,5 +1,7 @@
 package modelo;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -75,11 +77,50 @@ public class Reporte {
     public void setBorrado(boolean borrado) {
         this.borrado = borrado;
     }
+    
+     public Date getFechaReporte() {
+        return fechaReporte;
+    }
+    
+    public String getFechaReporteLinda(){
+        Format formatter = new SimpleDateFormat("dd/MM/yyyy");
+        return formatter.format(this.fechaReporte);            
+        }
 
+    public void setFechaReporte(Date fechaReporte) {
+        this.fechaReporte = fechaReporte;
+    }
+
+    public Pregunta getPregunta() {
+        return pregunta;
+    }
+
+    public void setPregunta(Pregunta pregunta) {
+        this.pregunta = pregunta;
+    }
+
+    public Respuesta getRespuesta() {
+        return respuesta;
+    }
+
+    public void setRespuesta(Respuesta respuesta) {
+        this.respuesta = respuesta;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }    
+    
     @Override
     public String toString() {
-        return "" + causa + "  " + fechaReporte;
+        return "" + this.causa + "  " + this.getFechaReporteLinda();
     }
+
+   
     
     
 

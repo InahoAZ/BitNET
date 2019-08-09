@@ -1,5 +1,7 @@
 package modelo;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -198,11 +200,15 @@ public class Usuario {
             this.password = password;
         }
         
+        public String getFechaNacLinda(){
+            Format formatter = new SimpleDateFormat("dd/MM/yyyy");
+            return formatter.format(this.fechaNac);            
+        }
         
 
         @Override
         public String toString() {
-            return "" + nombre + "  " + apellido + "  " + fechaNac + "  " + correo + "  " + reputacion;
+            return "" + nombre + "  " + apellido + "  " + this.getFechaNacLinda() + "  " + correo + "  " + reputacion;
         }
         
         
