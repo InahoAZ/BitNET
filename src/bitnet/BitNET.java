@@ -19,7 +19,8 @@ public class BitNET {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("BitNETPU");
         Persistencia p = new Persistencia(emf);
         Controlador c1 = new Controlador(p);
-        VistaLogin vp = new VistaLogin(c1);     
+        VistaLogin vp = new VistaLogin(c1);
+        //VistaPrincipal vp = new VistaPrincipal(c1,null,null);
     }
     
 }

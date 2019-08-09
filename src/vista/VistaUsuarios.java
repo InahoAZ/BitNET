@@ -84,6 +84,11 @@ public class VistaUsuarios extends javax.swing.JFrame {
 
         jLabel5.setText("Email");
 
+        listaUsuarios.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listaUsuariosValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(listaUsuarios);
 
         cbRol.addActionListener(new java.awt.event.ActionListener() {
@@ -102,8 +107,18 @@ public class VistaUsuarios extends javax.swing.JFrame {
         });
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/borrar.png"))); // NOI18N
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/modificar.png"))); // NOI18N
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Perpetua", 1, 36)); // NOI18N
         jLabel7.setText("Gestion de Usuarios");
@@ -286,6 +301,26 @@ public class VistaUsuarios extends javax.swing.JFrame {
         this.listaUsuarios.setListData(this.c.verListadoDeUsuarios().toArray());
     
     }
+    public void bloquearTxt(){
+        this.txtApellido.setEditable(false);
+        this.txtEmail.setEditable(false);
+        this.txtFNac.setEditable(false);
+        this.txtLegajo.setEditable(false);
+        this.txtNombre.setEditable(false);
+        this.txtPassword.setEditable(false);
+        this.cbRol.setEditable(false);
+    }
+    
+    public void desbloquearTxt(){
+        this.txtApellido.setEditable(true);
+        this.txtEmail.setEditable(true);
+        this.txtFNac.setEditable(true);
+        this.txtLegajo.setEditable(true);
+        this.txtNombre.setEditable(true);
+        this.txtPassword.setEditable(true);
+        this.cbRol.setEditable(true);
+    }
+    
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
@@ -308,8 +343,7 @@ public class VistaUsuarios extends javax.swing.JFrame {
         }
         if(apellido.isEmpty() && nombre.isEmpty() && legajo.isEmpty() && correo.isEmpty() && this.txtFNac.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Debe rellenar los campos correspondientes");
-        } else {
-            
+        } else {            
             this.c.añadirUsuario(legajo, nombre, apellido, fecha, correo, password, (Rol)this.cbRol.getSelectedItem());
             this.limpiar();
         }
@@ -326,6 +360,54 @@ public class VistaUsuarios extends javax.swing.JFrame {
     private void txtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusGained
         this.txtPassword.setText("");
     }//GEN-LAST:event_txtPasswordFocusGained
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        this.c.eliminarUsuario((Usuario) this.listaUsuarios.getSelectedValue());
+        this.limpiar();
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void listaUsuariosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaUsuariosValueChanged
+        this.txtApellido.setText(((Usuario)this.listaUsuarios.getSelectedValue()).getApellido());
+        this.txtEmail.setText(((Usuario)this.listaUsuarios.getSelectedValue()).getCorreo());
+        this.txtFNac.setText(((Usuario)this.listaUsuarios.getSelectedValue()).getFechaNac().toString());
+        this.txtLegajo.setText(((Usuario)this.listaUsuarios.getSelectedValue()).getLegajo());
+        this.txtNombre.setText(((Usuario)this.listaUsuarios.getSelectedValue()).getNombre());
+        this.txtPassword.setText(((Usuario)this.listaUsuarios.getSelectedValue()).getPassword());
+        this.bloquearTxt();
+        
+    }//GEN-LAST:event_listaUsuariosValueChanged
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        this.desbloquearTxt();        
+        String apellido = this.txtApellido.getText();
+        String nombre = this.txtNombre.getText();
+        String legajo = this.txtLegajo.getText();
+        String correo = this.txtEmail.getText();
+        String password = Arrays.toString(this.txtPassword.getPassword());
+        Date fecha = null;
+        try {
+            fecha = new SimpleDateFormat("dd/MM/yyyy").parse(this.txtFNac.getText());
+        } catch (ParseException ex) {
+            System.out.println("Ingrese una Fecha Valida (Formato dd/mm/yyyy)");
+        }
+        if(apellido.isEmpty() && nombre.isEmpty() && legajo.isEmpty() && correo.isEmpty() && this.txtFNac.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe rellenar los campos correspondientes");
+        } else {
+            Usuario unUsuario = new Usuario();
+            
+            unUsuario.setApellido(this.txtApellido.getSelectedText());
+            ((Usuario)this.listaUsuarios.getSelectedValue()).setNombre(this.txtNombre.getSelectedText());
+            ((Usuario)this.listaUsuarios.getSelectedValue()).setCorreo(this.txtEmail.getSelectedText());
+            ((Usuario)this.listaUsuarios.getSelectedValue()).setLegajo(this.txtLegajo.getSelectedText());
+            ((Usuario)this.listaUsuarios.getSelectedValue()).setPassword(this.txtPassword.getSelectedText());
+            if(((Usuario)this.listaUsuarios.getSelectedValue()).equals(c)){
+                this.c.modificarUsuario(((Usuario)this.listaUsuarios.getSelectedValue()));
+                this.limpiar();
+            }
+        }
+        
+    }//GEN-LAST:event_btnModificarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
