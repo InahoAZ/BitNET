@@ -252,13 +252,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
-       VistaUsuarios vUsuarios = new VistaUsuarios(this.c, this, this.usuarioActual);
+       VistaUsuarios vUsuarios = new VistaUsuarios(this.c, this, null);
        
         
     }//GEN-LAST:event_btnUsuariosActionPerformed
 
     private void btnAgregarForoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarForoActionPerformed
-        // TODO add your handling code here:
+        VistaAgregarForo VAF = new VistaAgregarForo(this.c,this,this.usuarioActual);
+        this.dispose();
     }//GEN-LAST:event_btnAgregarForoActionPerformed
 
     private void btnAñadirPreguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirPreguntaActionPerformed

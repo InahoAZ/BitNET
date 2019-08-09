@@ -5,6 +5,7 @@ import controlador.Persistencia;
 import java.util.Date;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.JFrame;
 import modelo.Rol;
 import modelo.Usuario;
 import vista.VistaLogin;
@@ -20,7 +21,10 @@ public class BitNET {
         Persistencia p = new Persistencia(emf);
         Controlador c1 = new Controlador(p);
         VistaLogin vp = new VistaLogin(c1);
-        //VistaPrincipal vp = new VistaPrincipal(c1,null,null);
+        
+        /*Usuario usrVacio = null;
+        JFrame ventanaVacia=null;
+        VistaPrincipal vp = new VistaPrincipal(c1,ventanaVacia,usrVacio);*/
     }
     
 }
