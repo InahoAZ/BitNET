@@ -30,7 +30,9 @@ public class Controlador {
 	public List<Foro> verListadoDeForos() {
 		return this.p.buscarTodos(Foro.class);
 	}
-        
+        public List<Respuesta> verRespuestas(Pregunta unaPregunta){
+            return unaPregunta.getRespuestas();
+        }
         public List<Usuario> verListadoDeUsuarios(){
             return this.p.buscarTodos(Usuario.class);
         }

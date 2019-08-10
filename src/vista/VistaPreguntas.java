@@ -1,8 +1,11 @@
 package vista;
 
 import controlador.Controlador;
+import javax.swing.Icon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import modelo.Pregunta;
+import modelo.Respuesta;
 import modelo.Usuario;
 
 public class VistaPreguntas extends javax.swing.JFrame {
@@ -21,7 +24,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
         this.lblRol.setText(usuarioActual.getRol().toString());
         this.lblTituloPregunta.setText(this.unaPregunta.getPregunta());
         this.txtDescripcionPregunta.setText(this.unaPregunta.getDescripcion());
-        //this.listaRespuesta.setListData(this.c.verRespuesta(unaPregunta));
+        this.listaRespuesta.setListData(this.c.verRespuestas(unaPregunta).toArray());
     }
 
     @SuppressWarnings("unchecked")
@@ -84,8 +87,14 @@ public class VistaPreguntas extends javax.swing.JFrame {
             }
         });
 
+        listaRespuesta.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listaRespuestaValueChanged(evt);
+            }
+        });
         jScrollPane3.setViewportView(listaRespuesta);
 
+        txtRespuesta.setEditable(false);
         txtRespuesta.setColumns(20);
         txtRespuesta.setRows(5);
         jScrollPane4.setViewportView(txtRespuesta);
@@ -100,6 +109,11 @@ public class VistaPreguntas extends javax.swing.JFrame {
 
         btnNoMeGusta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/no me gusta.png"))); // NOI18N
         btnNoMeGusta.setText("0");
+        btnNoMeGusta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNoMeGustaActionPerformed(evt);
+            }
+        });
 
         btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/restart_back_left_arrow_6022.png"))); // NOI18N
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -113,6 +127,11 @@ public class VistaPreguntas extends javax.swing.JFrame {
         btnReportarRespuesta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-bandera-2-24.png"))); // NOI18N
 
         btnAgregarRespuesta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/plus_15650.png"))); // NOI18N
+        btnAgregarRespuesta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarRespuestaActionPerformed(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-basura-24.png"))); // NOI18N
 
@@ -127,6 +146,11 @@ public class VistaPreguntas extends javax.swing.JFrame {
         lblRol.setText("rol aca");
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-salida-40.png"))); // NOI18N
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -219,7 +243,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
                                 .addComponent(btnReportarPregunta))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,7 +252,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
                         .addComponent(btnReportarRespuesta))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnMeGusta)
@@ -251,7 +275,11 @@ public class VistaPreguntas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMeGustaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMeGustaActionPerformed
-        // TODO add your handling code here:
+        if(!this.listaRespuesta.isSelectionEmpty()){
+            Respuesta unaRespuesta= (Respuesta) this.listaRespuesta.getSelectedValue();
+            this.c.puntuarRespuesta(unaRespuesta,true);
+        }
+        
     }//GEN-LAST:event_btnMeGustaActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
@@ -264,6 +292,33 @@ public class VistaPreguntas extends javax.swing.JFrame {
         VistaCargaReporte VCR = new VistaCargaReporte(this.c,this,this.usuarioActual,this.unaPregunta);
         this.dispose();
     }//GEN-LAST:event_btnReportarPreguntaActionPerformed
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        VistaLogin vl = new VistaLogin(this.c);
+        this.dispose();
+    }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void btnNoMeGustaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoMeGustaActionPerformed
+        if(!this.listaRespuesta.isSelectionEmpty()){
+            Respuesta unaRespuesta= (Respuesta) this.listaRespuesta.getSelectedValue();
+            this.c.puntuarRespuesta(unaRespuesta,false);
+        }
+    }//GEN-LAST:event_btnNoMeGustaActionPerformed
+
+    private void listaRespuestaValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaRespuestaValueChanged
+        if(!this.listaRespuesta.isSelectionEmpty()){
+            Respuesta unaRespuesta= (Respuesta) this.listaRespuesta.getSelectedValue();
+            this.txtRespuesta.setText(unaRespuesta.getRespuesta());
+        }
+    }//GEN-LAST:event_listaRespuestaValueChanged
+
+    private void btnAgregarRespuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarRespuestaActionPerformed
+        if(!this.txtCargarRespuesta.getText().isEmpty()){
+            this.c.añadirRespuesta(this.txtCargarRespuesta.getText(), this.unaPregunta, this.usuarioActual);
+        }else{
+            JOptionPane.showMessageDialog(null,"Por Favor ingrese una Respuesta");
+        }
+    }//GEN-LAST:event_btnAgregarRespuestaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
