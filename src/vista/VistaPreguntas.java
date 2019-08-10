@@ -21,6 +21,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
         this.lblRol.setText(usuarioActual.getRol().toString());
         this.lblTituloPregunta.setText(this.unaPregunta.getPregunta());
         this.txtDescripcionPregunta.setText(this.unaPregunta.getDescripcion());
+        //this.listaRespuesta.setListData(this.c.verRespuesta(unaPregunta));
     }
 
     @SuppressWarnings("unchecked")
@@ -38,7 +39,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
         txtDescripcionPregunta = new javax.swing.JTextArea();
         btnReportarPregunta = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        listaRespuesta = new javax.swing.JList<>();
+        listaRespuesta = new javax.swing.JList();
         jScrollPane4 = new javax.swing.JScrollPane();
         txtRespuesta = new javax.swing.JTextArea();
         btnMeGusta = new javax.swing.JButton();
@@ -83,11 +84,6 @@ public class VistaPreguntas extends javax.swing.JFrame {
             }
         });
 
-        listaRespuesta.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane3.setViewportView(listaRespuesta);
 
         txtRespuesta.setColumns(20);
@@ -228,7 +224,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
                                 .addComponent(btnReportarPregunta))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,7 +233,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
                         .addComponent(btnReportarRespuesta))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnMeGusta)
@@ -303,7 +299,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblRol;
     private javax.swing.JLabel lblTituloPregunta;
-    private javax.swing.JList<String> listaRespuesta;
+    private javax.swing.JList listaRespuesta;
     private javax.swing.JTextField txtCargarRespuesta;
     private javax.swing.JTextArea txtDescripcionPregunta;
     private javax.swing.JTextArea txtRespuesta;
