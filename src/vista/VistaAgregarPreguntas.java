@@ -129,14 +129,30 @@ public class VistaAgregarPreguntas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnAgregarPreguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPreguntaActionPerformed
-        if(this.txtPregunta.getText().isEmpty()||this.txtDescripcion.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null,"Complete todos los campos correctamente");
+        if(this.txtPregunta.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Complete el titulo");
         }else{
-            this.c.añadirPregunta(this.txtPregunta.getText(),this.txtDescripcion.getText(), unForo, this.usuarioActual);
+            if(this.txtDescripcion.getText().isEmpty()){
+                this.c.añadirPregunta(this.txtPregunta.getText(),"...", unForo, this.usuarioActual);            
+            }else{
+                this.c.añadirPregunta(this.txtPregunta.getText(),this.txtDescripcion.getText(), unForo, this.usuarioActual);
+            }
+        }
+        int respuesta = JOptionPane.showConfirmDialog(null,"Desea cargar otra pregunta?");
+        if(respuesta == JOptionPane.YES_OPTION){
+            this.limpiar();
+        }else{
+            if(respuesta == JOptionPane.NO_OPTION){
+                this.vistaAnterior.setVisible(true);
+                this.dispose();
+            }
         }
     }//GEN-LAST:event_btnAgregarPreguntaActionPerformed
 
-   
+public void limpiar(){
+    this.txtDescripcion.setText("");
+    this.txtPregunta.setText("");
+}   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarPregunta;

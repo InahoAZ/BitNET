@@ -114,7 +114,7 @@ public class VistaCargaReporte extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        
+        this.vistaAnterior.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
@@ -154,6 +154,9 @@ public class VistaCargaReporte extends javax.swing.JFrame {
                 this.c.reportarPregunta(causa, unaPregunta, usuarioActual);
             }
         }
+        JOptionPane.showMessageDialog(null,"Se Generó su reporte");
+        this.vistaAnterior.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnReportarActionPerformed
 
 

@@ -13,7 +13,6 @@ public class VistaLogin extends javax.swing.JFrame {
         this.c = c;
         this.setVisible(true);
         this.setResizable(true);
-        
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }

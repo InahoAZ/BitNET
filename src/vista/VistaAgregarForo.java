@@ -141,11 +141,23 @@ public class VistaAgregarForo extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDescripcionFocusGained
 
     private void btnAgregarForoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarForoActionPerformed
-       if(this.txtDescripcion.getText().isEmpty()||this.txtTitulo.getText().isEmpty()){
+       if(this.txtTitulo.getText().isEmpty()){
            JOptionPane.showMessageDialog(null,"Complete todos los campos correctamente");
        }else{
-            this.c.añadirForo(this.txtTitulo.getText(),this.txtDescripcion.getText());
-            this.limpiar();
+            if(this.txtDescripcion.getText().isEmpty()){
+                this.c.añadirForo(this.txtTitulo.getText(),"...");
+            }else{
+                this.c.añadirForo(this.txtTitulo.getText(),this.txtDescripcion.getText());
+            }
+            int respuesta = JOptionPane.showConfirmDialog(null,"Desea cargar otro foro?");
+            if(respuesta == JOptionPane.YES_OPTION){
+                this.limpiar();
+            }else{
+                if(respuesta == JOptionPane.NO_OPTION){
+                    this.vistaAnterior.setVisible(true);
+                    this.dispose();
+                }
+            }          
        }
     }//GEN-LAST:event_btnAgregarForoActionPerformed
 

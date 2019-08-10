@@ -129,6 +129,7 @@ public class VistaVerPerfil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        this.vistaAnterior.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 

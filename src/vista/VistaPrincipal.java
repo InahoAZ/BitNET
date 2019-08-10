@@ -303,8 +303,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
         
         this.ListaForos.setListData(this.c.verListadoDeForos().toArray());
         this.ListaUsuarios.setListData(this.c.verListadoDeUsuarios().toArray());
-        List<Object> object = null;
-        this.ListaPreguntas.setListData(object.toArray());
+        this.ListaForos.clearSelection();
+        
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -313,6 +313,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     private void ListaForosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaForosValueChanged
         Foro unForo = (Foro) this.ListaForos.getSelectedValue();
+        System.out.println("muero dsp de llamar al controlador");
         this.ListaPreguntas.setListData(this.c.verListadoDePreguntas(unForo).toArray());
     }//GEN-LAST:event_ListaForosValueChanged
   
