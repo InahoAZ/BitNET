@@ -364,16 +364,16 @@ public class VistaUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void listaUsuariosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaUsuariosValueChanged
-        this.txtApellido.setText(((Usuario)this.listaUsuarios.getSelectedValue()).getApellido());
-        this.txtEmail.setText(((Usuario)this.listaUsuarios.getSelectedValue()).getCorreo());
-        this.txtFNac.setText(((Usuario)this.listaUsuarios.getSelectedValue()).getFechaNacLinda());
-        this.txtLegajo.setText(((Usuario)this.listaUsuarios.getSelectedValue()).getLegajo());
-        this.txtNombre.setText(((Usuario)this.listaUsuarios.getSelectedValue()).getNombre());
-        this.txtPassword.setText((((Usuario)this.listaUsuarios.getSelectedValue()).getPassword()));
-        System.out.println(this.txtPassword.getText());
-        this.cbRol.setSelectedItem(((Usuario)this.listaUsuarios.getSelectedValue()).getRol());
-        
-        
+        if(!this.listaUsuarios.isSelectionEmpty()){
+            this.txtApellido.setText(((Usuario)this.listaUsuarios.getSelectedValue()).getApellido());
+            this.txtEmail.setText(((Usuario)this.listaUsuarios.getSelectedValue()).getCorreo());
+            this.txtFNac.setText(((Usuario)this.listaUsuarios.getSelectedValue()).getFechaNacLinda());
+            this.txtLegajo.setText(((Usuario)this.listaUsuarios.getSelectedValue()).getLegajo());
+            this.txtNombre.setText(((Usuario)this.listaUsuarios.getSelectedValue()).getNombre());
+            this.txtPassword.setText((((Usuario)this.listaUsuarios.getSelectedValue()).getPassword()));
+            System.out.println(this.txtPassword.getText());
+            this.cbRol.setSelectedItem(((Usuario)this.listaUsuarios.getSelectedValue()).getRol());
+        }
     }//GEN-LAST:event_listaUsuariosValueChanged
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
