@@ -279,8 +279,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
-       VistaUsuarios vUsuarios = new VistaUsuarios(this.c, this, null);
-       
+       VistaUsuarios vUsuarios = new VistaUsuarios(this.c, this,this.usuarioActual);
+       this.dispose();
         
     }//GEN-LAST:event_btnUsuariosActionPerformed
 
@@ -300,10 +300,21 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAñadirPreguntaActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        if(this.ListaForos.isSelectionEmpty()&&this.ListaUsuarios.isSelectionEmpty()){
+                this.ListaForos.setListData(this.c.verListadoDeForos().toArray());
+                this.ListaUsuarios.setListData(this.c.verListadoDeUsuarios().toArray());
+
+        }else{
+            if(!this.ListaUsuarios.isSelectionEmpty()){
+                this.ListaUsuarios.setSelectedIndex(-1);
+            }
+            if(!this.ListaForos.isSelectionEmpty()){
+                this.ListaForos.setSelectedIndex(-1);
+            }
+            this.ListaForos.setListData(this.c.verListadoDeForos().toArray());
+            this.ListaUsuarios.setListData(this.c.verListadoDeUsuarios().toArray());
+        }
         
-        this.ListaForos.setListData(this.c.verListadoDeForos().toArray());
-        this.ListaUsuarios.setListData(this.c.verListadoDeUsuarios().toArray());
-        this.ListaForos.clearSelection();
         
     }//GEN-LAST:event_btnActualizarActionPerformed
 
@@ -312,8 +323,10 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void ListaForosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaForosValueChanged
-        Foro unForo = (Foro) this.ListaForos.getSelectedValue();
-        this.ListaPreguntas.setListData(this.c.verListadoDePreguntas(unForo).toArray());
+        if(!this.ListaForos.isSelectionEmpty()){
+            Foro unForo = (Foro) this.ListaForos.getSelectedValue();
+            this.ListaPreguntas.setListData(this.c.verListadoDePreguntas(unForo).toArray());
+        }
     }//GEN-LAST:event_ListaForosValueChanged
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
