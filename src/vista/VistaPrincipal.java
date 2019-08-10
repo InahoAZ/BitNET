@@ -21,8 +21,56 @@ public class VistaPrincipal extends javax.swing.JFrame {
         this.usuarioActual = usuarioActual;
         this.ListaForos.setListData(this.c.verListadoDeForos().toArray());
         this.ListaUsuarios.setListData(this.c.verListadoDeUsuarios().toArray());
-        this.lblNombre.setText(usuarioActual.getNombre() + usuarioActual.getApellido());
+        this.lblNombre.setText(usuarioActual.getNombre() + " " + usuarioActual.getApellido());
         this.lblRol.setText(usuarioActual.getRol().toString());
+        
+        this.btnActualizar.setVisible(true);
+        this.btnAgregarForo.setVisible(true);
+        this.btnAñadirPregunta.setVisible(true);
+        this.btnBuscar.setVisible(true);
+        this.btnEliminarForo.setVisible(true);
+        this.btnUsuarios.setVisible(true);
+        //Todo lo que tenga que ver con Roles        
+        switch(this.usuarioActual.getRol().getNombre()){
+            case "Administrador":
+                System.out.println(this.usuarioActual.getRol().getNombre());
+                this.btnActualizar.setVisible(true);
+                this.btnAgregarForo.setVisible(true);
+                this.btnAñadirPregunta.setVisible(true);
+                this.btnBuscar.setVisible(true);
+                this.btnEliminarForo.setVisible(true);
+                this.btnUsuarios.setVisible(true);
+                break;
+            case "Registrador":
+                System.out.println(this.usuarioActual.getRol().getNombre());
+                this.btnActualizar.setVisible(true);
+                this.btnAgregarForo.setVisible(false);
+                this.btnAñadirPregunta.setVisible(false);
+                this.btnBuscar.setVisible(true);
+                this.btnEliminarForo.setVisible(false);
+                this.btnUsuarios.setVisible(true);
+                break;
+            case "Estudiante":
+                System.out.println(this.usuarioActual.getRol().getNombre());
+                this.btnActualizar.setVisible(true);
+                this.btnAgregarForo.setVisible(false);
+                this.btnAñadirPregunta.setVisible(true);
+                this.btnBuscar.setVisible(true);
+                this.btnEliminarForo.setVisible(false);
+                this.btnUsuarios.setVisible(false);
+                break;
+            case "Profesor":
+                System.out.println(this.usuarioActual.getRol().getNombre());                                
+                this.btnActualizar.setVisible(true);
+                this.btnAgregarForo.setVisible(true);
+                this.btnAñadirPregunta.setVisible(true);
+                this.btnBuscar.setVisible(true);
+                this.btnEliminarForo.setVisible(false);
+                this.btnUsuarios.setVisible(false);
+                break;
+        } 
+        
+        //Fin Roles
         this.setVisible(true);
     }
 
@@ -122,6 +170,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         lblRol.setText("rol aca");
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-salida-40.png"))); // NOI18N
+        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel5MouseClicked(evt);
@@ -148,12 +197,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(lblNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblRol)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         btnAgregarForo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-más-2-matemáticas-25 (1).png"))); // NOI18N
@@ -358,6 +409,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         VistaLogin vl = new VistaLogin(this.c);
+        this.usuarioActual = null;
         this.dispose();
     }//GEN-LAST:event_jLabel5MouseClicked
 
