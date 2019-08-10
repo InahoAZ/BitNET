@@ -44,16 +44,10 @@ public class Controlador {
 	public void añadirPregunta(String pregunta, String descripcion, Foro unForo, Usuario unUsuario) {
             try{
                 this.p.iniciarTransaccion();
-                System.out.println("1");
                 Pregunta unaPregunta = new Pregunta(pregunta, descripcion, unForo, unUsuario);
-                System.out.println("1.1");
-                System.out.println("forito: " + unForo);
                 unForo.añadirPregunta(unaPregunta);
-                System.out.println("2");
-                //unUsuario.añadirPregunta(unaPregunta);
-                System.out.println("3");
+                unUsuario.añadirPregunta(unaPregunta);
                 this.p.insertar(unaPregunta);
-                System.out.println("insert");
                 this.p.confirmarTransaccion();
             }catch(Exception e){
                 System.out.println("errorcito: " + e.getMessage());

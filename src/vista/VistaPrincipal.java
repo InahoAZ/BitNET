@@ -292,7 +292,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private void btnAñadirPreguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirPreguntaActionPerformed
         if(!this.ListaForos.isSelectionEmpty()){
             Foro unForo=(Foro) this.ListaForos.getSelectedValue();
-            VistaAgregarPreguntas vap= new VistaAgregarPreguntas(this.c,this,usuarioActual,unForo);
+            VistaAgregarPreguntas vap= new VistaAgregarPreguntas(this.c,this,this.usuarioActual,unForo);
             this.dispose();
         }else{
             JOptionPane.showMessageDialog(null,"Por Favor Seleccione un Foro");
@@ -313,7 +313,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     private void ListaForosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaForosValueChanged
         Foro unForo = (Foro) this.ListaForos.getSelectedValue();
-        System.out.println("muero dsp de llamar al controlador");
         this.ListaPreguntas.setListData(this.c.verListadoDePreguntas(unForo).toArray());
     }//GEN-LAST:event_ListaForosValueChanged
   

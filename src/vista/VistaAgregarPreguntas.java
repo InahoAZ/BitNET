@@ -12,12 +12,15 @@ public class VistaAgregarPreguntas extends javax.swing.JFrame {
     JFrame vistaAnterior;
     Usuario usuarioActual;
     Foro unForo; 
-    public VistaAgregarPreguntas(Controlador c, JFrame vistaAnterior, Usuario usuarioActual,Foro UnForo) {
+    
+    public VistaAgregarPreguntas(Controlador c, JFrame vistaAnterior, Usuario usuarioActual,Foro unForo) {
         initComponents();
         this.setVisible(true);
         this.c=c;
         this.vistaAnterior=vistaAnterior;
         this.usuarioActual=usuarioActual;
+        this.unForo= unForo;
+        
     }
 
  
@@ -135,7 +138,7 @@ public class VistaAgregarPreguntas extends javax.swing.JFrame {
             if(this.txtDescripcion.getText().isEmpty()){
                 this.c.añadirPregunta(this.txtPregunta.getText(),"...", unForo, this.usuarioActual);            
             }else{
-                this.c.añadirPregunta(this.txtPregunta.getText(),this.txtDescripcion.getText(), unForo, this.usuarioActual);
+                this.c.añadirPregunta(this.txtPregunta.getText(),this.txtDescripcion.getText(), this.unForo, this.usuarioActual);
             }
         }
         int respuesta = JOptionPane.showConfirmDialog(null,"Desea cargar otra pregunta?");

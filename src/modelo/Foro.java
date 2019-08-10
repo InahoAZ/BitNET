@@ -20,7 +20,7 @@ public class Foro {
 	private String titulo;
 	private String descripcion;
         @OneToMany(mappedBy = "foro")
-        private List<Pregunta> preguntas;
+        private List<Pregunta> preguntas=new ArrayList<>();
         
         public Foro() {
             this.preguntas = new ArrayList<>();
