@@ -105,7 +105,6 @@ public class VistaPreguntas extends javax.swing.JFrame {
         jScrollPane4.setViewportView(txtRespuesta);
 
         btnMeGusta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-me-gusta-24.png"))); // NOI18N
-        btnMeGusta.setText("0");
         btnMeGusta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMeGustaActionPerformed(evt);
@@ -113,7 +112,6 @@ public class VistaPreguntas extends javax.swing.JFrame {
         });
 
         btnNoMeGusta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/no me gusta.png"))); // NOI18N
-        btnNoMeGusta.setText("0");
         btnNoMeGusta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNoMeGustaActionPerformed(evt);
