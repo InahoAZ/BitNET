@@ -1,6 +1,7 @@
 package vista;
 
 import controlador.Controlador;
+import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 import modelo.Usuario;
@@ -75,6 +76,11 @@ public class VistaLogin extends javax.swing.JFrame {
                 txtLegajoActionPerformed(evt);
             }
         });
+        txtLegajo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtLegajoKeyPressed(evt);
+            }
+        });
         getContentPane().add(txtLegajo);
         txtLegajo.setBounds(90, 130, 230, 24);
 
@@ -88,6 +94,11 @@ public class VistaLogin extends javax.swing.JFrame {
         txtPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPasswordActionPerformed(evt);
+            }
+        });
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyPressed(evt);
             }
         });
         getContentPane().add(txtPassword);
@@ -141,6 +152,24 @@ public class VistaLogin extends javax.swing.JFrame {
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordActionPerformed
+
+    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
+        if(evt.getKeyChar()==KeyEvent.VK_ENTER){
+            Usuario usuarioActual = this.c.iniciarSesion(this.txtLegajo.getText(), String.valueOf(this.txtPassword.getPassword()));
+            if(usuarioActual != null){
+                this.dispose();
+                VistaPrincipal vPrincipal = new VistaPrincipal(this.c, this, usuarioActual);
+            }else{
+                JOptionPane.showMessageDialog(null, "Contraseña Incorrecta");
+            }
+        }
+    }//GEN-LAST:event_txtPasswordKeyPressed
+
+    private void txtLegajoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLegajoKeyPressed
+        if(evt.getKeyChar()==KeyEvent.VK_ENTER){
+            this.txtPassword.requestFocus();
+        }
+    }//GEN-LAST:event_txtLegajoKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

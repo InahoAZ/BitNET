@@ -31,8 +31,6 @@ public class VistaUsuarios extends javax.swing.JFrame {
         this.lblRol.setText(usuarioActual.getRol().toString());        
         this.txtLegajo.setEditable(false);
         this.setVisible(true);
-        
-        
     }
 
     @SuppressWarnings("unchecked")
