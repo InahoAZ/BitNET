@@ -30,6 +30,8 @@ public class VistaUsuarios extends javax.swing.JFrame {
         this.lblNombre.setText(usuarioActual.getNombre() + usuarioActual.getApellido());
         this.lblRol.setText(usuarioActual.getRol().toString());        
         this.txtLegajo.setEditable(false);
+        this.btnModificar.setEnabled(false);
+        this.btnEliminar.setEnabled(false);
         this.setVisible(true);
         
         
@@ -335,7 +337,10 @@ public class VistaUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_cbRolActionPerformed
 
     private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
-        this.txtLegajo.setEditable(true);
+        if(!this.listaUsuarios.isSelectionEmpty()){
+            System.out.println("limpiio");
+            this.limpiar();
+        }
         String apellido = this.txtApellido.getText();
         String nombre = this.txtNombre.getText();
         String legajo = this.txtLegajo.getText();
@@ -347,14 +352,17 @@ public class VistaUsuarios extends javax.swing.JFrame {
         } catch (ParseException ex) {
             System.out.println("Ingrese una Fecha Valida (Formato dd/mm/yyyy)");
         }
-        if(this.txtLegajo.isEditable()){
-            if(apellido.isEmpty() && nombre.isEmpty() && legajo.isEmpty() && correo.isEmpty() && this.txtFNac.getText().isEmpty() && this.txtLegajo.isEditable()){
+        if(this.txtLegajo.isEditable()){                        
+            if(apellido.isEmpty() && nombre.isEmpty() && legajo.isEmpty() && correo.isEmpty() && this.txtFNac.getText().isEmpty()){                
                 JOptionPane.showMessageDialog(null, "Debe rellenar los campos correspondientes");
-            }else {            
+            }else{                
                 this.c.añadirUsuario(legajo, nombre, apellido, fecha, correo, password, (Rol)this.cbRol.getSelectedItem());
-                this.limpiar();
+                this.limpiar();        
             }
+        }else {            
+            this.txtLegajo.setEditable(true);                
         }
+        
     }//GEN-LAST:event_btnAñadirActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -372,6 +380,8 @@ public class VistaUsuarios extends javax.swing.JFrame {
         this.txtPassword.setText((((Usuario)this.listaUsuarios.getSelectedValue()).getPassword()));
         System.out.println(this.txtPassword.getText());
         this.cbRol.setSelectedItem(((Usuario)this.listaUsuarios.getSelectedValue()).getRol());
+        this.btnModificar.setEnabled(true);
+        this.btnEliminar.setEnabled(true);
         
         
     }//GEN-LAST:event_listaUsuariosValueChanged
