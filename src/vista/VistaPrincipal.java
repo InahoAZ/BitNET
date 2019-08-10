@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import modelo.Foro;
+import modelo.Pregunta;
 import modelo.Usuario;
 
 public class VistaPrincipal extends javax.swing.JFrame {
@@ -172,6 +173,16 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-carpeta-de-usuario-48.png"))); // NOI18N
         jLabel6.setText("Usuarios");
 
+        ListaPreguntas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ListaPreguntasMouseClicked(evt);
+            }
+        });
+        ListaPreguntas.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                ListaPreguntasValueChanged(evt);
+            }
+        });
         jScrollPane5.setViewportView(ListaPreguntas);
 
         btnAñadirPregunta.setText("Añadir Pregunta");
@@ -349,6 +360,23 @@ public class VistaPrincipal extends javax.swing.JFrame {
         VistaLogin vl = new VistaLogin(this.c);
         this.dispose();
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void ListaPreguntasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListaPreguntasMouseClicked
+    }//GEN-LAST:event_ListaPreguntasMouseClicked
+
+    private void ListaPreguntasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaPreguntasValueChanged
+        if(!this.ListaPreguntas.isSelectionEmpty()){
+            int retorno = JOptionPane.showConfirmDialog(null,"Desea ver detalles de esta pregunta?");
+            if(retorno==JOptionPane.YES_OPTION){
+                Pregunta unaPregunta = (Pregunta) this.ListaPreguntas.getSelectedValue();
+                VistaPreguntas vp = new VistaPreguntas(this.c,this,this.usuarioActual,unaPregunta);
+                this.dispose();
+            }else{
+                this.ListaPreguntas.setSelectedIndex(-1);
+            }
+            
+        }
+    }//GEN-LAST:event_ListaPreguntasValueChanged
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList ListaForos;

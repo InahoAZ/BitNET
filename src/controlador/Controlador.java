@@ -120,10 +120,19 @@ public class Controlador {
 	public void añadirRespuesta(String respuesta, Pregunta unaPregunta, Usuario unUsuario) {
 		try{
                     this.p.iniciarTransaccion();
+                    System.out.println("Pregunta recibi3> "+ unaPregunta+" usr recib2> "+unUsuario);
                     Respuesta unaRespuesta= new Respuesta(respuesta,unaPregunta,unUsuario);
+                    System.out.println(""+unaRespuesta);
                     unaPregunta.añadirRespuesta(unaRespuesta);
+                    System.out.println("1");
                     unUsuario.añadirRespuesta(unaRespuesta);
+                    System.out.println("2");
+                    this.p.modificar(unaPregunta);
+                    System.out.println("3");
+                    this.p.modificar(unUsuario);
+                    System.out.println("4");
                     this.p.insertar(unaRespuesta);
+                    System.out.println("5");
                     this.p.confirmarTransaccion();
                 }catch(Exception e){
                     System.out.println(e.getMessage());

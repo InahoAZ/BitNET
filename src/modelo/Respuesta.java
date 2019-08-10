@@ -1,6 +1,7 @@
 package modelo;
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
@@ -32,7 +33,7 @@ public class Respuesta {
         private Pregunta pregunta;
         
         @OneToMany(mappedBy = "respuesta")
-        private List<Reporte> reportes;
+        private List<Reporte> reportes=new ArrayList<>();
         
         @ManyToOne
         private Usuario usuario;

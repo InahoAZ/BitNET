@@ -134,8 +134,7 @@ public class Pregunta {
          * @param unaRespuesta
          */
         public void añadirRespuesta(Respuesta unaRespuesta) {
-                // TODO - implement Pregunta.añadirRespuesta
-                throw new UnsupportedOperationException();
+                this.respuestas.add(unaRespuesta);
         }
 
 	/**

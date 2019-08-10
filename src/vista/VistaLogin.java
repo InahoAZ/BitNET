@@ -41,9 +41,7 @@ public class VistaLogin extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(400, 325));
         setMinimumSize(new java.awt.Dimension(400, 325));
-        setPreferredSize(new java.awt.Dimension(400, 325));
         setSize(new java.awt.Dimension(400, 325));
         getContentPane().setLayout(null);
 
@@ -61,7 +59,7 @@ public class VistaLogin extends javax.swing.JFrame {
         jLabel2.setBounds(130, 80, 120, 22);
 
         txtLegajo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        txtLegajo.setText("ls00775");
+        txtLegajo.setText("1");
         txtLegajo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtLegajoFocusGained(evt);
@@ -78,17 +76,22 @@ public class VistaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtLegajo);
-        txtLegajo.setBounds(90, 130, 230, 26);
+        txtLegajo.setBounds(90, 130, 230, 24);
 
         txtPassword.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        txtPassword.setText("1234");
+        txtPassword.setText("1");
         txtPassword.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtPasswordMouseClicked(evt);
             }
         });
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordActionPerformed(evt);
+            }
+        });
         getContentPane().add(txtPassword);
-        txtPassword.setBounds(90, 180, 230, 26);
+        txtPassword.setBounds(90, 180, 230, 24);
 
         btnIngresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/flecha.png"))); // NOI18N
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
@@ -97,7 +100,7 @@ public class VistaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnIngresar);
-        btnIngresar.setBounds(170, 230, 60, 41);
+        btnIngresar.setBounds(170, 230, 60, 42);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/wallpapers_tecnologia_computacion_by_madboxpc-1.png"))); // NOI18N
         jLabel3.setText("jLabel3");
@@ -117,8 +120,6 @@ public class VistaLogin extends javax.swing.JFrame {
         if(usuarioActual != null){
             this.dispose();
             VistaPrincipal vPrincipal = new VistaPrincipal(this.c, this, usuarioActual);
-            
-            
         }else{
             JOptionPane.showMessageDialog(null, "Contraseña Incorrecta");
         }
@@ -136,6 +137,10 @@ public class VistaLogin extends javax.swing.JFrame {
     private void txtPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPasswordMouseClicked
         this.txtPassword.setText("");
     }//GEN-LAST:event_txtPasswordMouseClicked
+
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

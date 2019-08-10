@@ -79,8 +79,7 @@ public class Usuario {
 	 * @param unaRespuesta
 	 */
 	public void añadirRespuesta(Respuesta unaRespuesta) {
-		// TODO - implement Usuario.añadirRespuesta
-		throw new UnsupportedOperationException();
+		this.respuestas.add(unaRespuesta);
 	}
 
 	/**
@@ -88,8 +87,7 @@ public class Usuario {
 	 * @param unaPregunta
 	 */
 	public void eliminarPregunta(Pregunta unaPregunta) {
-		// TODO - implement Usuario.eliminarPregunta
-		throw new UnsupportedOperationException();
+		this.preguntas.remove(unaPregunta);
 	}
 
 	/**
@@ -97,8 +95,7 @@ public class Usuario {
 	 * @param unaRespuesta
 	 */
 	public void eliminarRespuesta(Respuesta unaRespuesta) {
-		// TODO - implement Usuario.eliminarRespuesta
-		throw new UnsupportedOperationException();
+		this.respuestas.remove(unaRespuesta);
 	}
 
 	/**
@@ -106,8 +103,7 @@ public class Usuario {
 	 * @param unReporte
 	 */
 	public void añadirReporte(Reporte unReporte) {
-		// TODO - implement Usuario.añadirReporte
-		throw new UnsupportedOperationException();
+		this.reportes.add(unReporte);
 	}
 
 	/**

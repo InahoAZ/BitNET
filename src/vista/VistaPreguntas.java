@@ -68,7 +68,12 @@ public class VistaPreguntas extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/business_man_user_support_supportfortheuser_aquestion_theclient_2330_1.png"))); // NOI18N
 
-        txtCargarRespuesta.setText("Agregar Respueta");
+        txtCargarRespuesta.setText("Agregar Respuesta");
+        txtCargarRespuesta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCargarRespuestaMouseClicked(evt);
+            }
+        });
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/msn_user_23243.png"))); // NOI18N
 
@@ -243,7 +248,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
                                 .addComponent(btnReportarPregunta))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -252,7 +257,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
                         .addComponent(btnReportarRespuesta))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnMeGusta)
@@ -309,16 +314,25 @@ public class VistaPreguntas extends javax.swing.JFrame {
         if(!this.listaRespuesta.isSelectionEmpty()){
             Respuesta unaRespuesta= (Respuesta) this.listaRespuesta.getSelectedValue();
             this.txtRespuesta.setText(unaRespuesta.getRespuesta());
+            //this.btnMeGusta.setText(unaRespuesta.getPuntaje());
+
         }
     }//GEN-LAST:event_listaRespuestaValueChanged
 
     private void btnAgregarRespuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarRespuestaActionPerformed
         if(!this.txtCargarRespuesta.getText().isEmpty()){
+            System.out.println("pregunta enviada: "+this.unaPregunta+" usuario envia2: "+this.usuarioActual);
             this.c.añadirRespuesta(this.txtCargarRespuesta.getText(), this.unaPregunta, this.usuarioActual);
+            this.txtRespuesta.setText("");
+            this.listaRespuesta.setListData(this.c.verRespuestas(this.unaPregunta).toArray());
         }else{
             JOptionPane.showMessageDialog(null,"Por Favor ingrese una Respuesta");
         }
     }//GEN-LAST:event_btnAgregarRespuestaActionPerformed
+
+    private void txtCargarRespuestaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCargarRespuestaMouseClicked
+        this.txtCargarRespuesta.setText("");
+    }//GEN-LAST:event_txtCargarRespuestaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
