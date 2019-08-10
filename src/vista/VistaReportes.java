@@ -57,11 +57,6 @@ public class VistaReportes extends javax.swing.JFrame {
         lblRol.setText("rol aca");
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-salida-40.png"))); // NOI18N
-        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel12MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -127,11 +122,6 @@ public class VistaReportes extends javax.swing.JFrame {
         this.vistaAnterior.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
-
-    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
-        VistaLogin vl = new VistaLogin(this.c);
-        this.dispose();
-    }//GEN-LAST:event_jLabel12MouseClicked
 
  
 

@@ -110,13 +110,13 @@
               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
+<<<<<<< HEAD
               <EmptySpace max="32767" attributes="0"/>
+=======
+              <EmptySpace pref="36" max="32767" attributes="0"/>
+>>>>>>> parent of f72f8d8... se agrego funcionalidad cerrar sesion en todas las vistas que tenian el panel
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="btnEliminarForo" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnAgregarForo" linkSize="3" min="-2" pref="34" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="btnAgregarForo" linkSize="3" alignment="1" min="-2" pref="34" max="-2" attributes="0"/>
                   <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                       <Component id="jScrollPane1" linkSize="2" min="-2" pref="105" max="-2" attributes="0"/>
                       <Component id="jLabel7" min="-2" pref="170" max="-2" attributes="0"/>
@@ -184,16 +184,8 @@
                               <Component id="jScrollPane1" linkSize="1" min="-2" pref="319" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnAñadirPregunta" linkSize="4" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                              <Component id="btnEliminarForo" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnAñadirPregunta" linkSize="4" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="btnAgregarForo" linkSize="4" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -329,9 +321,6 @@
               <Image iconType="3" name="/imagenes/icons8-salida-40.png"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel5MouseClicked"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -434,10 +423,13 @@
         <Property name="text" type="java.lang.String" value="Foros"/>
       </Properties>
     </Component>
+<<<<<<< HEAD
     <Component class="javax.swing.JButton" name="btnEliminarForo">
       <Properties>
         <Property name="text" type="java.lang.String" value="xD"/>
       </Properties>
     </Component>
+=======
+>>>>>>> parent of f72f8d8... se agrego funcionalidad cerrar sesion en todas las vistas que tenian el panel
   </SubComponents>
 </Form>

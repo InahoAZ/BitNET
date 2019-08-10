@@ -66,7 +66,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnAñadirPregunta = new javax.swing.JToggleButton();
         btnActualizar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        btnEliminarForo = new javax.swing.JButton();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -121,11 +120,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         lblRol.setText("rol aca");
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-salida-40.png"))); // NOI18N
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -192,8 +186,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-ver-detalles-48.png"))); // NOI18N
         jLabel7.setText("Foros");
 
+<<<<<<< HEAD
         btnEliminarForo.setText("xD");
 
+=======
+>>>>>>> parent of f72f8d8... se agrego funcionalidad cerrar sesion en todas las vistas que tenian el panel
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -215,12 +212,13 @@ public class VistaPrincipal extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(1, 1, 1))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+<<<<<<< HEAD
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+=======
+                .addContainerGap(36, Short.MAX_VALUE)
+>>>>>>> parent of f72f8d8... se agrego funcionalidad cerrar sesion en todas las vistas que tenian el panel
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnEliminarForo)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAgregarForo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAgregarForo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -276,13 +274,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnAñadirPregunta))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(btnEliminarForo))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAñadirPregunta))
                     .addComponent(btnAgregarForo, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
@@ -344,11 +337,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
             this.ListaPreguntas.setListData(this.c.verListadoDePreguntas(unForo).toArray());
         }
     }//GEN-LAST:event_ListaForosValueChanged
-
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        VistaLogin vl = new VistaLogin(this.c);
-        this.dispose();
-    }//GEN-LAST:event_jLabel5MouseClicked
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList ListaForos;
@@ -358,7 +346,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregarForo;
     private javax.swing.JToggleButton btnAñadirPregunta;
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnEliminarForo;
     private javax.swing.JButton btnUsuarios;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
