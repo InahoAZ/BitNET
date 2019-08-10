@@ -61,7 +61,7 @@ public class VistaLogin extends javax.swing.JFrame {
         jLabel2.setBounds(130, 80, 120, 22);
 
         txtLegajo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        txtLegajo.setText("ingrese su legajo");
+        txtLegajo.setText("ls00775");
         txtLegajo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtLegajoFocusGained(evt);
@@ -78,17 +78,17 @@ public class VistaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtLegajo);
-        txtLegajo.setBounds(90, 130, 230, 24);
+        txtLegajo.setBounds(90, 130, 230, 26);
 
         txtPassword.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        txtPassword.setText("Contraseña");
+        txtPassword.setText("1234");
         txtPassword.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtPasswordMouseClicked(evt);
             }
         });
         getContentPane().add(txtPassword);
-        txtPassword.setBounds(90, 180, 230, 24);
+        txtPassword.setBounds(90, 180, 230, 26);
 
         btnIngresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/flecha.png"))); // NOI18N
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
@@ -97,7 +97,7 @@ public class VistaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnIngresar);
-        btnIngresar.setBounds(170, 230, 60, 42);
+        btnIngresar.setBounds(170, 230, 60, 41);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/wallpapers_tecnologia_computacion_by_madboxpc-1.png"))); // NOI18N
         jLabel3.setText("jLabel3");
@@ -113,7 +113,7 @@ public class VistaLogin extends javax.swing.JFrame {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         //System.out.println("Antes del controlador");
-        Usuario usuarioActual = this.c.iniciarSesion(this.txtLegajo.getText(), Arrays.toString(this.txtPassword.getPassword()));
+        Usuario usuarioActual = this.c.iniciarSesion(this.txtLegajo.getText(), String.valueOf(this.txtPassword.getPassword()));
         if(usuarioActual != null){
             this.dispose();
             VistaPrincipal vPrincipal = new VistaPrincipal(this.c, this, usuarioActual);

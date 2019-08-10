@@ -3,6 +3,7 @@ package modelo;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
@@ -130,8 +131,8 @@ public class Usuario {
 	}
         
         public boolean compararPassword(String password){
-                System.out.println("pwd recibido: " + password);
-                System.out.println("pwd compara2: " + this.password);
+                System.out.println("pwd recibido: " + (password));
+                System.out.println("pwd compara2: " + (this.password));
                 return this.password.equals(password);       
         }
         
@@ -157,6 +158,7 @@ public class Usuario {
         }
 
         public void setApellido(String apellido) {
+            System.out.println(apellido);
             this.apellido = apellido;
         }
 

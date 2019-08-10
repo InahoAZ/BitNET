@@ -294,11 +294,13 @@ public class Controlador {
 	 */
 	public void modificarUsuario(Usuario unUsuario) {
 		try{
+                    System.out.println(unUsuario);
                     this.p.iniciarTransaccion();
                     this.p.modificar(unUsuario);
+                    System.out.println("modifica");
                     this.p.confirmarTransaccion();
                 }catch(Exception e){
-                    System.out.println(e.getMessage());
+                    System.out.println("Errorcito------>" + e.getMessage());
                     this.p.descartarTransaccion();
                 }
 	}
@@ -438,8 +440,7 @@ public class Controlador {
                 }                
             }catch(Exception e){
                 System.out.println("errorcito: " + e.getMessage());
-                JOptionPane.showMessageDialog(null, "Usuario Incorrecto");
-                
+                JOptionPane.showMessageDialog(null, "Usuario Incorrecto");                
             }
         return null;
         }

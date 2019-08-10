@@ -32,6 +32,7 @@ public class Persistencia {
     }
 
     public void modificar(Object o) {
+        System.out.println("modifica2");
         this.em.merge(o);
     }
 

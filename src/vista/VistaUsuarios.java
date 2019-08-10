@@ -28,7 +28,8 @@ public class VistaUsuarios extends javax.swing.JFrame {
         this.cbRol.setModel((new DefaultComboBoxModel(c.verListadoDeRoles().toArray())));
         this.listaUsuarios.setListData(this.c.verListadoDeUsuarios().toArray());
         this.lblNombre.setText(usuarioActual.getNombre() + usuarioActual.getApellido());
-        this.lblRol.setText(usuarioActual.getRol().toString());
+        this.lblRol.setText(usuarioActual.getRol().toString());        
+        this.txtLegajo.setEditable(false);
         this.setVisible(true);
         
         
@@ -58,13 +59,13 @@ public class VistaUsuarios extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txtFNac = new javax.swing.JFormattedTextField();
-        txtPassword = new javax.swing.JPasswordField();
         jLabel10 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         lblRol = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        txtPassword = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,23 +129,6 @@ public class VistaUsuarios extends javax.swing.JFrame {
 
         txtFNac.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
-        txtPassword.setText("jPasswordField1");
-        txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtPasswordFocusGained(evt);
-            }
-        });
-        txtPassword.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtPasswordMouseClicked(evt);
-            }
-        });
-        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtPasswordKeyPressed(evt);
-            }
-        });
-
         jLabel10.setText("Password");
 
         jPanel3.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.focus"));
@@ -192,6 +176,7 @@ public class VistaUsuarios extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        txtPassword.setText("**********");
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -226,6 +211,19 @@ public class VistaUsuarios extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
+                        .addComponent(jLabel6)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbRol, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtLegajo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                        .addComponent(txtFNac, javax.swing.GroupLayout.Alignment.LEADING)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel8)
@@ -276,8 +274,8 @@ public class VistaUsuarios extends javax.swing.JFrame {
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10))
+                            .addComponent(jLabel10)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(13, 13, 13)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
@@ -339,36 +337,27 @@ public class VistaUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_cbRolActionPerformed
 
     private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
+        this.txtLegajo.setEditable(true);
         String apellido = this.txtApellido.getText();
         String nombre = this.txtNombre.getText();
         String legajo = this.txtLegajo.getText();
         String correo = this.txtEmail.getText();
-        String password = Arrays.toString(this.txtPassword.getPassword());
+        String password = this.txtPassword.getText();
         Date fecha = null;
         try {
             fecha = new SimpleDateFormat("dd/MM/yyyy").parse(this.txtFNac.getText());
         } catch (ParseException ex) {
             System.out.println("Ingrese una Fecha Valida (Formato dd/mm/yyyy)");
         }
-        if(apellido.isEmpty() && nombre.isEmpty() && legajo.isEmpty() && correo.isEmpty() && this.txtFNac.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Debe rellenar los campos correspondientes");
-        } else {            
-            this.c.añadirUsuario(legajo, nombre, apellido, fecha, correo, password, (Rol)this.cbRol.getSelectedItem());
-            this.limpiar();
+        if(this.txtLegajo.isEditable()){
+            if(apellido.isEmpty() && nombre.isEmpty() && legajo.isEmpty() && correo.isEmpty() && this.txtFNac.getText().isEmpty() && this.txtLegajo.isEditable()){
+                JOptionPane.showMessageDialog(null, "Debe rellenar los campos correspondientes");
+            }else {            
+                this.c.añadirUsuario(legajo, nombre, apellido, fecha, correo, password, (Rol)this.cbRol.getSelectedItem());
+                this.limpiar();
+            }
         }
     }//GEN-LAST:event_btnAñadirActionPerformed
-
-    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
-        
-    }//GEN-LAST:event_txtPasswordKeyPressed
-
-    private void txtPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPasswordMouseClicked
-        this.txtPassword.setText("");
-    }//GEN-LAST:event_txtPasswordMouseClicked
-
-    private void txtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusGained
-        this.txtPassword.setText("");
-    }//GEN-LAST:event_txtPasswordFocusGained
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         this.c.eliminarUsuario((Usuario) this.listaUsuarios.getSelectedValue());
@@ -379,42 +368,34 @@ public class VistaUsuarios extends javax.swing.JFrame {
     private void listaUsuariosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaUsuariosValueChanged
         this.txtApellido.setText(((Usuario)this.listaUsuarios.getSelectedValue()).getApellido());
         this.txtEmail.setText(((Usuario)this.listaUsuarios.getSelectedValue()).getCorreo());
-        this.txtFNac.setText(((Usuario)this.listaUsuarios.getSelectedValue()).getFechaNac().toString());
+        this.txtFNac.setText(((Usuario)this.listaUsuarios.getSelectedValue()).getFechaNacLinda());
         this.txtLegajo.setText(((Usuario)this.listaUsuarios.getSelectedValue()).getLegajo());
         this.txtNombre.setText(((Usuario)this.listaUsuarios.getSelectedValue()).getNombre());
-        this.txtPassword.setText(((Usuario)this.listaUsuarios.getSelectedValue()).getPassword());
-        this.bloquearTxt();
+        this.txtPassword.setText((((Usuario)this.listaUsuarios.getSelectedValue()).getPassword()));
+        System.out.println(this.txtPassword.getText());
+        this.cbRol.setSelectedItem(((Usuario)this.listaUsuarios.getSelectedValue()).getRol());
+        
         
     }//GEN-LAST:event_listaUsuariosValueChanged
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        this.desbloquearTxt();        
-        String apellido = this.txtApellido.getText();
-        String nombre = this.txtNombre.getText();
-        String legajo = this.txtLegajo.getText();
-        String correo = this.txtEmail.getText();
-        String password = Arrays.toString(this.txtPassword.getPassword());
+        
+        Usuario unUsuario = (Usuario)this.listaUsuarios.getSelectedValue();
+        unUsuario.setApellido(this.txtApellido.getText());
+        unUsuario.setNombre(this.txtNombre.getText());
+        unUsuario.setCorreo(this.txtEmail.getText());
+        unUsuario.setLegajo(this.txtLegajo.getText());
+        unUsuario.setPassword(this.txtPassword.getText());
+        System.out.println(Arrays.toString(this.txtPassword.getText().toCharArray()));
+        unUsuario.setRol((Rol)this.cbRol.getSelectedItem());
         Date fecha = null;
         try {
             fecha = new SimpleDateFormat("dd/MM/yyyy").parse(this.txtFNac.getText());
         } catch (ParseException ex) {
             System.out.println("Ingrese una Fecha Valida (Formato dd/mm/yyyy)");
         }
-        if(apellido.isEmpty() && nombre.isEmpty() && legajo.isEmpty() && correo.isEmpty() && this.txtFNac.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Debe rellenar los campos correspondientes");
-        } else {
-            Usuario unUsuario = new Usuario();
-            
-            unUsuario.setApellido(this.txtApellido.getSelectedText());
-            ((Usuario)this.listaUsuarios.getSelectedValue()).setNombre(this.txtNombre.getSelectedText());
-            ((Usuario)this.listaUsuarios.getSelectedValue()).setCorreo(this.txtEmail.getSelectedText());
-            ((Usuario)this.listaUsuarios.getSelectedValue()).setLegajo(this.txtLegajo.getSelectedText());
-            ((Usuario)this.listaUsuarios.getSelectedValue()).setPassword(this.txtPassword.getSelectedText());
-            if(((Usuario)this.listaUsuarios.getSelectedValue()).equals(c)){
-                this.c.modificarUsuario(((Usuario)this.listaUsuarios.getSelectedValue()));
-                this.limpiar();
-            }
-        }
+        this.c.modificarUsuario(unUsuario);
+        this.limpiar();     
         
     }//GEN-LAST:event_btnModificarActionPerformed
 
@@ -451,6 +432,6 @@ public class VistaUsuarios extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField txtFNac;
     private javax.swing.JTextField txtLegajo;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JTextField txtPassword;
     // End of variables declaration//GEN-END:variables
 }
