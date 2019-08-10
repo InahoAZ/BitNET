@@ -131,6 +131,11 @@ public class VistaPreguntas extends javax.swing.JFrame {
         lblRol.setText("rol aca");
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-salida-40.png"))); // NOI18N
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -268,6 +273,11 @@ public class VistaPreguntas extends javax.swing.JFrame {
         VistaCargaReporte VCR = new VistaCargaReporte(this.c,this,this.usuarioActual,this.unaPregunta);
         this.dispose();
     }//GEN-LAST:event_btnReportarPreguntaActionPerformed
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        VistaLogin vl = new VistaLogin(this.c);
+        this.dispose();
+    }//GEN-LAST:event_jLabel6MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
