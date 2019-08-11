@@ -50,7 +50,11 @@ public class Reporte {
         this.borrado=false;
     }
     public Reporte(String causa, Respuesta unaRespuesta, Usuario unUsuario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.causa=causa;
+        this.respuesta=unaRespuesta;
+        this.usuario = unUsuario;
+        this.fechaReporte=new Date();
+        this.borrado=false;
     }
     
 

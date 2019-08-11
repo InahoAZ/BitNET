@@ -142,8 +142,7 @@ public class Pregunta {
 	 * @param unaRespuesta
 	 */
 	public void eliminarRespuesta(Respuesta unaRespuesta) {
-		// TODO - implement Pregunta.eliminarRespuesta
-		throw new UnsupportedOperationException();
+		this.respuestas.remove(unaRespuesta);
 	}
 
 	/**
@@ -151,8 +150,7 @@ public class Pregunta {
 	 * @param unReporte
 	 */
 	public void añadirReporte(Reporte unReporte) {
-		// TODO - implement Pregunta.añadirReporte
-		throw new UnsupportedOperationException();
+		this.reportes.add(unReporte);
 	}
 
 	/**

@@ -1,5 +1,6 @@
 package controlador;
 
+import java.awt.HeadlessException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -353,12 +354,6 @@ public class Controlador {
             
 	}
 
-	/**
-	 * 
-	 * @param causa
-	 * @param unaRespuesta
-	 * @param unUsuario
-	 */
 	public void reportarRespuesta(String causa, Respuesta unaRespuesta, Usuario unUsuario) {
 		try{
                     this.p.iniciarTransaccion();
@@ -367,6 +362,7 @@ public class Controlador {
                     unUsuario.añadirReporte(reporte);
                     this.p.modificar(unaRespuesta);
                     this.p.modificar(unUsuario);
+                    JOptionPane.showMessageDialog(null,"Se Generó su reporte");
                     this.p.confirmarTransaccion();
                 }catch(Exception e){
                     System.out.println(e.getMessage());

@@ -15,17 +15,23 @@ public class VistaCargaReporte extends javax.swing.JFrame {
     Respuesta unaRespuesta=null;
     Pregunta unaPregunta=null;
     
-    public VistaCargaReporte(Controlador c, JFrame vistaAnterior, Usuario usuarioActual,Object reportado) {
+    public VistaCargaReporte(Controlador c, JFrame vistaAnterior, Usuario usuarioActual,Pregunta unaPregunta) {
         initComponents();
         this.c=c;
         this.vistaAnterior = vistaAnterior;
         this.usuarioActual = usuarioActual;
-        if(reportado.getClass().equals(this.unaRespuesta.getClass())){
-            this.unaRespuesta=(Respuesta) reportado;
-        }
-         if(reportado.getClass().equals(this.unaPregunta.getClass())){
-            this.unaPregunta=(Pregunta) reportado;
-        }
+        this.unaPregunta=unaPregunta;
+        this.setVisible(true);
+        
+    }
+    public VistaCargaReporte(Controlador c, JFrame vistaAnterior, Usuario usuarioActual,Respuesta unaRespuesta) {
+        initComponents();
+        this.c=c;
+        this.vistaAnterior = vistaAnterior;
+        this.usuarioActual = usuarioActual;
+        this.unaRespuesta=unaRespuesta;
+        this.setVisible(true);
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -47,47 +53,61 @@ public class VistaCargaReporte extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(330, 280));
-        setMinimumSize(new java.awt.Dimension(330, 280));
-        setPreferredSize(new java.awt.Dimension(330, 280));
+        setMinimumSize(new java.awt.Dimension(340, 350));
         getContentPane().setLayout(null);
 
         opt1.setBackground(new java.awt.Color(0, 0, 0));
+        opt1.setForeground(new java.awt.Color(255, 255, 255));
         opt1.setText("Contiene Contenido Violento");
+        opt1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                opt1MouseClicked(evt);
+            }
+        });
         getContentPane().add(opt1);
-        opt1.setBounds(63, 62, 160, 23);
+        opt1.setBounds(40, 60, 230, 23);
 
         opt2.setBackground(new java.awt.Color(0, 0, 0));
+        opt2.setForeground(new java.awt.Color(255, 255, 255));
         opt2.setText("Es Inapropiado");
         getContentPane().add(opt2);
-        opt2.setBounds(63, 88, 96, 23);
+        opt2.setBounds(40, 90, 130, 23);
 
         opt3.setBackground(new java.awt.Color(0, 0, 0));
+        opt3.setForeground(new java.awt.Color(255, 255, 255));
         opt3.setText("Es Spam");
         getContentPane().add(opt3);
-        opt3.setBounds(63, 114, 67, 23);
+        opt3.setBounds(40, 120, 110, 23);
 
         opt4.setBackground(new java.awt.Color(0, 0, 0));
+        opt4.setForeground(new java.awt.Color(255, 255, 255));
         opt4.setText("Acoso o Bullyng");
         getContentPane().add(opt4);
-        opt4.setBounds(63, 140, 104, 23);
+        opt4.setBounds(40, 150, 220, 23);
 
         opt5.setBackground(new java.awt.Color(0, 0, 0));
+        opt5.setForeground(new java.awt.Color(255, 255, 255));
         opt5.setText("Lenguaje o simbolos que incitan al odio");
         getContentPane().add(opt5);
-        opt5.setBounds(63, 166, 212, 23);
+        opt5.setBounds(40, 180, 260, 23);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 28)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Reportar");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(100, 10, 130, 37);
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Otro:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(63, 209, 24, 15);
+        jLabel2.setBounds(50, 210, 40, 15);
+
+        txtOtro.setForeground(new java.awt.Color(0, 0, 0));
         getContentPane().add(txtOtro);
         txtOtro.setBounds(99, 207, 167, 19);
 
+        btnReportar.setBackground(new java.awt.Color(0, 0, 0));
+        btnReportar.setForeground(new java.awt.Color(255, 255, 255));
         btnReportar.setText("Reportar");
         btnReportar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,8 +115,9 @@ public class VistaCargaReporte extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnReportar);
-        btnReportar.setBounds(240, 250, 76, 25);
+        btnReportar.setBounds(200, 250, 100, 25);
 
+        btnVolver.setBackground(new java.awt.Color(0, 0, 0));
         btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/restart_back_left_arrow_6022.png"))); // NOI18N
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,11 +125,11 @@ public class VistaCargaReporte extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnVolver);
-        btnVolver.setBounds(0, 250, 66, 30);
+        btnVolver.setBounds(10, 250, 66, 30);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Diseño sin título.png"))); // NOI18N
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(-580, 0, 910, 330);
+        jLabel3.setBounds(-580, 0, 920, 330);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -145,19 +166,20 @@ public class VistaCargaReporte extends javax.swing.JFrame {
                 causa=this.txtOtro.getText();
             }
             if(this.unaPregunta==null){
-                if(this.unaRespuesta==null){
-                    JOptionPane.showMessageDialog(null,"No se que cosa cargaron ahi en object XD");
-                }else{
-                    this.c.reportarRespuesta(causa, unaRespuesta, usuarioActual);
-                }
+                System.out.println("0");
+                this.c.reportarRespuesta(causa,this.unaRespuesta,this.usuarioActual);
+                System.out.println("6");
             }else{
-                this.c.reportarPregunta(causa, unaPregunta, usuarioActual);
+                this.c.reportarPregunta(causa,this.unaPregunta, this.usuarioActual);
             }
         }
-        JOptionPane.showMessageDialog(null,"Se Generó su reporte");
         this.vistaAnterior.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnReportarActionPerformed
+
+    private void opt1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_opt1MouseClicked
+       
+    }//GEN-LAST:event_opt1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

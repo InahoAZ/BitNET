@@ -116,6 +116,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnActualizar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         btnEliminarForo = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -133,6 +134,10 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenuItem6.setText("jMenuItem6");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(740, 575));
+        setMinimumSize(new java.awt.Dimension(740, 575));
+        setPreferredSize(new java.awt.Dimension(740, 575));
+        getContentPane().setLayout(null);
 
         ListaForos.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -141,9 +146,17 @@ public class VistaPrincipal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(ListaForos);
 
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(36, 145, 191, 319);
+
         jLabel1.setFont(new java.awt.Font("Dotum", 0, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Letter_B_red_35046 (1).png"))); // NOI18N
         jLabel1.setText("itNet");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(12, 5, 127, 48);
+        getContentPane().add(txtBuscar);
+        txtBuscar.setBounds(157, 28, 260, 19);
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-google-web-search-30.png"))); // NOI18N
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -151,6 +164,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnBuscar);
+        btnBuscar.setBounds(423, 13, 45, 40);
 
         btnUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nuevo.png"))); // NOI18N
         btnUsuarios.addActionListener(new java.awt.event.ActionListener() {
@@ -158,6 +173,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 btnUsuariosActionPerformed(evt);
             }
         });
+        getContentPane().add(btnUsuarios);
+        btnUsuarios.setBounds(583, 472, 112, 42);
 
         jPanel3.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.focus"));
 
@@ -207,22 +224,36 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        getContentPane().add(jPanel3);
+        jPanel3.setBounds(529, 0, 198, 52);
+
         btnAgregarForo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-más-2-matemáticas-25 (1).png"))); // NOI18N
         btnAgregarForo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarForoActionPerformed(evt);
             }
         });
+        getContentPane().add(btnAgregarForo);
+        btnAgregarForo.setBounds(170, 470, 50, 40);
 
         jLabel3.setFont(new java.awt.Font("Levenim MT", 1, 20)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-pregunta-48.png"))); // NOI18N
         jLabel3.setText("Preguntas");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(270, 90, 170, 48);
 
         jScrollPane4.setViewportView(ListaUsuarios);
 
+        getContentPane().add(jScrollPane4);
+        jScrollPane4.setBounds(504, 147, 191, 319);
+
         jLabel6.setFont(new java.awt.Font("Levenim MT", 1, 20)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-carpeta-de-usuario-48.png"))); // NOI18N
         jLabel6.setText("Usuarios");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(504, 93, 170, 48);
 
         ListaPreguntas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -236,12 +267,17 @@ public class VistaPrincipal extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(ListaPreguntas);
 
+        getContentPane().add(jScrollPane5);
+        jScrollPane5.setBounds(267, 145, 191, 319);
+
         btnAñadirPregunta.setText("Añadir Pregunta");
         btnAñadirPregunta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAñadirPreguntaActionPerformed(evt);
             }
         });
+        getContentPane().add(btnAñadirPregunta);
+        btnAñadirPregunta.setBounds(328, 470, 130, 42);
 
         btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-actualizar-30.png"))); // NOI18N
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -249,109 +285,29 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 btnActualizarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnActualizar);
+        btnActualizar.setBounds(473, 13, 51, 40);
 
         jLabel7.setFont(new java.awt.Font("Levenim MT", 1, 20)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-ver-detalles-48.png"))); // NOI18N
         jLabel7.setText("Foros");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(36, 91, 170, 48);
 
-        btnEliminarForo.setText("jButton1");
+        btnEliminarForo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-basura-24.png"))); // NOI18N
+        btnEliminarForo.setToolTipText("");
+        btnEliminarForo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarForoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEliminarForo);
+        btnEliminarForo.setBounds(110, 470, 50, 40);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(1, 1, 1))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnEliminarForo)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAgregarForo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnAñadirPregunta, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnUsuarios, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(33, 33, 33))
-        );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jScrollPane1, jScrollPane4, jScrollPane5});
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAgregarForo, btnAñadirPregunta, btnUsuarios});
-
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1))
-                            .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnActualizar, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnUsuarios))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(54, 54, 54)
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnAñadirPregunta))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(btnEliminarForo))))
-                    .addComponent(btnAgregarForo, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jScrollPane1, jScrollPane4, jScrollPane5});
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAgregarForo, btnAñadirPregunta, btnUsuarios});
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo login.jpg"))); // NOI18N
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(-670, -110, 1630, 930);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -424,11 +380,18 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 VistaPreguntas vp = new VistaPreguntas(this.c,this,this.usuarioActual,unaPregunta);
                 this.dispose();
             }else{
-                this.ListaPreguntas.setSelectedIndex(-1);
+                this.ListaPreguntas.clearSelection();
             }
             
         }
     }//GEN-LAST:event_ListaPreguntasValueChanged
+
+    private void btnEliminarForoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarForoActionPerformed
+        if(!this.ListaForos.isSelectionEmpty()){
+            Foro unForo = (Foro) this.ListaForos.getSelectedValue();
+            this.c.eliminarForo(unForo);
+        }
+    }//GEN-LAST:event_btnEliminarForoActionPerformed
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList ListaForos;
@@ -446,6 +409,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.ButtonGroup buttonGroup5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

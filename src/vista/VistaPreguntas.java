@@ -69,6 +69,11 @@ public class VistaPreguntas extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/business_man_user_support_supportfortheuser_aquestion_theclient_2330_1.png"))); // NOI18N
 
         txtCargarRespuesta.setText("Agregar Respuesta");
+        txtCargarRespuesta.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtCargarRespuestaFocusGained(evt);
+            }
+        });
         txtCargarRespuesta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtCargarRespuestaMouseClicked(evt);
@@ -128,6 +133,11 @@ public class VistaPreguntas extends javax.swing.JFrame {
         jLabel4.setText("Seleccione una Respuesta para puntuarla");
 
         btnReportarRespuesta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-bandera-2-24.png"))); // NOI18N
+        btnReportarRespuesta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportarRespuestaActionPerformed(evt);
+            }
+        });
 
         btnAgregarRespuesta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/plus_15650.png"))); // NOI18N
         btnAgregarRespuesta.addActionListener(new java.awt.event.ActionListener() {
@@ -331,6 +341,21 @@ public class VistaPreguntas extends javax.swing.JFrame {
     private void txtCargarRespuestaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCargarRespuestaMouseClicked
         this.txtCargarRespuesta.setText("");
     }//GEN-LAST:event_txtCargarRespuestaMouseClicked
+
+    private void btnReportarRespuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportarRespuestaActionPerformed
+        if(!this.listaRespuesta.isSelectionEmpty()){
+            Respuesta unaRespuesta = (Respuesta) this.listaRespuesta.getSelectedValue();
+            VistaCargaReporte VCR = new VistaCargaReporte(this.c,this,this.usuarioActual,unaRespuesta);
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(null,"Seleccione una Respuesta por favor");
+        }
+        
+    }//GEN-LAST:event_btnReportarRespuestaActionPerformed
+
+    private void txtCargarRespuestaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCargarRespuestaFocusGained
+        this.txtCargarRespuesta.setText("");
+    }//GEN-LAST:event_txtCargarRespuestaFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

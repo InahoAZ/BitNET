@@ -56,8 +56,7 @@ public class Respuesta {
 	 * @param unReporte
 	 */
 	public void añadirReporte(Reporte unReporte) {
-		// TODO - implement Respuesta.añadirReporte
-		throw new UnsupportedOperationException();
+		this.reportes.add(unReporte);
 	}
 
     public int getIdRespuesta() {
