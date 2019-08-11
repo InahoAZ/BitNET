@@ -3,6 +3,7 @@ package vista;
 import controlador.Controlador;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import modelo.Foro;
 import modelo.Usuario;
 
 
@@ -10,12 +11,23 @@ public class VistaAgregarForo extends javax.swing.JFrame {
     Controlador c;
     JFrame vistaAnterior;
     Usuario usuarioActual;
+    Foro unForo;
     public VistaAgregarForo(Controlador c,JFrame vistaAnterior,Usuario usuarioActual) {
         initComponents();
         this.setVisible(true);
         this.c=c;
         this.vistaAnterior=vistaAnterior;
         this.usuarioActual=usuarioActual;
+    }
+    public VistaAgregarForo(Controlador c,JFrame vistaAnterior,Usuario usuarioActual,Foro unForo) {
+        initComponents();
+        this.setVisible(true);
+        this.c=c;
+        this.vistaAnterior=vistaAnterior;
+        this.usuarioActual=usuarioActual;
+        this.txtTitulo.setText(unForo.getTitulo());
+        this.txtDescripcion.setText(unForo.getDescripcion());
+        this.unForo=unForo;
     }
 
     
@@ -145,11 +157,22 @@ public class VistaAgregarForo extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null,"Complete todos los campos correctamente");
        }else{
             if(this.txtDescripcion.getText().isEmpty()){
-                this.c.añadirForo(this.txtTitulo.getText(),"...");
+                if(this.unForo==null){
+                    this.c.añadirForo(this.txtTitulo.getText(),"...");
+                }else{
+                    this.unForo.setDescripcion("...");
+                    this.c.modificarForo(this.unForo);
+                    this.unForo=null;
+                }
             }else{
-                this.c.añadirForo(this.txtTitulo.getText(),this.txtDescripcion.getText());
+                if(this.unForo==null){
+                    this.c.añadirForo(this.txtTitulo.getText(),this.txtDescripcion.getText());
+                }else{
+                    this.c.modificarForo(this.unForo);
+                    this.unForo=null;
+                }
             }
-            int respuesta = JOptionPane.showConfirmDialog(null,"Desea cargar otro foro?");
+            int respuesta = JOptionPane.showConfirmDialog(null,"Desea cargar un nuevo foro?");
             if(respuesta == JOptionPane.YES_OPTION){
                 this.limpiar();
             }else{

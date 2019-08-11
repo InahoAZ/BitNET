@@ -116,6 +116,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnActualizar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         btnEliminarForo = new javax.swing.JButton();
+        btnEditarForo = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         jMenuItem1.setText("jMenuItem1");
@@ -134,9 +135,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenuItem6.setText("jMenuItem6");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(740, 575));
         setMinimumSize(new java.awt.Dimension(740, 575));
-        setPreferredSize(new java.awt.Dimension(740, 575));
         getContentPane().setLayout(null);
 
         ListaForos.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -305,6 +304,15 @@ public class VistaPrincipal extends javax.swing.JFrame {
         getContentPane().add(btnEliminarForo);
         btnEliminarForo.setBounds(110, 470, 50, 40);
 
+        btnEditarForo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-editar-24.png"))); // NOI18N
+        btnEditarForo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarForoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEditarForo);
+        btnEditarForo.setBounds(53, 471, 50, 40);
+
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo login.jpg"))); // NOI18N
         getContentPane().add(jLabel2);
         jLabel2.setBounds(-670, -110, 1630, 930);
@@ -390,8 +398,21 @@ public class VistaPrincipal extends javax.swing.JFrame {
         if(!this.ListaForos.isSelectionEmpty()){
             Foro unForo = (Foro) this.ListaForos.getSelectedValue();
             this.c.eliminarForo(unForo);
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(null,"Seleccione un Foro");
         }
+        
     }//GEN-LAST:event_btnEliminarForoActionPerformed
+
+    private void btnEditarForoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarForoActionPerformed
+        if(!this.ListaForos.isSelectionEmpty()){
+            Foro unForo = (Foro) this.ListaForos.getSelectedValue();
+            VistaAgregarForo vaf = new VistaAgregarForo(this.c,this,this.usuarioActual,unForo);
+         }else{
+            JOptionPane.showMessageDialog(null,"Seleccione un Foro");
+        }
+    }//GEN-LAST:event_btnEditarForoActionPerformed
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList ListaForos;
@@ -401,6 +422,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregarForo;
     private javax.swing.JToggleButton btnAñadirPregunta;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnEditarForo;
     private javax.swing.JButton btnEliminarForo;
     private javax.swing.JButton btnUsuarios;
     private javax.swing.ButtonGroup buttonGroup1;
