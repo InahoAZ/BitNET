@@ -166,14 +166,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
         getContentPane().add(btnBuscar);
         btnBuscar.setBounds(423, 13, 45, 40);
 
-        btnUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nuevo.png"))); // NOI18N
+        btnUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-añadir-grupo-de-usuarios-hombre-hombre-40.png"))); // NOI18N
         btnUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUsuariosActionPerformed(evt);
             }
         });
         getContentPane().add(btnUsuarios);
-        btnUsuarios.setBounds(583, 472, 112, 42);
+        btnUsuarios.setBounds(635, 472, 60, 50);
 
         jPanel3.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.focus"));
 
@@ -226,14 +226,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jPanel3);
         jPanel3.setBounds(529, 0, 198, 52);
 
-        btnAgregarForo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-más-2-matemáticas-25 (1).png"))); // NOI18N
+        btnAgregarForo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-más-2-matemáticas-40.png"))); // NOI18N
         btnAgregarForo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarForoActionPerformed(evt);
             }
         });
         getContentPane().add(btnAgregarForo);
-        btnAgregarForo.setBounds(170, 470, 50, 40);
+        btnAgregarForo.setBounds(180, 470, 50, 50);
 
         jLabel3.setFont(new java.awt.Font("Levenim MT", 1, 20)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -269,14 +269,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jScrollPane5);
         jScrollPane5.setBounds(267, 145, 191, 319);
 
-        btnAñadirPregunta.setText("Añadir Pregunta");
+        btnAñadirPregunta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-ayuda-40.png"))); // NOI18N
         btnAñadirPregunta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAñadirPreguntaActionPerformed(evt);
             }
         });
         getContentPane().add(btnAñadirPregunta);
-        btnAñadirPregunta.setBounds(328, 470, 130, 42);
+        btnAñadirPregunta.setBounds(400, 470, 50, 50);
 
         btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-actualizar-30.png"))); // NOI18N
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -294,7 +294,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabel7);
         jLabel7.setBounds(36, 91, 170, 48);
 
-        btnEliminarForo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-basura-24.png"))); // NOI18N
+        btnEliminarForo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-basura-40.png"))); // NOI18N
         btnEliminarForo.setToolTipText("");
         btnEliminarForo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -302,16 +302,16 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnEliminarForo);
-        btnEliminarForo.setBounds(110, 470, 50, 40);
+        btnEliminarForo.setBounds(110, 470, 50, 50);
 
-        btnEditarForo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-editar-24.png"))); // NOI18N
+        btnEditarForo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-editar-fila-40.png"))); // NOI18N
         btnEditarForo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarForoActionPerformed(evt);
             }
         });
         getContentPane().add(btnEditarForo);
-        btnEditarForo.setBounds(53, 471, 50, 40);
+        btnEditarForo.setBounds(40, 470, 50, 50);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo login.jpg"))); // NOI18N
         getContentPane().add(jLabel2);
