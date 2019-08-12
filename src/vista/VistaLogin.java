@@ -42,22 +42,23 @@ public class VistaLogin extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(400, 325));
-        setSize(new java.awt.Dimension(400, 325));
+        setMaximumSize(new java.awt.Dimension(470, 425));
+        setMinimumSize(new java.awt.Dimension(470, 425));
+        setSize(new java.awt.Dimension(470, 425));
         getContentPane().setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 48)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 58)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Letter_B_red_35046.png"))); // NOI18N
         jLabel1.setText("itNet");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(99, 12, 166, 64);
+        jLabel1.setBounds(120, 30, 220, 83);
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("DialogInput", 0, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Inicar Sesion");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(130, 80, 120, 22);
+        jLabel2.setBounds(160, 120, 140, 22);
 
         txtLegajo.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         txtLegajo.setText("1");
@@ -82,7 +83,7 @@ public class VistaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtLegajo);
-        txtLegajo.setBounds(90, 130, 230, 24);
+        txtLegajo.setBounds(110, 170, 230, 24);
 
         txtPassword.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         txtPassword.setText("1");
@@ -102,7 +103,7 @@ public class VistaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtPassword);
-        txtPassword.setBounds(90, 180, 230, 24);
+        txtPassword.setBounds(110, 240, 230, 24);
 
         btnIngresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/flecha.png"))); // NOI18N
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
@@ -111,12 +112,12 @@ public class VistaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnIngresar);
-        btnIngresar.setBounds(170, 230, 60, 42);
+        btnIngresar.setBounds(190, 310, 60, 42);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/wallpapers_tecnologia_computacion_by_madboxpc-1.png"))); // NOI18N
         jLabel3.setText("jLabel3");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(0, 0, 390, 330);
+        jLabel3.setBounds(0, -20, 520, 480);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

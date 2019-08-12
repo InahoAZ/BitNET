@@ -142,8 +142,7 @@ public class Pregunta {
 	 * @param unaRespuesta
 	 */
 	public void eliminarRespuesta(Respuesta unaRespuesta) {
-		// TODO - implement Pregunta.eliminarRespuesta
-		throw new UnsupportedOperationException();
+		this.respuestas.remove(unaRespuesta);
 	}
 
 	/**
@@ -151,8 +150,7 @@ public class Pregunta {
 	 * @param unReporte
 	 */
 	public void añadirReporte(Reporte unReporte) {
-		// TODO - implement Pregunta.añadirReporte
-		throw new UnsupportedOperationException();
+		this.reportes.add(unReporte);
 	}
 
 	/**
@@ -161,8 +159,7 @@ public class Pregunta {
          * @return 
 	 */
 	public boolean compararPregunta(String unaBusqueda) {
-		// TODO - implement Pregunta.compararPregunta
-		throw new UnsupportedOperationException();
+		return this.pregunta.contains(unaBusqueda);
 	}
 
 	/**
@@ -171,8 +168,7 @@ public class Pregunta {
          * @return 
 	 */
 	public boolean compararDescripcion(String unaBusqueda) {
-		// TODO - implement Pregunta.compararDescripcion
-		throw new UnsupportedOperationException();
+		return this.descripcion.contains(unaBusqueda);
 	}
 
     @Override

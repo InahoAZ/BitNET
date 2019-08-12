@@ -67,9 +67,14 @@ public class Respuesta {
             this.usuariosPuntuadores.remove(unVoto);
         }        
         
-	public List<Voto> getUsuarioPuntuador() {
-            return usuariosPuntuadores;
-	}
+    	public List<Voto> getUsuarioPuntuador() {
+                return usuariosPuntuadores;
+    	}
+    	
+    	public void añadirReporte(Reporte unReporte) {
+    		this.reportes.add(unReporte);
+    	}
+	
 
         /**
          *

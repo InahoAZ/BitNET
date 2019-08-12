@@ -181,6 +181,7 @@
         <Property name="text" type="java.lang.String" value="Agregar Respuesta"/>
       </Properties>
       <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtCargarRespuestaFocusGained"/>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtCargarRespuestaMouseClicked"/>
       </Events>
     </Component>
@@ -284,6 +285,9 @@
           <Image iconType="3" name="/imagenes/icons8-bandera-2-24.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReportarRespuestaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnAgregarRespuesta">
       <Properties>
