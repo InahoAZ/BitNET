@@ -5,9 +5,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -29,7 +26,6 @@ public class VistaUsuarios extends javax.swing.JFrame {
         this.listaUsuarios.setListData(this.c.verListadoDeUsuarios().toArray());
         this.lblNombre.setText(usuarioActual.getNombre() + usuarioActual.getApellido());
         this.lblRol.setText(usuarioActual.getRol().toString());        
-        this.txtLegajo.setEditable(false);
         this.btnModificar.setEnabled(false);
         this.btnEliminar.setEnabled(false);
         this.setVisible(true);
@@ -362,21 +358,22 @@ public class VistaUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_cbRolActionPerformed
 
     private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
-        if(!this.listaUsuarios.isSelectionEmpty()){
-            System.out.println("limpiio");
-            this.limpiar();
-        }
-        String apellido = this.txtApellido.getText();
-        String nombre = this.txtNombre.getText();
+        Date fecha = null;
+             try {
+                fecha = new SimpleDateFormat("dd/MM/yyyy").parse(this.txtFNac.getText());
+                Date fecha2 = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/1920");
+                if(fecha.compareTo(fecha2)<0){
+                    JOptionPane.showMessageDialog(null,"Ingrese una fecha de nacimiento valida");
+                }
+            } catch (ParseException ex) {
+                System.out.println("Ingrese una Fecha Valida (Formato dd/mm/yyyy)");
+            }
+        String apellido = this.txtApellido.getText().toUpperCase().toUpperCase();
+        String nombre = this.txtNombre.getText();            
+        nombre = nombre.substring(0,1).toUpperCase()+nombre.substring(1);
         String legajo = this.txtLegajo.getText();
         String correo = this.txtEmail.getText();
         String password = this.txtPassword.getText();
-        Date fecha = null;
-        try {
-            fecha = new SimpleDateFormat("dd/MM/yyyy").parse(this.txtFNac.getText());
-        } catch (ParseException ex) {
-            System.out.println("Ingrese una Fecha Valida (Formato dd/mm/yyyy)");
-        }
         if(this.txtLegajo.isEditable()){                        
             if(apellido.isEmpty() && nombre.isEmpty() && legajo.isEmpty() && correo.isEmpty() && this.txtFNac.getText().isEmpty()){                
                 JOptionPane.showMessageDialog(null, "Debe rellenar los campos correspondientes");
@@ -391,8 +388,16 @@ public class VistaUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAñadirActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        this.c.eliminarUsuario((Usuario) this.listaUsuarios.getSelectedValue());
-        this.limpiar();
+        if(!this.listaUsuarios.isSelectionEmpty()){
+            System.out.println("usr "+this.listaUsuarios.getSelectedValue());
+            this.c.eliminarUsuario((Usuario) this.listaUsuarios.getSelectedValue());
+            this.limpiar();
+            this.btnAñadir.setEnabled(true);
+            this.txtLegajo.setEnabled(true);
+        }else{
+            JOptionPane.showMessageDialog(null,"Seleccione un Usuario");
+        }
+        
         
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -406,30 +411,47 @@ public class VistaUsuarios extends javax.swing.JFrame {
             this.txtPassword.setText((((Usuario)this.listaUsuarios.getSelectedValue()).getPassword()));
             System.out.println(this.txtPassword.getText());
             this.cbRol.setSelectedItem(((Usuario)this.listaUsuarios.getSelectedValue()).getRol());
+            this.btnEliminar.setEnabled(true);
+            this.btnModificar.setEnabled(true);
+            this.txtLegajo.setEnabled(false);
+            this.btnAñadir.setEnabled(false);
         }
-        this.btnEliminar.setEnabled(true);
-        this.btnModificar.setEnabled(true);
+        
     }//GEN-LAST:event_listaUsuariosValueChanged
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         
-        Usuario unUsuario = (Usuario)this.listaUsuarios.getSelectedValue();
-        unUsuario.setApellido(this.txtApellido.getText());
-        unUsuario.setNombre(this.txtNombre.getText());
-        unUsuario.setCorreo(this.txtEmail.getText());
-        unUsuario.setLegajo(this.txtLegajo.getText());
-        unUsuario.setPassword(this.txtPassword.getText());
-        System.out.println(Arrays.toString(this.txtPassword.getText().toCharArray()));
-        unUsuario.setRol((Rol)this.cbRol.getSelectedItem());
-        Date fecha = null;
-        try {
-            fecha = new SimpleDateFormat("dd/MM/yyyy").parse(this.txtFNac.getText());
-        } catch (ParseException ex) {
-            System.out.println("Ingrese una Fecha Valida (Formato dd/mm/yyyy)");
-        }
-        this.c.modificarUsuario(unUsuario);
-        this.limpiar();     
-        
+        if(this.txtApellido.getText().isEmpty()&& this.txtNombre.getText().isEmpty() && this.txtLegajo.getText().isEmpty() && this.txtEmail.getText().isEmpty() && this.txtFNac.getText().isEmpty()){ 
+            JOptionPane.showMessageDialog(null,"Debe rellenar todos los campos");
+        }else{
+            
+            Usuario unUsuario = (Usuario)this.listaUsuarios.getSelectedValue();
+            unUsuario.setApellido(this.txtApellido.getText().toUpperCase());
+            unUsuario.setNombre(this.txtNombre.getText().substring(0,1).toUpperCase()+this.txtNombre.getText().substring(1));
+            unUsuario.setCorreo(this.txtEmail.getText());
+            unUsuario.setLegajo(this.txtLegajo.getText());
+            unUsuario.setPassword(this.txtPassword.getText());
+            System.out.println(Arrays.toString(this.txtPassword.getText().toCharArray()));
+            unUsuario.setRol((Rol)this.cbRol.getSelectedItem());
+            Date fecha = null;
+             try {
+                fecha = new SimpleDateFormat("dd/MM/yyyy").parse(this.txtFNac.getText());
+                Date fecha2 = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/1920");
+                if(fecha.compareTo(fecha2)<0){
+                    JOptionPane.showMessageDialog(null,"Ingrese una fecha de nacimiento valida");
+                }else{
+                    unUsuario.setFechaNac(fecha);
+                    this.c.modificarUsuario(unUsuario);
+                    this.limpiar();
+                    this.btnAñadir.setEnabled(true);
+                    this.txtLegajo.setEnabled(true);
+                }
+            } catch (ParseException ex) {
+                System.out.println("Ingrese una Fecha Valida (Formato dd/mm/yyyy)");
+            }
+                
+        }       
+
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked

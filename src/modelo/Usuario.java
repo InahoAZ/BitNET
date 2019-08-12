@@ -263,7 +263,7 @@ public class Usuario {
 
         @Override
         public String toString() {
-            return "" + nombre + "  " + apellido + "  " + this.getFechaNacLinda() + "  " + correo + "  " + reputacion;
+            return "  " + this.apellido + "  " + this.nombre;
         }
         
         
