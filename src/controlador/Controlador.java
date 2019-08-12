@@ -188,7 +188,7 @@ public class Controlador {
 		try{
                      this.p.iniciarTransaccion();
                      Usuario unUsuario=unaRespuesta.getUsuario();
-                     Voto unVoto = new Voto();
+                     //Voto unVoto = new Voto();
                      if(positivo){
                         if(usuarioActual.buscarVotoRespuesta(unaRespuesta)== null){
                             int puntaje = unaRespuesta.getPuntaje();
@@ -197,9 +197,7 @@ public class Controlador {
                             unUsuario.setReputacion(reputacion + 1);
                             
                             //Creamos instancia de Voto
-                            unVoto.setRespuestaPuntuada(unaRespuesta);
-                            unVoto.setUsuarioPuntuador(usuarioActual);
-                            unVoto.setPositivo(positivo);
+                            Voto unVoto = new Voto(unaRespuesta,usuarioActual,positivo);                            
                             
                             //Asociamos el voto al usuario y a la respuesta
                             unaRespuesta.añadirPuntajeUsuario(unVoto);
@@ -215,8 +213,7 @@ public class Controlador {
                             unUsuario.setReputacion(reputacion - 1);                            
                             
                             //Buscamos el registro de voto que corresponda
-                            unVoto = usuarioActual.buscarVotoRespuesta(unaRespuesta);
-                            System.out.println(unVoto);
+                            Voto unVoto = usuarioActual.buscarVotoRespuesta(unaRespuesta);                            
                             
                             //Eliminamos las asociaciones de usuario - voto - respuesta
                             usuarioActual.eliminarPuntajeRespuesta(unVoto);
@@ -235,10 +232,9 @@ public class Controlador {
                             unUsuario.setReputacion(reputacion - 1);
                             
                             //Creamos instancia de Voto
-                            unVoto.setRespuestaPuntuada(unaRespuesta);
-                            unVoto.setUsuarioPuntuador(usuarioActual);
-                            unVoto.setPositivo(positivo);
+                            Voto unVoto = new Voto(unaRespuesta,usuarioActual,positivo);
                             
+                            //asociamos usuario - voto - respuesta
                             unaRespuesta.añadirPuntajeUsuario(unVoto);
                             usuarioActual.añadirPuntajeRespuesta(unVoto);
                             
@@ -254,8 +250,7 @@ public class Controlador {
                             System.out.println("Despresiona DOWN");
                             
                             //Buscamos el registro de voto que corresponda
-                            unVoto = usuarioActual.buscarVotoRespuesta(unaRespuesta);
-                            System.out.println(unVoto);
+                            Voto unVoto = usuarioActual.buscarVotoRespuesta(unaRespuesta);                            
                             
                             //Eliminamos las asociaciones de usuario - voto - respuesta
                             usuarioActual.eliminarPuntajeRespuesta(unVoto);
@@ -264,9 +259,7 @@ public class Controlador {
                             //Eliminamos el voto del registro
                             this.p.eliminar(unVoto);
                         }
-                        
-                     }
-                     
+                     }                     
                      this.p.modificar(unaRespuesta);
                      this.p.modificar(unUsuario);
                      this.p.confirmarTransaccion();
