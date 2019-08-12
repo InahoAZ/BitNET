@@ -82,14 +82,7 @@ public class Respuesta {
          */
         public void setUsuarioPuntuador(List<Voto> usuarioPuntuador) {
             this.usuariosPuntuadores = usuarioPuntuador;
-        }
-
-        public void añadirReporte(Reporte unReporte) {
-            // TODO - implement Respuesta.añadirReporte
-            throw new UnsupportedOperationException();
-        }
-    
-        
+        }   
         
         public int getIdRespuesta() {
             return idRespuesta;
