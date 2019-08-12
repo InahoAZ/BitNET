@@ -4,10 +4,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -16,6 +20,7 @@ import javax.persistence.Temporal;
 
 @Entity
 @Table(name="respuesta")
+@DiscriminatorValue("respuesta")
 public class Respuesta {
         
         @Id
@@ -33,13 +38,16 @@ public class Respuesta {
         private Pregunta pregunta;
         
         @OneToMany(mappedBy = "respuesta")
-        private List<Reporte> reportes=new ArrayList<>();
+        private List<Reporte> reportes = new ArrayList<>();
         
         @ManyToOne
         private Usuario usuario;
         
-        public Respuesta(){
+        @OneToMany(mappedBy="respuestaPuntuada")        
+        private List<Voto> usuariosPuntuadores;
         
+        public Respuesta(){
+            this.usuariosPuntuadores = new ArrayList<>();
         }
         
 
@@ -48,84 +56,102 @@ public class Respuesta {
             this.pregunta=unaPregunta;
             this.usuario=unUsuario;
             this.fechaPublicacion=new Date();
+            this.usuariosPuntuadores = new ArrayList<>();
         }   
 
+        public void añadirPuntajeUsuario(Voto unVoto){
+            this.usuariosPuntuadores.add(unVoto);
+        }
         
-	/**
-	 * 
-	 * @param unReporte
-	 */
-	public void añadirReporte(Reporte unReporte) {
-		// TODO - implement Respuesta.añadirReporte
-		throw new UnsupportedOperationException();
+        public void eliminarPuntajeUsuario(Voto unVoto){
+            this.usuariosPuntuadores.remove(unVoto);
+        }        
+        
+	public List<Voto> getUsuarioPuntuador() {
+            return usuariosPuntuadores;
 	}
 
-    public int getIdRespuesta() {
-        return idRespuesta;
-    }
+        /**
+         *
+         * @param usuarioPuntuador
+         */
+        public void setUsuarioPuntuador(List<Voto> usuarioPuntuador) {
+            this.usuariosPuntuadores = usuarioPuntuador;
+        }
 
-    public void setIdRespuesta(int idRespuesta) {
-        this.idRespuesta = idRespuesta;
-    }
-
-    public String getRespuesta() {
-        return respuesta;
-    }
-
-    public void setRespuesta(String respuesta) {
-        this.respuesta = respuesta;
-    }
-
-    public int getPuntaje() {
-        return puntaje;
-    }
-
-    public void setPuntaje(int puntaje) {
-        this.puntaje = puntaje;
-    }
-
-    public Date getFechaPublicacion() {
-        return fechaPublicacion;
-    }
-
-    public void setFechaPublicacion(Date fechaPublicacion) {
-        this.fechaPublicacion = fechaPublicacion;
-    }
-    
-    public String getFechaPublicacionLinda(){
-            Format formatter = new SimpleDateFormat("dd/MM/yyyy");
-            return formatter.format(this.fechaPublicacion);            
+        public void añadirReporte(Reporte unReporte) {
+            // TODO - implement Respuesta.añadirReporte
+            throw new UnsupportedOperationException();
         }
     
-    public Pregunta getPregunta() {
-        return pregunta;
-    }
-
-    public void setPregunta(Pregunta pregunta) {
-        this.pregunta = pregunta;
-    }
-
-    public List<Reporte> getReportes() {
-        return reportes;
-    }
-
-    public void setReportes(List<Reporte> reportes) {
-        this.reportes = reportes;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
         
+        
+        public int getIdRespuesta() {
+            return idRespuesta;
+        }
 
-    @Override
-    public String toString() {
-        return "" + this.respuesta + "  " + this.puntaje + " puntos  " + this.getFechaPublicacionLinda();
-    }
+        public void setIdRespuesta(int idRespuesta) {
+            this.idRespuesta = idRespuesta;
+        }
+
+        public String getRespuesta() {
+            return respuesta;
+        }
+
+        public void setRespuesta(String respuesta) {
+            this.respuesta = respuesta;
+        }
+
+        public int getPuntaje() {
+            return puntaje;
+        }
+
+        public void setPuntaje(int puntaje) {
+            this.puntaje = puntaje;
+        }
+
+        public Date getFechaPublicacion() {
+            return fechaPublicacion;
+        }
+
+        public void setFechaPublicacion(Date fechaPublicacion) {
+            this.fechaPublicacion = fechaPublicacion;
+        }
+
+        public String getFechaPublicacionLinda(){
+                Format formatter = new SimpleDateFormat("dd/MM/yyyy");
+                return formatter.format(this.fechaPublicacion);            
+            }
+
+        public Pregunta getPregunta() {
+            return pregunta;
+        }
+
+        public void setPregunta(Pregunta pregunta) {
+            this.pregunta = pregunta;
+        }
+
+        public List<Reporte> getReportes() {
+            return reportes;
+        }
+
+        public void setReportes(List<Reporte> reportes) {
+            this.reportes = reportes;
+        }
+
+        public Usuario getUsuario() {
+            return usuario;
+        }
+
+        public void setUsuario(Usuario usuario) {
+            this.usuario = usuario;
+        }
+
+
+        @Override
+        public String toString() {
+            return "" + this.respuesta + "  " + this.puntaje + " puntos  " + this.getFechaPublicacionLinda();
+        }
 
          
 }

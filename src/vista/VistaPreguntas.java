@@ -7,12 +7,13 @@ import javax.swing.JOptionPane;
 import modelo.Pregunta;
 import modelo.Respuesta;
 import modelo.Usuario;
+import modelo.Voto;
 
 public class VistaPreguntas extends javax.swing.JFrame {
     Controlador c;
-    JFrame vistaAnterior;
-    Usuario usuarioActual;
-    Pregunta unaPregunta;
+    private JFrame vistaAnterior;
+    private Usuario usuarioActual;
+    private Pregunta unaPregunta;
     public VistaPreguntas(Controlador c,JFrame vistaAnterior,Usuario usuarioActual,Pregunta unaPregunta) {
         initComponents();
         this.setVisible(true);
@@ -25,6 +26,10 @@ public class VistaPreguntas extends javax.swing.JFrame {
         this.lblTituloPregunta.setText(this.unaPregunta.getPregunta());
         this.txtDescripcionPregunta.setText(this.unaPregunta.getDescripcion());
         this.listaRespuesta.setListData(this.c.verRespuestas(unaPregunta).toArray());
+        
+        
+        
+        //FALTA QUE SE DIFERENCIE EN SI UN USUARIO DEJO PUNTUADO UNA PREGUNTA DE MANERA POSITIVA O NEGATIVA PARA SABER QUE BOTON DEBE PERSISTIR APRETADO.
     }
 
     @SuppressWarnings("unchecked")
@@ -45,8 +50,6 @@ public class VistaPreguntas extends javax.swing.JFrame {
         listaRespuesta = new javax.swing.JList();
         jScrollPane4 = new javax.swing.JScrollPane();
         txtRespuesta = new javax.swing.JTextArea();
-        btnMeGusta = new javax.swing.JButton();
-        btnNoMeGusta = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         btnReportarRespuesta = new javax.swing.JButton();
@@ -57,6 +60,8 @@ public class VistaPreguntas extends javax.swing.JFrame {
         lblNombre = new javax.swing.JLabel();
         lblRol = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        btnMeGusta = new javax.swing.JToggleButton();
+        btnNoMeGusta = new javax.swing.JToggleButton();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -103,20 +108,6 @@ public class VistaPreguntas extends javax.swing.JFrame {
         txtRespuesta.setColumns(20);
         txtRespuesta.setRows(5);
         jScrollPane4.setViewportView(txtRespuesta);
-
-        btnMeGusta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-me-gusta-24.png"))); // NOI18N
-        btnMeGusta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMeGustaActionPerformed(evt);
-            }
-        });
-
-        btnNoMeGusta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/no me gusta.png"))); // NOI18N
-        btnNoMeGusta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNoMeGustaActionPerformed(evt);
-            }
-        });
 
         btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/restart_back_left_arrow_6022.png"))); // NOI18N
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -183,10 +174,27 @@ public class VistaPreguntas extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnMeGusta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-me-gusta-24.png"))); // NOI18N
+        btnMeGusta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMeGustaActionPerformed(evt);
+            }
+        });
+
+        btnNoMeGusta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/no me gusta.png"))); // NOI18N
+        btnNoMeGusta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNoMeGustaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -207,8 +215,8 @@ public class VistaPreguntas extends javax.swing.JFrame {
                                         .addComponent(btnReportarRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(29, 29, 29)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnMeGusta)
                             .addComponent(btnAgregarRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnMeGusta)
                             .addComponent(btnNoMeGusta)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -217,18 +225,15 @@ public class VistaPreguntas extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblTituloPregunta)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(btnReportarPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(lblTituloPregunta)))
+                                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addComponent(jLabel4))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,22 +251,19 @@ public class VistaPreguntas extends javax.swing.JFrame {
                                 .addComponent(btnReportarPregunta))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(147, 147, 147)
-                        .addComponent(btnReportarRespuesta))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnMeGusta)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnNoMeGusta)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(4, 4, 4)
+                        .addComponent(btnNoMeGusta))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnReportarRespuesta, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -276,14 +278,6 @@ public class VistaPreguntas extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnMeGustaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMeGustaActionPerformed
-        if(!this.listaRespuesta.isSelectionEmpty()){
-            Respuesta unaRespuesta= (Respuesta) this.listaRespuesta.getSelectedValue();
-            this.c.puntuarRespuesta(unaRespuesta,true);
-        }
-        
-    }//GEN-LAST:event_btnMeGustaActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         this.vistaAnterior.setVisible(true);
@@ -301,19 +295,25 @@ public class VistaPreguntas extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jLabel6MouseClicked
 
-    private void btnNoMeGustaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoMeGustaActionPerformed
-        if(!this.listaRespuesta.isSelectionEmpty()){
-            Respuesta unaRespuesta= (Respuesta) this.listaRespuesta.getSelectedValue();
-            this.c.puntuarRespuesta(unaRespuesta,false);
-        }
-    }//GEN-LAST:event_btnNoMeGustaActionPerformed
-
     private void listaRespuestaValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaRespuestaValueChanged
         if(!this.listaRespuesta.isSelectionEmpty()){
             Respuesta unaRespuesta= (Respuesta) this.listaRespuesta.getSelectedValue();
             this.txtRespuesta.setText(unaRespuesta.getRespuesta());
             //this.btnMeGusta.setText(unaRespuesta.getPuntaje());
-
+            
+            Voto unVoto = this.usuarioActual.buscarVotoRespuesta(unaRespuesta);        
+            if(unVoto == null){
+                this.btnMeGusta.setSelected(false);
+                this.btnNoMeGusta.setSelected(false);
+            }else{
+                if(unVoto.isPositivo()){
+                    this.btnMeGusta.setSelected(true);
+                    this.btnNoMeGusta.setSelected(false);
+                }else{
+                    this.btnNoMeGusta.setSelected(true);
+                    this.btnMeGusta.setSelected(false);
+                }
+            }
         }
     }//GEN-LAST:event_listaRespuestaValueChanged
 
@@ -332,11 +332,35 @@ public class VistaPreguntas extends javax.swing.JFrame {
         this.txtCargarRespuesta.setText("");
     }//GEN-LAST:event_txtCargarRespuestaMouseClicked
 
+    private void btnMeGustaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMeGustaActionPerformed
+        // TODO add your handling code here:        
+        if(!this.listaRespuesta.isSelectionEmpty()){
+                Respuesta unaRespuesta= (Respuesta) this.listaRespuesta.getSelectedValue();
+                if(this.btnNoMeGusta.isSelected()){
+                    this.btnNoMeGusta.setSelected(false);
+                    this.c.puntuarRespuesta(unaRespuesta, this.usuarioActual, false);
+                }                
+                this.c.puntuarRespuesta(unaRespuesta, this.usuarioActual, true);
+        }   
+    }//GEN-LAST:event_btnMeGustaActionPerformed
+
+    private void btnNoMeGustaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoMeGustaActionPerformed
+        // TODO add your handling code here:
+        if(!this.listaRespuesta.isSelectionEmpty()){
+                Respuesta unaRespuesta= (Respuesta) this.listaRespuesta.getSelectedValue();
+                if(this.btnMeGusta.isSelected()){
+                    this.btnMeGusta.setSelected(false);
+                    this.c.puntuarRespuesta(unaRespuesta, this.usuarioActual, true);
+                }                
+                this.c.puntuarRespuesta(unaRespuesta, this.usuarioActual, false);
+        }
+    }//GEN-LAST:event_btnNoMeGustaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarRespuesta;
-    private javax.swing.JButton btnMeGusta;
-    private javax.swing.JButton btnNoMeGusta;
+    private javax.swing.JToggleButton btnMeGusta;
+    private javax.swing.JToggleButton btnNoMeGusta;
     private javax.swing.JButton btnReportarPregunta;
     private javax.swing.JButton btnReportarRespuesta;
     private javax.swing.JButton btnVolver;

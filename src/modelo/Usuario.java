@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -18,11 +20,12 @@ import javax.persistence.Temporal;
 
 @Entity
 @Table(name = "usuario")
+@DiscriminatorValue("usuario")
+
 
 public class Usuario {
         @Id
-	private String legajo;
-        
+	private String legajo;        
 	private String nombre;
 	private String apellido;
         
@@ -45,6 +48,9 @@ public class Usuario {
         private List<Reporte> reportes;
         
         private String password;
+        
+        @OneToMany(mappedBy="usuarioPuntuador")
+        private List<Voto> respuestasPuntuadas;
         
         public Usuario(){
             this.preguntas = new ArrayList<>();
@@ -81,6 +87,25 @@ public class Usuario {
 	public void añadirRespuesta(Respuesta unaRespuesta) {
 		this.respuestas.add(unaRespuesta);
 	}
+        
+        public void añadirPuntajeRespuesta(Voto unVoto){
+                this.respuestasPuntuadas.add(unVoto);
+                //unaRespuesta.añadirPuntajeUsuario(this);
+        }
+        
+        public void eliminarPuntajeRespuesta(Voto unVoto){
+                this.respuestasPuntuadas.remove(unVoto);
+                //unaRespuesta.eliminarPuntajeUsuario(this);
+        }
+        //Devuelve unVoto que contenga la respuesta pasada por parametro.
+        public Voto buscarVotoRespuesta(Respuesta unaRespuesta){
+            for(Voto item : this.respuestasPuntuadas){
+                if(item.getRespuestaPuntuada().equals(unaRespuesta)){
+                    return item;
+                }
+            }
+            return null;
+        }
 
 	/**
 	 * 
@@ -202,6 +227,40 @@ public class Usuario {
             Format formatter = new SimpleDateFormat("dd/MM/yyyy");
             return formatter.format(this.fechaNac);            
         }
+
+        public List<Pregunta> getPreguntas() {
+            return preguntas;
+        }
+
+        public void setPreguntas(List<Pregunta> preguntas) {
+            this.preguntas = preguntas;
+        }
+
+        public List<Respuesta> getRespuestas() {
+            return respuestas;
+        }
+
+        public void setRespuestas(List<Respuesta> respuestas) {
+            this.respuestas = respuestas;
+        }
+
+        public List<Reporte> getReportes() {
+            return reportes;
+        }
+
+        public void setReportes(List<Reporte> reportes) {
+            this.reportes = reportes;
+        }
+
+        public List<Voto> getRespuestasPuntuadas() {
+            return respuestasPuntuadas;
+        }
+
+        public void setRespuestasPuntuadas(List<Voto> respuestasPuntuadas) {
+            this.respuestasPuntuadas = respuestasPuntuadas;
+        }
+        
+        
         
 
         @Override

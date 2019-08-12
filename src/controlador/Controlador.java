@@ -10,6 +10,7 @@ import modelo.Reporte;
 import modelo.Respuesta;
 import modelo.Rol;
 import modelo.Usuario;
+import modelo.Voto;
 
 public class Controlador {
     private Persistencia p;
@@ -164,23 +165,94 @@ public class Controlador {
 	/**
 	 * 
 	 * @param unaRespuesta
+         * @param usuarioActual
 	 * @param positivo
 	 */
-	public void puntuarRespuesta(Respuesta unaRespuesta, boolean positivo) {
+	public void puntuarRespuesta(Respuesta unaRespuesta, Usuario usuarioActual, boolean positivo) {
 		try{
                      this.p.iniciarTransaccion();
                      Usuario unUsuario=unaRespuesta.getUsuario();
-                     if(positivo=true){
-                        int puntaje = unaRespuesta.getPuntaje();
-                        unaRespuesta.setPuntaje(puntaje + 1);
-                        float reputacion=unUsuario.getReputacion();
-                        unUsuario.setReputacion(reputacion + 1);
+                     Voto unVoto = new Voto();
+                     if(positivo){
+                        if(usuarioActual.buscarVotoRespuesta(unaRespuesta)== null){
+                            int puntaje = unaRespuesta.getPuntaje();
+                            unaRespuesta.setPuntaje(puntaje + 1);
+                            float reputacion=unUsuario.getReputacion();
+                            unUsuario.setReputacion(reputacion + 1);
+                            
+                            //Creamos instancia de Voto
+                            unVoto.setRespuestaPuntuada(unaRespuesta);
+                            unVoto.setUsuarioPuntuador(usuarioActual);
+                            unVoto.setPositivo(positivo);
+                            
+                            //Asociamos el voto al usuario y a la respuesta
+                            unaRespuesta.añadirPuntajeUsuario(unVoto);
+                            usuarioActual.añadirPuntajeRespuesta(unVoto);                            
+                            
+                            this.p.insertar(unVoto);
+                            
+                            System.out.println("Presiona UP");
+                        }else{
+                            int puntaje = unaRespuesta.getPuntaje();
+                            unaRespuesta.setPuntaje(puntaje - 1);
+                            float reputacion=unUsuario.getReputacion();
+                            unUsuario.setReputacion(reputacion - 1);                            
+                            
+                            //Buscamos el registro de voto que corresponda
+                            unVoto = usuarioActual.buscarVotoRespuesta(unaRespuesta);
+                            System.out.println(unVoto);
+                            
+                            //Eliminamos las asociaciones de usuario - voto - respuesta
+                            usuarioActual.eliminarPuntajeRespuesta(unVoto);
+                            unaRespuesta.eliminarPuntajeUsuario(unVoto);
+                            
+                            //Eliminamos el voto del registro
+                            this.p.eliminar(unVoto);
+                            System.out.println("Despresiona UP");
+                        }                       
+                        
                      }else{
-                        int puntaje = unaRespuesta.getPuntaje();
-                        unaRespuesta.setPuntaje(puntaje - 1);
-                        float reputacion=unUsuario.getReputacion();
-                        unUsuario.setReputacion(reputacion - 1);
+                        if(usuarioActual.buscarVotoRespuesta(unaRespuesta)== null){
+                            int puntaje = unaRespuesta.getPuntaje();
+                            unaRespuesta.setPuntaje(puntaje - 1);
+                            float reputacion=unUsuario.getReputacion();
+                            unUsuario.setReputacion(reputacion - 1);
+                            
+                            //Creamos instancia de Voto
+                            unVoto.setRespuestaPuntuada(unaRespuesta);
+                            unVoto.setUsuarioPuntuador(usuarioActual);
+                            unVoto.setPositivo(positivo);
+                            
+                            unaRespuesta.añadirPuntajeUsuario(unVoto);
+                            usuarioActual.añadirPuntajeRespuesta(unVoto);
+                            
+                            this.p.insertar(unVoto);
+                            
+                            System.out.println("Presiona DOWN");
+                        }else{
+                            int puntaje = unaRespuesta.getPuntaje();
+                            unaRespuesta.setPuntaje(puntaje + 1);
+                            float reputacion=unUsuario.getReputacion();
+                            unUsuario.setReputacion(reputacion + 1);
+                            //usuarioActual.eliminarPuntajeRespuesta(unaRespuesta);
+                            System.out.println("Despresiona DOWN");
+                            
+                            //Buscamos el registro de voto que corresponda
+                            unVoto = usuarioActual.buscarVotoRespuesta(unaRespuesta);
+                            System.out.println(unVoto);
+                            
+                            //Eliminamos las asociaciones de usuario - voto - respuesta
+                            usuarioActual.eliminarPuntajeRespuesta(unVoto);
+                            unaRespuesta.eliminarPuntajeUsuario(unVoto);
+                            
+                            //Eliminamos el voto del registro
+                            this.p.eliminar(unVoto);
+                        }
+                        
                      }
+                     
+                     this.p.modificar(unaRespuesta);
+                     this.p.modificar(unUsuario);
                      this.p.confirmarTransaccion();
                 }catch(Exception e){
                     System.out.println(e.getMessage());
