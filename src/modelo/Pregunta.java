@@ -159,8 +159,7 @@ public class Pregunta {
          * @return 
 	 */
 	public boolean compararPregunta(String unaBusqueda) {
-		// TODO - implement Pregunta.compararPregunta
-		throw new UnsupportedOperationException();
+		return this.pregunta.contains(unaBusqueda);
 	}
 
 	/**
@@ -169,8 +168,7 @@ public class Pregunta {
          * @return 
 	 */
 	public boolean compararDescripcion(String unaBusqueda) {
-		// TODO - implement Pregunta.compararDescripcion
-		throw new UnsupportedOperationException();
+		return this.descripcion.contains(unaBusqueda);
 	}
 
     @Override

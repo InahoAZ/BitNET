@@ -112,8 +112,7 @@ public class Usuario {
          * @return 
 	 */
 	public boolean compararNombre(String unaBusqueda) {
-		// TODO - implement Usuario.compararNombre
-		throw new UnsupportedOperationException();
+		return this.nombre.contains(unaBusqueda);
 	}
 
 	/**
@@ -122,8 +121,7 @@ public class Usuario {
          * @return 
 	 */
 	public boolean compararApellido(String unaBusqueda) {
-		// TODO - implement Usuario.compararApellido
-		throw new UnsupportedOperationException();
+            return this.apellido.contains(unaBusqueda);
 	}
         
         public boolean compararPassword(String password){

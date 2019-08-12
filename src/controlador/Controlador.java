@@ -18,7 +18,11 @@ public class Controlador {
         public Controlador(Persistencia p) {
             this.p = p;
         }
-
+        //Dejo algo ranciowich por aqui
+        public List<Pregunta> returnVacio(){
+            Foro unForo=new Foro();
+            return unForo.getPreguntas();
+        }
 	/**
 	 * 
 	 * @param unForo
@@ -82,32 +86,43 @@ public class Controlador {
 	/**
 	 * 
 	 * @param unaBusqueda
+     * @return 
 	 */
 	public List<Pregunta> buscarPregunta(String unaBusqueda) {
 		try{
-                    List<Foro> foro=new ArrayList<>();
+                    List<Foro> foro=this.p.buscarTodos(Foro.class);
                     List<Pregunta>ResultadoPregunta=new ArrayList<>();
                     int i=0;
-                    while(foro.get(i)!=null){
+                    int sizeForo = foro.size();
+                    while(i<sizeForo){
+                        System.out.println("F"+i);
                         Foro unForo = foro.get(i);
                         List<Pregunta> pregunta=unForo.getPreguntas();
                         int j=0;
-                        while(pregunta.get(j)!=null){
+                        System.out.println("tamanio> "+pregunta.size());
+                        int size = pregunta.size();
+                        while(j<size){
+                            System.out.println("vuelta n: "+ j);
                             Pregunta unaPregunta = pregunta.get(j);
                             boolean retorno1=unaPregunta.compararPregunta(unaBusqueda);
                             boolean retorno2=unaPregunta.compararDescripcion(unaBusqueda);
                             if(retorno1||retorno2){
+                                System.out.println("encontre "+j);
                                 ResultadoPregunta.add(unaPregunta);
                             }
-                        }    
+                            j++;
+                        } 
+                        i++;
                     }
                     if(ResultadoPregunta.isEmpty()){
                         JOptionPane.showMessageDialog(null,"No se encontraron coincidencias de Preguntas");
-                        return null;
+                        //return null;
                     }else{
                         return ResultadoPregunta;
                     }
-                }catch(Exception e){
+                    return ResultadoPregunta;
+
+                }catch(HeadlessException e){
                     System.out.println(e.getMessage());
                     return null;
                 }
@@ -278,7 +293,8 @@ public class Controlador {
                     List<Usuario>ListaUsuario=new ArrayList<>();
                     List<Usuario> usuario = this.p.buscarTodos(Usuario.class);//no esta en dsd
                     int i = 0;
-                    while(usuario.get(i)!=null){
+                    int size = usuario.size();
+                    while(i<size){
                         Usuario unUsuario=usuario.get(i);
                         boolean retorno1=unUsuario.compararNombre(unaBusqueda);
                         boolean retorno2=unUsuario.compararApellido(unaBusqueda);
@@ -287,13 +303,14 @@ public class Controlador {
                         }
                         i++;
                     }
+                    
                     if(ListaUsuario.isEmpty()){//a partir de aca no esta en dsd
-                        JOptionPane.showMessageDialog(null,"No se encontraron coincidencias");
-                         return null;
+                        JOptionPane.showMessageDialog(null,"No se encontraron coincidencias en usuarios");
+                        return ListaUsuario;
                     }else{
                         return ListaUsuario;
                     }
-                }catch(Exception e){
+                }catch(HeadlessException e){
                     System.out.println(e.getMessage());
                      return null;
                 }

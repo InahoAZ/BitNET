@@ -4,6 +4,7 @@ import controlador.Controlador;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.ListModel;
 import modelo.Foro;
 import modelo.Pregunta;
 import modelo.Usuario;
@@ -356,12 +357,25 @@ public class VistaPrincipal extends javax.swing.JFrame {
             this.ListaForos.setListData(this.c.verListadoDeForos().toArray());
             this.ListaUsuarios.setListData(this.c.verListadoDeUsuarios().toArray());
         }
+        this.ListaPreguntas.setListData(this.c.returnVacio().toArray());//no anda la wea
         
         
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
+        if(!this.txtBuscar.getText().isEmpty()){
+            String unaBusqueda = this.txtBuscar.getText();
+            List<Pregunta>preg=this.c.buscarPregunta(unaBusqueda); //no hice na todavia
+            if(preg!=null){
+                this.ListaPreguntas.setListData(preg.toArray());
+            }
+            List<Usuario> usr =this.c.buscarUsuario(unaBusqueda);
+            if(usr!=null){
+                this.ListaUsuarios.setListData(usr.toArray());
+            }
+        } else {
+            JOptionPane.showMessageDialog(null,"No hay nada que buscar");
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void ListaForosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaForosValueChanged
@@ -398,7 +412,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         if(!this.ListaForos.isSelectionEmpty()){
             Foro unForo = (Foro) this.ListaForos.getSelectedValue();
             this.c.eliminarForo(unForo);
-            this.dispose();
         }else{
             JOptionPane.showMessageDialog(null,"Seleccione un Foro");
         }
