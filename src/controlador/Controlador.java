@@ -30,17 +30,31 @@ public class Controlador {
          * @return 
 	 */
 	public List<Pregunta> verListadoDePreguntas(Foro unForo) {
-                return unForo.getPreguntas();		
+                List<Pregunta> preguntasActivas = new ArrayList<>();
+                for(Pregunta p : unForo.getPreguntas()){
+                    if(!p.isBorrado()){
+                        preguntasActivas.add(p);
+                    }
+                }
+                return preguntasActivas;		
 	}
 
 	public List<Foro> verListadoDeForos() {
-		return this.p.buscarTodos(Foro.class);
+		return this.p.buscarActivos(Foro.class);
 	}
         public List<Respuesta> verRespuestas(Pregunta unaPregunta){
-            return unaPregunta.getRespuestas();
+            List<Respuesta> respuestasActivas = new ArrayList<>();
+            for(Respuesta r : unaPregunta.getRespuestas()){
+                if(!r.isBorrado()){
+                    respuestasActivas.add(r);
+                }
+            }
+            return respuestasActivas;
+            
+            
         }
         public List<Usuario> verListadoDeUsuarios(){
-            return this.p.buscarTodos(Usuario.class);
+            return this.p.buscarActivos(Usuario.class);
         }
 	/**
 	 * 
@@ -71,15 +85,20 @@ public class Controlador {
 	public void eliminarPregunta(Pregunta unaPregunta) {
 		try{
                     this.p.iniciarTransaccion();
-                    Foro unForo= unaPregunta.getForo();
-                    unForo.eliminarPregunta(unaPregunta);
-                    Usuario unUsuario = unaPregunta.getUsuario();
-                    unUsuario.eliminarPregunta(unaPregunta);
-                    this.p.modificar(unForo);
-                    this.p.modificar(unUsuario);
+                    
+                    //Foro unForo= unaPregunta.getForo();
+                    //unForo.eliminarPregunta(unaPregunta);
+                    //Usuario unUsuario = unaPregunta.getUsuario();
+                    //unUsuario.eliminarPregunta(unaPregunta);
+                    
+                    //this.p.modificar(unForo);
+                    //this.p.modificar(unUsuario);
+                    unaPregunta.setBorrado(true);
+                    this.p.modificar(unaPregunta);
+                    
                     this.p.confirmarTransaccion();
                 }catch(Exception e){
-                    System.out.println(e.getMessage());
+                    System.out.println("Errorcito: " + e.getMessage());
                     this.p.descartarTransaccion();
                 }
 	}
@@ -164,12 +183,14 @@ public class Controlador {
 	public void eliminarRespuesta(Respuesta unaRespuesta) {
 		try{
                     this.p.iniciarTransaccion();
-                    Pregunta unaPregunta=unaRespuesta.getPregunta();
+                    /*Pregunta unaPregunta=unaRespuesta.getPregunta();
                     unaPregunta.eliminarRespuesta(unaRespuesta);
                     Usuario unUsuario = unaRespuesta.getUsuario();
                     unUsuario.eliminarRespuesta(unaRespuesta);
                     this.p.modificar(unaPregunta);
-                    this.p.modificar(unUsuario);
+                    this.p.modificar(unUsuario);*/
+                    unaRespuesta.setBorrado(true);
+                    this.p.modificar(unaRespuesta);
                     this.p.confirmarTransaccion();
                 }catch(Exception e){
                     System.out.println(e.getMessage());
@@ -187,17 +208,18 @@ public class Controlador {
 	public void puntuarRespuesta(Respuesta unaRespuesta, Usuario usuarioActual, boolean positivo) {
 		try{
                      this.p.iniciarTransaccion();
+                     
                      Usuario unUsuario=unaRespuesta.getUsuario();
+                     Voto unVoto = usuarioActual.buscarVotoRespuesta(unaRespuesta);
+                     int puntaje = unaRespuesta.getPuntaje();
+                     float reputacion=unUsuario.getReputacion();
                      //Voto unVoto = new Voto();
                      if(positivo){
-                        if(usuarioActual.buscarVotoRespuesta(unaRespuesta)== null){
-                            int puntaje = unaRespuesta.getPuntaje();
-                            unaRespuesta.setPuntaje(puntaje + 1);
-                            float reputacion=unUsuario.getReputacion();
-                            unUsuario.setReputacion(reputacion + 1);
-                            
+                        if(unVoto == null){                            
+                            unaRespuesta.setPuntaje(puntaje + 1);                            
+                            unUsuario.setReputacion(reputacion + 1);                            
                             //Creamos instancia de Voto
-                            Voto unVoto = new Voto(unaRespuesta,usuarioActual,positivo);                            
+                            unVoto = new Voto(unaRespuesta,usuarioActual,positivo);                           
                             
                             //Asociamos el voto al usuario y a la respuesta
                             unaRespuesta.añadirPuntajeUsuario(unVoto);
@@ -206,14 +228,12 @@ public class Controlador {
                             this.p.insertar(unVoto);
                             
                             System.out.println("Presiona UP");
-                        }else{
-                            int puntaje = unaRespuesta.getPuntaje();
-                            unaRespuesta.setPuntaje(puntaje - 1);
-                            float reputacion=unUsuario.getReputacion();
+                        }else{                            
+                            unaRespuesta.setPuntaje(puntaje - 1);                            
                             unUsuario.setReputacion(reputacion - 1);                            
                             
                             //Buscamos el registro de voto que corresponda
-                            Voto unVoto = usuarioActual.buscarVotoRespuesta(unaRespuesta);                            
+                            //Voto unVoto = usuarioActual.buscarVotoRespuesta(unaRespuesta);                            
                             
                             //Eliminamos las asociaciones de usuario - voto - respuesta
                             usuarioActual.eliminarPuntajeRespuesta(unVoto);
@@ -225,14 +245,12 @@ public class Controlador {
                         }                       
                         
                      }else{
-                        if(usuarioActual.buscarVotoRespuesta(unaRespuesta)== null){
-                            int puntaje = unaRespuesta.getPuntaje();
-                            unaRespuesta.setPuntaje(puntaje - 1);
-                            float reputacion=unUsuario.getReputacion();
+                        if(usuarioActual.buscarVotoRespuesta(unaRespuesta)== null){                            
+                            unaRespuesta.setPuntaje(puntaje - 1);                            
                             unUsuario.setReputacion(reputacion - 1);
                             
                             //Creamos instancia de Voto
-                            Voto unVoto = new Voto(unaRespuesta,usuarioActual,positivo);
+                            unVoto = new Voto(unaRespuesta,usuarioActual,positivo);
                             
                             //asociamos usuario - voto - respuesta
                             unaRespuesta.añadirPuntajeUsuario(unVoto);
@@ -241,16 +259,14 @@ public class Controlador {
                             this.p.insertar(unVoto);
                             
                             System.out.println("Presiona DOWN");
-                        }else{
-                            int puntaje = unaRespuesta.getPuntaje();
-                            unaRespuesta.setPuntaje(puntaje + 1);
-                            float reputacion=unUsuario.getReputacion();
+                        }else{                            
+                            unaRespuesta.setPuntaje(puntaje + 1);                            
                             unUsuario.setReputacion(reputacion + 1);
                             //usuarioActual.eliminarPuntajeRespuesta(unaRespuesta);
                             System.out.println("Despresiona DOWN");
                             
                             //Buscamos el registro de voto que corresponda
-                            Voto unVoto = usuarioActual.buscarVotoRespuesta(unaRespuesta);                            
+                            //Voto unVoto = usuarioActual.buscarVotoRespuesta(unaRespuesta);                            
                             
                             //Eliminamos las asociaciones de usuario - voto - respuesta
                             usuarioActual.eliminarPuntajeRespuesta(unVoto);
@@ -311,7 +327,8 @@ public class Controlador {
 	public void eliminarForo(Foro unForo) {
 		try{
                     this.p.iniciarTransaccion();
-                    this.p.eliminar(unForo);
+                    unForo.setBorrado(true);
+                    this.p.modificar(unForo);
                     this.p.confirmarTransaccion();
                 }catch(Exception e){
                     System.out.println(e.getMessage());
@@ -406,7 +423,8 @@ public class Controlador {
 	public void eliminarUsuario(Usuario unUsuario) {
 		try{
                     this.p.iniciarTransaccion();
-                    this.p.eliminar(unUsuario);
+                    unUsuario.setBorrado(true);
+                    this.p.modificar(unUsuario);
                     this.p.confirmarTransaccion();
                 }catch(Exception e){
                     System.out.println(e.getMessage());

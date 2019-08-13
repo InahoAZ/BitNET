@@ -5,6 +5,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.SingularAttribute;
 
@@ -60,6 +61,24 @@ public class Persistencia {
         CriteriaQuery<T> consulta = cb.createQuery(clase);
         Root<T> inicio = consulta.from(clase);
         consulta.orderBy(cb.asc(inicio.get(orden)));
+        return em.createQuery(consulta).getResultList();
+    }
+    
+    public <T extends Object> List<T> buscarActivos(Class<T> clase){
+        CriteriaBuilder cb = this.em.getCriteriaBuilder();
+        CriteriaQuery<T> consulta = cb.createQuery(clase);
+        Root<T> inicio = consulta.from(clase);
+        ParameterExpression<Boolean> p = cb.parameter(Boolean.class);
+        consulta.select(inicio).where(cb.isFalse(inicio.get("borrado")));
+        return em.createQuery(consulta).getResultList();
+    }
+    
+    public <T extends Object> List<T> buscarActivos(Class<T> clase, Object id){
+        CriteriaBuilder cb = this.em.getCriteriaBuilder();
+        CriteriaQuery<T> consulta = cb.createQuery(clase);
+        Root<T> inicio = consulta.from(clase);
+        ParameterExpression<Boolean> p = cb.parameter(Boolean.class);
+        consulta.select(inicio).where(cb.isFalse(inicio.get("borrado")));
         return em.createQuery(consulta).getResultList();
     }
 

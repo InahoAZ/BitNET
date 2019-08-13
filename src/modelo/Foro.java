@@ -21,15 +21,18 @@ public class Foro {
 	private String descripcion;
         @OneToMany(mappedBy = "foro")
         private List<Pregunta> preguntas=new ArrayList<>();
+        private boolean borrado;
         
         public Foro() {
             this.preguntas = new ArrayList<>();
+            this.borrado = false;
         }
 
         public Foro(String titulo, String descripcion) {
             this.titulo = titulo;
             this.descripcion = descripcion;
             this.preguntas = new ArrayList<>();
+            this.borrado = false;
         }        
 
         public List<Pregunta> getPreguntas() {
@@ -55,8 +58,7 @@ public class Foro {
 	 * @param unaPregunta
 	 */
 	public void eliminarPregunta(Pregunta unaPregunta) {
-		// TODO - implement Foro.eliminarPregunta
-		throw new UnsupportedOperationException();
+		this.preguntas.remove(unaPregunta);
 	}
 
         public String getTitulo() {
@@ -82,6 +84,15 @@ public class Foro {
         public void setIdForo(int idForo) {
             this.idForo = idForo;
         }
+
+        public boolean isBorrado() {
+            return borrado;
+        }
+
+        public void setBorrado(boolean borrado) {
+            this.borrado = borrado;
+        }
+        
 
         @Override
         public String toString() {

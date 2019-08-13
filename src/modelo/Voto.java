@@ -31,7 +31,7 @@ public class Voto {
     @ManyToOne
     private Usuario usuarioPuntuador;
     
-    private boolean positivo;
+    private boolean positivo;    
     
     public Voto(){
     

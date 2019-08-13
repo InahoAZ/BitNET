@@ -52,8 +52,11 @@ public class Usuario {
         @OneToMany(mappedBy="usuarioPuntuador")
         private List<Voto> respuestasPuntuadas;
         
+        private boolean borrado;
+        
         public Usuario(){
             this.preguntas = new ArrayList<>();
+            this.borrado = false;
                   
         }
         
@@ -66,9 +69,9 @@ public class Usuario {
             this.password = password;
             this.preguntas = new ArrayList<>();
             this.rol = rol;
+            this.borrado = false;
             
         }
-
         
 	/**
 	 * 
@@ -256,6 +259,14 @@ public class Usuario {
 
         public void setRespuestasPuntuadas(List<Voto> respuestasPuntuadas) {
             this.respuestasPuntuadas = respuestasPuntuadas;
+        }
+
+        public boolean isBorrado() {
+            return borrado;
+        }
+
+        public void setBorrado(boolean borrado) {
+            this.borrado = borrado;
         }
         
         

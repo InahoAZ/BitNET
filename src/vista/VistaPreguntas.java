@@ -1,9 +1,11 @@
 package vista;
 
 import controlador.Controlador;
+import java.util.Vector;
 import javax.swing.Icon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import modelo.Foro;
 import modelo.Pregunta;
 import modelo.Respuesta;
 import modelo.Usuario;
@@ -27,9 +29,16 @@ public class VistaPreguntas extends javax.swing.JFrame {
         this.txtDescripcionPregunta.setText(this.unaPregunta.getDescripcion());
         this.listaRespuesta.setListData(this.c.verRespuestas(unaPregunta).toArray());
         
+        if(this.usuarioActual.getPreguntas().contains(unaPregunta)){
+            this.btnEliminarPregunta.setVisible(true);        
+        }else{
+            this.btnEliminarPregunta.setVisible(false);
+        }
+        
+        this.lblAutorPregunta.setText(unaPregunta.getUsuario().getNombre() + " " + unaPregunta.getUsuario().getApellido());
         
         
-        //FALTA QUE SE DIFERENCIE EN SI UN USUARIO DEJO PUNTUADO UNA PREGUNTA DE MANERA POSITIVA O NEGATIVA PARA SABER QUE BOTON DEBE PERSISTIR APRETADO.
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -54,7 +63,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         btnReportarRespuesta = new javax.swing.JButton();
         btnAgregarRespuesta = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnEliminarPregunta = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
@@ -62,6 +71,11 @@ public class VistaPreguntas extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         btnMeGusta = new javax.swing.JToggleButton();
         btnNoMeGusta = new javax.swing.JToggleButton();
+        btnEliminarRespuesta = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        lblAutorPregunta = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        lblAutorRespuesta = new javax.swing.JLabel();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -137,7 +151,12 @@ public class VistaPreguntas extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-basura-40.png"))); // NOI18N
+        btnEliminarPregunta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-basura-40.png"))); // NOI18N
+        btnEliminarPregunta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarPreguntaActionPerformed(evt);
+            }
+        });
 
         jPanel3.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.focus"));
 
@@ -198,6 +217,21 @@ public class VistaPreguntas extends javax.swing.JFrame {
             }
         });
 
+        btnEliminarRespuesta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-basura-40.png"))); // NOI18N
+        btnEliminarRespuesta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarRespuestaActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Autor:");
+
+        lblAutorPregunta.setText("Juan Perez");
+
+        jLabel7.setText("Autor:");
+
+        lblAutorRespuesta.setText("...");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -222,7 +256,13 @@ public class VistaPreguntas extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnReportarRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnReportarRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnEliminarRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblAutorRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(29, 29, 29)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnAgregarRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -237,11 +277,16 @@ public class VistaPreguntas extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblTituloPregunta)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addComponent(jLabel2)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(lblAutorPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(btnReportarPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addComponent(btnEliminarPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addComponent(jLabel4))))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
@@ -256,12 +301,16 @@ public class VistaPreguntas extends javax.swing.JFrame {
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton3)
+                                .addComponent(btnEliminarPregunta)
                                 .addGap(6, 6, 6)
                                 .addComponent(btnReportarPregunta))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(lblAutorPregunta))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -270,9 +319,16 @@ public class VistaPreguntas extends javax.swing.JFrame {
                         .addGap(4, 4, 4)
                         .addComponent(btnNoMeGusta))
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(lblAutorRespuesta))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnReportarRespuesta, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnEliminarRespuesta)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnReportarRespuesta))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,7 +365,13 @@ public class VistaPreguntas extends javax.swing.JFrame {
         if(!this.listaRespuesta.isSelectionEmpty()){
             Respuesta unaRespuesta= (Respuesta) this.listaRespuesta.getSelectedValue();
             this.txtRespuesta.setText(unaRespuesta.getRespuesta());
+            this.lblAutorRespuesta.setText(((Respuesta)this.listaRespuesta.getSelectedValue()).getUsuario().getNombre() + " " + ((Respuesta)this.listaRespuesta.getSelectedValue()).getUsuario().getApellido());
             //this.btnMeGusta.setText(unaRespuesta.getPuntaje());
+            if(((Respuesta)this.listaRespuesta.getSelectedValue()).getUsuario().equals(this.usuarioActual)){
+                this.btnEliminarRespuesta.setVisible(true);            
+            }else{
+                this.btnEliminarRespuesta.setVisible(false);
+            }
             
             Voto unVoto = this.usuarioActual.buscarVotoRespuesta(unaRespuesta);        
             if(unVoto == null){
@@ -382,27 +444,55 @@ public class VistaPreguntas extends javax.swing.JFrame {
         this.txtCargarRespuesta.setText("");
     }//GEN-LAST:event_txtCargarRespuestaFocusGained
 
+    private void btnEliminarPreguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPreguntaActionPerformed
+        int retorno = JOptionPane.showConfirmDialog(null,"Esta seguro de que quiere eliminar su pregunta?");
+        if (retorno == JOptionPane.YES_OPTION) {
+            this.c.eliminarPregunta(unaPregunta);
+            this.dispose();
+            this.vistaAnterior.setVisible(true);
+        }
+        
+    }//GEN-LAST:event_btnEliminarPreguntaActionPerformed
+
+    private void btnEliminarRespuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarRespuestaActionPerformed
+        // TODO add your handling code here:
+        int retorno = JOptionPane.showConfirmDialog(null,"Esta seguro de que quiere eliminar su pregunta?");
+        if (retorno == JOptionPane.YES_OPTION) {
+            this.c.eliminarRespuesta((Respuesta)this.listaRespuesta.getSelectedValue());
+            this.listaRespuesta.setListData(this.c.verRespuestas(unaPregunta).toArray());
+            this.txtRespuesta.setText("");
+            this.btnMeGusta.setSelected(false);
+            this.btnNoMeGusta.setSelected(false);
+        }
+        
+    }//GEN-LAST:event_btnEliminarRespuestaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarRespuesta;
+    private javax.swing.JButton btnEliminarPregunta;
+    private javax.swing.JButton btnEliminarRespuesta;
     private javax.swing.JToggleButton btnMeGusta;
     private javax.swing.JToggleButton btnNoMeGusta;
     private javax.swing.JButton btnReportarPregunta;
     private javax.swing.JButton btnReportarRespuesta;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JLabel lblAutorPregunta;
+    private javax.swing.JLabel lblAutorRespuesta;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblRol;
     private javax.swing.JLabel lblTituloPregunta;

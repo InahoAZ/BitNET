@@ -35,6 +35,7 @@ public class Reporte {
         @ManyToOne
         private Usuario usuario;
         
+        
     public Reporte() {
     }
 

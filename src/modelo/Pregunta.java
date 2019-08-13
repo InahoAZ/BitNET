@@ -41,10 +41,13 @@ public class Pregunta {
         
         @ManyToOne
         private Usuario usuario;
+        
+        private boolean borrado;
 
         public Pregunta() {
             this.respuestas = new ArrayList<>();
             this.reportes = new ArrayList<>();
+            this.borrado = false;
         }
 
         public Pregunta(String pregunta, String descripcion, Foro unForo, Usuario unUsuario) {
@@ -55,10 +58,20 @@ public class Pregunta {
             this.fechaPublicacion = new Date();
             this.foro = unForo;            
             this.usuario = unUsuario;
+            this.borrado = false;
             
             
         }
 
+        public boolean isBorrado() {
+            return borrado;
+        }
+
+        public void setBorrado(boolean borrado) {
+            this.borrado = borrado;
+        }
+
+        
         public Foro getForo() {
             return foro;
         }

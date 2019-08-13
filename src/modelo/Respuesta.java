@@ -29,6 +29,7 @@ public class Respuesta {
 	private int idRespuesta;
 	private String respuesta;
 	private int puntaje;
+        private boolean borrado;
         
         @Temporal(javax.persistence.TemporalType.DATE)
 	private Date fechaPublicacion;
@@ -48,6 +49,7 @@ public class Respuesta {
         
         public Respuesta(){
             this.usuariosPuntuadores = new ArrayList<>();
+            this.borrado = false;
         }
         
 
@@ -57,6 +59,7 @@ public class Respuesta {
             this.usuario=unUsuario;
             this.fechaPublicacion=new Date();
             this.usuariosPuntuadores = new ArrayList<>();
+            this.borrado = false;
         }   
 
         public void añadirPuntajeUsuario(Voto unVoto){
@@ -145,6 +148,23 @@ public class Respuesta {
             this.usuario = usuario;
         }
 
+        public boolean isBorrado() {
+            return borrado;
+        }
+
+        public void setBorrado(boolean borrado) {
+            this.borrado = borrado;
+        }
+
+        public List<Voto> getUsuariosPuntuadores() {
+            return usuariosPuntuadores;
+        }
+
+        public void setUsuariosPuntuadores(List<Voto> usuariosPuntuadores) {
+            this.usuariosPuntuadores = usuariosPuntuadores;
+        }
+
+        
 
         @Override
         public String toString() {
