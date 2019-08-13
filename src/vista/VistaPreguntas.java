@@ -65,7 +65,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
         btnAgregarRespuesta = new javax.swing.JButton();
         btnEliminarPregunta = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        lblUsuario = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         lblRol = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -135,6 +135,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel4.setText("Seleccione una Respuesta para puntuarla");
 
         btnReportarRespuesta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-bandera-2-24.png"))); // NOI18N
@@ -160,7 +161,12 @@ public class VistaPreguntas extends javax.swing.JFrame {
 
         jPanel3.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.focus"));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/user_person_people_6100.png"))); // NOI18N
+        lblUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/user_person_people_6100.png"))); // NOI18N
+        lblUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblUsuarioMouseClicked(evt);
+            }
+        });
 
         lblNombre.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblNombre.setText("Aca va el nombre");
@@ -185,7 +191,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
                     .addComponent(lblNombre)
                     .addComponent(lblRol))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5)
+                .addComponent(lblUsuario)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6))
         );
@@ -195,7 +201,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(lblNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -453,6 +459,11 @@ public class VistaPreguntas extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnEliminarPreguntaActionPerformed
+    
+    private void lblUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUsuarioMouseClicked
+        VistaVerPerfil VVP = new VistaVerPerfil(this.c,this,this.usuarioActual);
+        this.dispose();
+    }//GEN-LAST:event_lblUsuarioMouseClicked
 
     private void btnEliminarRespuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarRespuestaActionPerformed
         // TODO add your handling code here:
@@ -482,7 +493,6 @@ public class VistaPreguntas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel3;
@@ -496,6 +506,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblRol;
     private javax.swing.JLabel lblTituloPregunta;
+    private javax.swing.JLabel lblUsuario;
     private javax.swing.JList listaRespuesta;
     private javax.swing.JTextField txtCargarRespuesta;
     private javax.swing.JTextArea txtDescripcionPregunta;

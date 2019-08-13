@@ -3,23 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/Santy%20Villar/Documents/NetBeansProjects/BitNET/src/controlador/Controlador.java</file>
-            <file>file:/C:/Users/Santy%20Villar/Documents/NetBeansProjects/BitNET/src/vista/VistaPreguntas.java</file>
-            <file>file:/C:/Users/Santy%20Villar/Documents/NetBeansProjects/BitNET/src/modelo/Pregunta.java</file>
-            <file>file:/C:/Users/Santy%20Villar/Documents/NetBeansProjects/BitNET/src/modelo/Voto.java</file>
-            <file>file:/C:/Users/Santy%20Villar/Documents/NetBeansProjects/BitNET/src/modelo/Respuesta.java</file>
-            <file>file:/C:/Users/Santy%20Villar/Documents/NetBeansProjects/BitNET/src/modelo/Reporte.java</file>
-            <file>file:/C:/Users/Santy%20Villar/Documents/NetBeansProjects/BitNET/src/bitnet/BitNET.java</file>
-            <file>file:/C:/Users/Santy%20Villar/Documents/NetBeansProjects/BitNET/src/vista/VistaPrincipal.java</file>
-            <file>file:/C:/Users/Santy%20Villar/Documents/NetBeansProjects/BitNET/src/META-INF/persistence.xml</file>
-            <file>file:/C:/Users/Santy%20Villar/Documents/NetBeansProjects/BitNET/src/modelo/Usuario.java</file>
-=======
-            <file>file:/C:/Users/Hp1/Downloads/POO%20II/BitNET/src/vista/VistaPreguntas.java</file>
+            <file>file:/C:/Users/Hp1/Downloads/POO%20II/BitNET/src/modelo/Pregunta.java</file>
+            <file>file:/C:/Users/Hp1/Downloads/POO%20II/BitNET/src/bitnet/BitNET.java</file>
             <file>file:/C:/Users/Hp1/Downloads/POO%20II/BitNET/src/controlador/Controlador.java</file>
-            <file>file:/C:/Users/Hp1/Downloads/POO%20II/BitNET/src/vista/VistaCargaReporte.java</file>
+            <file>file:/C:/Users/Hp1/Downloads/POO%20II/BitNET/src/vista/VistaUsuarios.java</file>
             <file>file:/C:/Users/Hp1/Downloads/POO%20II/BitNET/src/vista/VistaPrincipal.java</file>
->>>>>>> master
         </group>
     </open-files>
 </project-private>
