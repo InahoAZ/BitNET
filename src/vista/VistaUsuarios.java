@@ -57,7 +57,7 @@ public class VistaUsuarios extends javax.swing.JFrame {
         txtFNac = new javax.swing.JFormattedTextField();
         jLabel10 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        lblUsr = new javax.swing.JLabel();
+        lblUsuario = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         lblRol = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -139,7 +139,12 @@ public class VistaUsuarios extends javax.swing.JFrame {
 
         jPanel3.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.focus"));
 
-        lblUsr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/securityguard_person_man_avatar_segurida_2844 (1).png"))); // NOI18N
+        lblUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/securityguard_person_man_avatar_segurida_2844 (1).png"))); // NOI18N
+        lblUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblUsuarioMouseClicked(evt);
+            }
+        });
 
         lblNombre.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblNombre.setText("Aca va el nombre");
@@ -164,7 +169,7 @@ public class VistaUsuarios extends javax.swing.JFrame {
                     .addComponent(lblNombre)
                     .addComponent(lblRol))
                 .addGap(18, 18, 18)
-                .addComponent(lblUsr)
+                .addComponent(lblUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel12))
         );
@@ -180,7 +185,7 @@ public class VistaUsuarios extends javax.swing.JFrame {
                         .addComponent(lblRol)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(lblUsr, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -459,6 +464,11 @@ public class VistaUsuarios extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jLabel12MouseClicked
 
+    private void lblUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUsuarioMouseClicked
+        VistaVerPerfil VVP = new VistaVerPerfil(this.c,this,this.usuarioActual);
+        this.dispose();
+    }//GEN-LAST:event_lblUsuarioMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAñadir;
@@ -481,7 +491,7 @@ public class VistaUsuarios extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblRol;
-    private javax.swing.JLabel lblUsr;
+    private javax.swing.JLabel lblUsuario;
     private javax.swing.JList listaUsuarios;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtEmail;

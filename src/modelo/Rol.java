@@ -60,7 +60,7 @@ public class Rol {
     
     @Override
     public String toString() {
-        return "" + nombre;
+        return  this.nombre;
     }
     
     

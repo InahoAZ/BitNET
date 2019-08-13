@@ -54,14 +54,16 @@ public class VistaPreguntas extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         btnReportarRespuesta = new javax.swing.JButton();
         btnAgregarRespuesta = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnEliminarPregunta = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        lblUsuario = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         lblRol = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         btnMeGusta = new javax.swing.JToggleButton();
         btnNoMeGusta = new javax.swing.JToggleButton();
+        btnEliminarRespuesta = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -121,6 +123,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel4.setText("Seleccione una Respuesta para puntuarla");
 
         btnReportarRespuesta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-bandera-2-24.png"))); // NOI18N
@@ -137,11 +140,16 @@ public class VistaPreguntas extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-basura-24.png"))); // NOI18N
+        btnEliminarPregunta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-basura-24.png"))); // NOI18N
 
         jPanel3.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.focus"));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/user_person_people_6100.png"))); // NOI18N
+        lblUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/user_person_people_6100.png"))); // NOI18N
+        lblUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblUsuarioMouseClicked(evt);
+            }
+        });
 
         lblNombre.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblNombre.setText("Aca va el nombre");
@@ -166,7 +174,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
                     .addComponent(lblNombre)
                     .addComponent(lblRol))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5)
+                .addComponent(lblUsuario)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6))
         );
@@ -176,7 +184,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(lblNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -197,6 +205,10 @@ public class VistaPreguntas extends javax.swing.JFrame {
                 btnNoMeGustaActionPerformed(evt);
             }
         });
+
+        btnEliminarRespuesta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-basura-24.png"))); // NOI18N
+
+        jLabel2.setText("Lista de Respuestas");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -222,7 +234,10 @@ public class VistaPreguntas extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnReportarRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnReportarRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnEliminarRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel2))
                                 .addGap(29, 29, 29)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnAgregarRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,7 +256,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(btnReportarPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addComponent(btnEliminarPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addComponent(jLabel4))))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
@@ -256,12 +271,12 @@ public class VistaPreguntas extends javax.swing.JFrame {
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton3)
+                                .addComponent(btnEliminarPregunta)
                                 .addGap(6, 6, 6)
                                 .addComponent(btnReportarPregunta))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -269,11 +284,16 @@ public class VistaPreguntas extends javax.swing.JFrame {
                         .addComponent(btnMeGusta)
                         .addGap(4, 4, 4)
                         .addComponent(btnNoMeGusta))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnReportarRespuesta, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnEliminarRespuesta)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnReportarRespuesta))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -382,20 +402,26 @@ public class VistaPreguntas extends javax.swing.JFrame {
         this.txtCargarRespuesta.setText("");
     }//GEN-LAST:event_txtCargarRespuestaFocusGained
 
+    private void lblUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUsuarioMouseClicked
+        VistaVerPerfil VVP = new VistaVerPerfil(this.c,this,this.usuarioActual);
+        this.dispose();
+    }//GEN-LAST:event_lblUsuarioMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarRespuesta;
+    private javax.swing.JButton btnEliminarPregunta;
+    private javax.swing.JButton btnEliminarRespuesta;
     private javax.swing.JToggleButton btnMeGusta;
     private javax.swing.JToggleButton btnNoMeGusta;
     private javax.swing.JButton btnReportarPregunta;
     private javax.swing.JButton btnReportarRespuesta;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
@@ -406,6 +432,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblRol;
     private javax.swing.JLabel lblTituloPregunta;
+    private javax.swing.JLabel lblUsuario;
     private javax.swing.JList listaRespuesta;
     private javax.swing.JTextField txtCargarRespuesta;
     private javax.swing.JTextArea txtDescripcionPregunta;
