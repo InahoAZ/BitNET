@@ -31,7 +31,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
         this.btnBuscar.setVisible(true);
         this.btnEliminarForo.setVisible(true);
         this.btnUsuarios.setVisible(true);
-        //Todo lo que tenga que ver con Roles        
+        //Todo lo que tenga que ver con Roles     
+        this.btnReportes.setVisible(false);
         switch(this.usuarioActual.getRol().getNombre()){
             case "Administrador":
                 System.out.println(this.usuarioActual.getRol().getNombre());
@@ -41,6 +42,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 this.btnBuscar.setVisible(true);
                 this.btnEliminarForo.setVisible(true);
                 this.btnUsuarios.setVisible(true);
+                this.btnReportes.setVisible(true);
                 break;
             case "Registrador":
                 System.out.println(this.usuarioActual.getRol().getNombre());
@@ -118,6 +120,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         btnEliminarForo = new javax.swing.JButton();
         btnEditarForo = new javax.swing.JButton();
+        btnReportes = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         jMenuItem1.setText("jMenuItem1");
@@ -248,6 +251,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(270, 90, 170, 48);
 
+        ListaUsuarios.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                ListaUsuariosValueChanged(evt);
+            }
+        });
         jScrollPane4.setViewportView(ListaUsuarios);
 
         getContentPane().add(jScrollPane4);
@@ -319,6 +327,15 @@ public class VistaPrincipal extends javax.swing.JFrame {
         getContentPane().add(btnEditarForo);
         btnEditarForo.setBounds(40, 470, 50, 50);
 
+        btnReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-evidencia-40.png"))); // NOI18N
+        btnReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnReportes);
+        btnReportes.setBounds(650, 60, 74, 40);
+
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo login.jpg"))); // NOI18N
         getContentPane().add(jLabel2);
         jLabel2.setBounds(-670, -110, 1630, 930);
@@ -346,26 +363,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Por Favor Seleccione un Foro");
         }
     }//GEN-LAST:event_btnAñadirPreguntaActionPerformed
-
-    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        if(this.ListaForos.isSelectionEmpty()&&this.ListaUsuarios.isSelectionEmpty()){
-                this.ListaForos.setListData(this.c.verListadoDeForos().toArray());
-                this.ListaUsuarios.setListData(this.c.verListadoDeUsuarios().toArray());
-
-        }else{
-            if(!this.ListaUsuarios.isSelectionEmpty()){
-                this.ListaUsuarios.setSelectedIndex(-1);
-            }
-            if(!this.ListaForos.isSelectionEmpty()){
-                this.ListaForos.setSelectedIndex(-1);
-            }
-            this.ListaForos.setListData(this.c.verListadoDeForos().toArray());
-            this.ListaUsuarios.setListData(this.c.verListadoDeUsuarios().toArray());
-        }
-        this.ListaPreguntas.setListData(this.c.returnVacio().toArray());//no anda la wea
-        
-        
-    }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         if(!this.txtBuscar.getText().isEmpty()){
@@ -431,10 +428,42 @@ public class VistaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEditarForoActionPerformed
 
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        if(this.ListaForos.isSelectionEmpty()&&this.ListaUsuarios.isSelectionEmpty()){
+            this.ListaForos.setListData(this.c.verListadoDeForos().toArray());
+            this.ListaUsuarios.setListData(this.c.verListadoDeUsuarios().toArray());
+
+        }else{
+            if(!this.ListaUsuarios.isSelectionEmpty()){
+                this.ListaUsuarios.setSelectedIndex(-1);
+            }
+            if(!this.ListaForos.isSelectionEmpty()){
+                this.ListaForos.setSelectedIndex(-1);
+            }
+            this.ListaForos.setListData(this.c.verListadoDeForos().toArray());
+            this.ListaUsuarios.setListData(this.c.verListadoDeUsuarios().toArray());
+        }
+        this.ListaPreguntas.setListData(this.c.returnVacio().toArray());//no anda la wea
+
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
+        VistaReportes VR = new VistaReportes(this.c,this,this.usuarioActual);
+        this.dispose();
+    }//GEN-LAST:event_btnReportesActionPerformed
+
     private void lblUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUsuarioMouseClicked
-        VistaVerPerfil VVP = new VistaVerPerfil(this.c,this,this.usuarioActual);
+        VistaVerPerfil vvp = new VistaVerPerfil(this.c,this,this.usuarioActual);
         this.dispose();
     }//GEN-LAST:event_lblUsuarioMouseClicked
+
+    private void ListaUsuariosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaUsuariosValueChanged
+        if(!this.ListaUsuarios.isSelectionEmpty()){
+            Usuario unUsuario = (Usuario) this.ListaUsuarios.getSelectedValue();
+            VistaVerPerfil vvp = new VistaVerPerfil(this.c,this,unUsuario);
+            this.dispose();
+        }
+    }//GEN-LAST:event_ListaUsuariosValueChanged
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList ListaForos;
@@ -446,6 +475,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEditarForo;
     private javax.swing.JButton btnEliminarForo;
+    private javax.swing.JButton btnReportes;
     private javax.swing.JButton btnUsuarios;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;

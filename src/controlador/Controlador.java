@@ -115,20 +115,22 @@ public class Controlador {
                     int i=0;
                     int sizeForo = foro.size();
                     while(i<sizeForo){
-                        System.out.println("F"+i);
+                        //System.out.println("F"+i);
                         Foro unForo = foro.get(i);
                         List<Pregunta> pregunta=unForo.getPreguntas();
                         int j=0;
-                        System.out.println("tamanio> "+pregunta.size());
+                        //System.out.println("tamanio> "+pregunta.size());
                         int size = pregunta.size();
                         while(j<size){
-                            System.out.println("vuelta n: "+ j);
+                           // System.out.println("vuelta n: "+ j);
                             Pregunta unaPregunta = pregunta.get(j);
-                            boolean retorno1=unaPregunta.compararPregunta(unaBusqueda);
-                            boolean retorno2=unaPregunta.compararDescripcion(unaBusqueda);
-                            if(retorno1||retorno2){
-                                System.out.println("encontre "+j);
-                                ResultadoPregunta.add(unaPregunta);
+                            if(!unaPregunta.isBorrado()){
+                                boolean retorno1=unaPregunta.compararPregunta(unaBusqueda);
+                                boolean retorno2=unaPregunta.compararDescripcion(unaBusqueda);
+                                if(retorno1||retorno2){
+                                    System.out.println("encontre "+j);
+                                    ResultadoPregunta.add(unaPregunta);
+                                }
                             }
                             j++;
                         } 
@@ -373,7 +375,7 @@ public class Controlador {
 		//no esta igual en el diagrama, hay que actualizar DSD
                 try{
                     List<Usuario>ListaUsuario=new ArrayList<>();
-                    List<Usuario> usuario = this.p.buscarTodos(Usuario.class);//no esta en dsd
+                    List<Usuario> usuario = this.p.buscarActivos(Usuario.class);//no esta en dsd
                     int i = 0;
                     int size = usuario.size();
                     while(i<size){
@@ -474,23 +476,30 @@ public class Controlador {
 		//no esta igual que en diagrama
                 try{
                     List<Reporte>ListaReportes=new ArrayList<>();
-                    List<Pregunta> preguntas = this.p.buscarTodos(Pregunta.class);//no esta en dsd
+                    List<Pregunta> preguntas = this.p.buscarActivos(Pregunta.class);//no esta en dsd
                     int i = 0;
-                    while(preguntas.get(i)!=null){
+                    System.out.println("tamanio "+preguntas.size());
+                    int size = preguntas.size();
+                    while(i<size){
+                        System.out.println("vueltita n "+i);
                         Pregunta unaPregunta=preguntas.get(i);
-                        Reporte Reportes=unaPregunta.getReportes().get(i);
-                        ListaReportes.add(Reportes);
+                        if(!unaPregunta.getReportes().isEmpty()){
+                            for (int j = 0;j < unaPregunta.getReportes().size(); j++) {
+                                Reporte reporte= unaPregunta.getReportes().get(j);
+                                ListaReportes.add(reporte);
+                            }
+                        }
                         i++;
                     }
                     if(ListaReportes.isEmpty()){
-                        JOptionPane.showMessageDialog(null,"No se encontraron Reportes de Preguntas");
-                         return null;
+                         return ListaReportes;
                     }else{
                         return ListaReportes;
                     }
-                }catch(Exception e){
+                }catch(HeadlessException e){
                     System.out.println(e.getMessage());
-                     return null;
+                    List<Reporte> repo = new ArrayList<>();
+                    return repo;
                 }
 	}
 
@@ -514,23 +523,29 @@ public class Controlador {
 		//no esta igual que en diagrama
                 try{
                     List<Reporte>ListaReportes=new ArrayList<>();
-                    List<Respuesta> respuestas = this.p.buscarTodos(Respuesta.class);//no esta en dsd
+                    List<Respuesta> respuestas = this.p.buscarActivos(Respuesta.class);//no esta en dsd
                     int i = 0;
-                    while(respuestas.get(i)!=null){
+                    int size = respuestas.size();
+                    while(i<size){
                         Respuesta unaRespuesta=respuestas.get(i);
-                        Reporte Reportes=unaRespuesta.getReportes().get(i);
-                        ListaReportes.add(Reportes);
+                        if(!unaRespuesta.getReportes().isEmpty()){
+                            for (int j = 0; j < unaRespuesta.getReportes().size(); j++) {
+                                Reporte Reportes=unaRespuesta.getReportes().get(j);
+                                ListaReportes.add(Reportes);
+                            }
+                        }
+                        
                         i++;
                     }
                     if(ListaReportes.isEmpty()){
-                        JOptionPane.showMessageDialog(null,"No se encontraron Reportes de Respuestas");
-                         return null;
+                        return ListaReportes;
                     }else{
                         return ListaReportes;
                     }
                 }catch(Exception e){
                     System.out.println(e.getMessage());
-                     return null;
+                    List<Reporte> vacia = new ArrayList<>();
+                     return vacia;
                 }
 	}
         

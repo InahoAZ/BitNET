@@ -140,7 +140,7 @@ public class Usuario {
          * @return 
 	 */
 	public boolean compararNombre(String unaBusqueda) {
-		return this.nombre.contains(unaBusqueda);
+		return this.nombre.toUpperCase().contains(unaBusqueda.toUpperCase());
 	}
 
 	/**
@@ -149,7 +149,7 @@ public class Usuario {
          * @return 
 	 */
 	public boolean compararApellido(String unaBusqueda) {
-            return this.apellido.contains(unaBusqueda);
+            return this.apellido.toUpperCase().contains(unaBusqueda.toUpperCase());
 	}
         
         public boolean compararPassword(String password){
@@ -274,7 +274,7 @@ public class Usuario {
 
         @Override
         public String toString() {
-            return "  " + this.apellido + "  " + this.nombre;
+            return  this.nombre+"  " + this.apellido;
         }
         
         

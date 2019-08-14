@@ -172,7 +172,7 @@ public class Pregunta {
          * @return 
 	 */
 	public boolean compararPregunta(String unaBusqueda) {
-		return this.pregunta.contains(unaBusqueda);
+		return this.pregunta.toUpperCase().contains(unaBusqueda.toUpperCase());
 	}
 
 	/**
@@ -181,7 +181,7 @@ public class Pregunta {
          * @return 
 	 */
 	public boolean compararDescripcion(String unaBusqueda) {
-		return this.descripcion.contains(unaBusqueda);
+		return this.descripcion.toUpperCase().contains(unaBusqueda.toUpperCase());
 	}
 
     @Override
