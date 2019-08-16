@@ -24,38 +24,15 @@ public class Controlador {
             Foro unForo=new Foro();
             return unForo.getPreguntas();
         }
-	/**
-	 * 
-	 * @param unForo
-         * @return 
-	 */
-	public List<Pregunta> verListadoDePreguntas(Foro unForo) {
-                List<Pregunta> preguntasActivas = new ArrayList<>();
-                for(Pregunta p : unForo.getPreguntas()){
-                    if(!p.isBorrado()){
-                        preguntasActivas.add(p);
-                    }
-                }
-                return preguntasActivas;		
-	}
-
+	
 	public List<Foro> verListadoDeForos() {
-		return this.p.buscarActivos(Foro.class);
-	}
-        public List<Respuesta> verRespuestas(Pregunta unaPregunta){
-            List<Respuesta> respuestasActivas = new ArrayList<>();
-            for(Respuesta r : unaPregunta.getRespuestas()){
-                if(!r.isBorrado()){
-                    respuestasActivas.add(r);
-                }
-            }
-            return respuestasActivas;
-            
-            
-        }
+            return this.p.buscarActivos(Foro.class);
+	}       
+        
         public List<Usuario> verListadoDeUsuarios(){
             return this.p.buscarActivos(Usuario.class);
         }
+        
 	/**
 	 * 
 	 * @param pregunta
@@ -73,29 +50,19 @@ public class Controlador {
                 this.p.confirmarTransaccion();
             }catch(Exception e){
                 System.out.println("errorcito: " + e.getMessage());
-                this.p.descartarTransaccion();
-                
+                this.p.descartarTransaccion();                
             }
 	}
-
 	/**
 	 * 
 	 * @param unaPregunta
 	 */
+        
 	public void eliminarPregunta(Pregunta unaPregunta) {
 		try{
                     this.p.iniciarTransaccion();
-                    
-                    //Foro unForo= unaPregunta.getForo();
-                    //unForo.eliminarPregunta(unaPregunta);
-                    //Usuario unUsuario = unaPregunta.getUsuario();
-                    //unUsuario.eliminarPregunta(unaPregunta);
-                    
-                    //this.p.modificar(unForo);
-                    //this.p.modificar(unUsuario);
                     unaPregunta.setBorrado(true);
-                    this.p.modificar(unaPregunta);
-                    
+                    this.p.modificar(unaPregunta);                    
                     this.p.confirmarTransaccion();
                 }catch(Exception e){
                     System.out.println("Errorcito: " + e.getMessage());
@@ -158,19 +125,12 @@ public class Controlador {
 	public void añadirRespuesta(String respuesta, Pregunta unaPregunta, Usuario unUsuario) {
 		try{
                     this.p.iniciarTransaccion();
-                    System.out.println("Pregunta recibi3> "+ unaPregunta+" usr recib2> "+unUsuario);
                     Respuesta unaRespuesta= new Respuesta(respuesta,unaPregunta,unUsuario);
-                    System.out.println(""+unaRespuesta);
                     unaPregunta.añadirRespuesta(unaRespuesta);
-                    System.out.println("1");
                     unUsuario.añadirRespuesta(unaRespuesta);
-                    System.out.println("2");
                     this.p.modificar(unaPregunta);
-                    System.out.println("3");
                     this.p.modificar(unUsuario);
-                    System.out.println("4");
                     this.p.insertar(unaRespuesta);
-                    System.out.println("5");
                     this.p.confirmarTransaccion();
                 }catch(Exception e){
                     System.out.println(e.getMessage());
@@ -184,13 +144,7 @@ public class Controlador {
 	 */
 	public void eliminarRespuesta(Respuesta unaRespuesta) {
 		try{
-                    this.p.iniciarTransaccion();
-                    /*Pregunta unaPregunta=unaRespuesta.getPregunta();
-                    unaPregunta.eliminarRespuesta(unaRespuesta);
-                    Usuario unUsuario = unaRespuesta.getUsuario();
-                    unUsuario.eliminarRespuesta(unaRespuesta);
-                    this.p.modificar(unaPregunta);
-                    this.p.modificar(unUsuario);*/
+                    this.p.iniciarTransaccion();                    
                     unaRespuesta.setBorrado(true);
                     this.p.modificar(unaRespuesta);
                     this.p.confirmarTransaccion();
@@ -209,13 +163,11 @@ public class Controlador {
 	 */
 	public void puntuarRespuesta(Respuesta unaRespuesta, Usuario usuarioActual, boolean positivo) {
 		try{
-                     this.p.iniciarTransaccion();
-                     
+                     this.p.iniciarTransaccion();                     
                      Usuario unUsuario=unaRespuesta.getUsuario();
                      Voto unVoto = usuarioActual.buscarVotoRespuesta(unaRespuesta);
                      int puntaje = unaRespuesta.getPuntaje();
-                     float reputacion=unUsuario.getReputacion();
-                     //Voto unVoto = new Voto();
+                     float reputacion=unUsuario.getReputacion();                     
                      if(positivo){
                         if(unVoto == null){                            
                             unaRespuesta.setPuntaje(puntaje + 1);                            
@@ -340,14 +292,15 @@ public class Controlador {
 
 	/**
 	 * 
-     * @param legajo
-     * @param nombre
-     * @param apellido
-     * @param fechaNac
-     * @param correo
-     * @param password
-     * @param rol
+        * @param legajo
+        * @param nombre
+        * @param apellido
+        * @param fechaNac
+        * @param correo
+        * @param password
+        * @param rol
 	 */
+        
 	public void añadirUsuario(String legajo, String nombre, String apellido, Date fechaNac, String correo, String password, Rol rol) {
             try{
                 this.p.iniciarTransaccion();
@@ -443,12 +396,13 @@ public class Controlador {
 	public void reportarPregunta(String causa, Pregunta unaPregunta, Usuario unUsuario) {
 		try{
                     this.p.iniciarTransaccion();
-                    Reporte reporte= new Reporte(causa,unaPregunta,unUsuario);
-                    unaPregunta.añadirReporte(reporte);
-                    unUsuario.añadirReporte(reporte);
+                    Reporte unReporte= new Reporte(causa,unaPregunta,unUsuario);
+                    unaPregunta.añadirReporte(unReporte);
+                    unUsuario.añadirReporte(unReporte);
                     this.p.modificar(unaPregunta);
                     this.p.modificar(unUsuario);
                     this.p.confirmarTransaccion();
+                    JOptionPane.showMessageDialog(null,"Se Generó su reporte");
                 }catch(Exception e){
                     System.out.println(e.getMessage());
                     this.p.descartarTransaccion();
@@ -459,13 +413,13 @@ public class Controlador {
 	public void reportarRespuesta(String causa, Respuesta unaRespuesta, Usuario unUsuario) {
 		try{
                     this.p.iniciarTransaccion();
-                    Reporte reporte= new Reporte(causa,unaRespuesta,unUsuario);
-                    unaRespuesta.añadirReporte(reporte);
-                    unUsuario.añadirReporte(reporte);
+                    Reporte unReporte= new Reporte(causa,unaRespuesta,unUsuario);
+                    unaRespuesta.añadirReporte(unReporte);
+                    unUsuario.añadirReporte(unReporte);
                     this.p.modificar(unaRespuesta);
-                    this.p.modificar(unUsuario);
-                    JOptionPane.showMessageDialog(null,"Se Generó su reporte");
+                    this.p.modificar(unUsuario);                    
                     this.p.confirmarTransaccion();
+                    JOptionPane.showMessageDialog(null,"Se Generó su reporte");
                 }catch(Exception e){
                     System.out.println(e.getMessage());
                     this.p.descartarTransaccion();

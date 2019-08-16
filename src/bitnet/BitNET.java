@@ -17,7 +17,7 @@ public class BitNET {
 
     public static void main(String[] args) {
         // TODO code application logic here
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("BitNET");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("BitNETPU");
         Persistencia p = new Persistencia(emf);
         Controlador c1 = new Controlador(p);
         VistaLogin vp = new VistaLogin(c1);

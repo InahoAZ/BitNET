@@ -1,6 +1,7 @@
 package vista;
  
 import controlador.Controlador;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -383,7 +384,15 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private void ListaForosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaForosValueChanged
         if(!this.ListaForos.isSelectionEmpty()){
             Foro unForo = (Foro) this.ListaForos.getSelectedValue();
-            this.ListaPreguntas.setListData(this.c.verListadoDePreguntas(unForo).toArray());
+            
+            List<Pregunta> preguntasActivas = new ArrayList<>();
+                for(Pregunta p : unForo.getPreguntas()){
+                    if(!p.isBorrado()){
+                        preguntasActivas.add(p);
+                    }
+                }
+            
+            this.ListaPreguntas.setListData(preguntasActivas.toArray());
         }
     }//GEN-LAST:event_ListaForosValueChanged
 

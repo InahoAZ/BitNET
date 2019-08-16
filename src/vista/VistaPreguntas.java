@@ -1,6 +1,8 @@
 package vista;
 
 import controlador.Controlador;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 import javax.swing.Icon;
 import javax.swing.JFrame;
@@ -16,6 +18,17 @@ public class VistaPreguntas extends javax.swing.JFrame {
     private JFrame vistaAnterior;
     private Usuario usuarioActual;
     private Pregunta unaPregunta;
+    
+    private List<Respuesta> verPreguntasActivas(Pregunta unaPregunta){
+        List<Respuesta> respuestasActivas = new ArrayList<>();
+            for(Respuesta r : unaPregunta.getRespuestas()){
+                if(!r.isBorrado()){
+                    respuestasActivas.add(r);
+                }
+            }
+        return respuestasActivas;
+    }
+    
     public VistaPreguntas(Controlador c,JFrame vistaAnterior,Usuario usuarioActual,Pregunta unaPregunta) {
         initComponents();
         this.setVisible(true);
@@ -27,7 +40,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
         this.lblRol.setText(usuarioActual.getRol().toString());
         this.lblTituloPregunta.setText(this.unaPregunta.getPregunta());
         this.txtDescripcionPregunta.setText(this.unaPregunta.getDescripcion());
-        this.listaRespuesta.setListData(this.c.verRespuestas(unaPregunta).toArray());
+        this.listaRespuesta.setListData(this.verPreguntasActivas(unaPregunta).toArray());
         
         if(this.usuarioActual.getPreguntas().contains(unaPregunta)){
             this.btnEliminarPregunta.setVisible(true);        
@@ -351,6 +364,8 @@ public class VistaPreguntas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         this.vistaAnterior.setVisible(true);
         this.dispose();
@@ -400,7 +415,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
             System.out.println("pregunta enviada: "+this.unaPregunta+" usuario envia2: "+this.usuarioActual);
             this.c.añadirRespuesta(this.txtCargarRespuesta.getText(), this.unaPregunta, this.usuarioActual);
             this.txtRespuesta.setText("");
-            this.listaRespuesta.setListData(this.c.verRespuestas(this.unaPregunta).toArray());
+            this.listaRespuesta.setListData(this.verPreguntasActivas(this.unaPregunta).toArray());
         }else{
             JOptionPane.showMessageDialog(null,"Por Favor ingrese una Respuesta");
         }
@@ -470,7 +485,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
         int retorno = JOptionPane.showConfirmDialog(null,"Esta seguro de que quiere eliminar su pregunta?");
         if (retorno == JOptionPane.YES_OPTION) {
             this.c.eliminarRespuesta((Respuesta)this.listaRespuesta.getSelectedValue());
-            this.listaRespuesta.setListData(this.c.verRespuestas(unaPregunta).toArray());
+            this.listaRespuesta.setListData(this.verPreguntasActivas(unaPregunta).toArray());
             this.txtRespuesta.setText("");
             this.btnMeGusta.setSelected(false);
             this.btnNoMeGusta.setSelected(false);
