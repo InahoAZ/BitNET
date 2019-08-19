@@ -26,12 +26,13 @@ public class Voto {
     @SequenceGenerator(name="sec_idrespuesta", initialValue=1, allocationSize=1)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="sec_idrespuesta")
     private long idVoto;
+    private boolean positivo;  
+    
     @ManyToOne
     private Respuesta respuestaPuntuada;
     @ManyToOne
     private Usuario usuarioPuntuador;
     
-    private boolean positivo;    
     
     public Voto(){
     

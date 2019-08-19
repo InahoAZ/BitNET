@@ -41,17 +41,14 @@ public class VistaPreguntas extends javax.swing.JFrame {
         this.lblTituloPregunta.setText(this.unaPregunta.getPregunta());
         this.txtDescripcionPregunta.setText(this.unaPregunta.getDescripcion());
         this.listaRespuesta.setListData(this.verPreguntasActivas(unaPregunta).toArray());
-        
         if(this.usuarioActual.getPreguntas().contains(unaPregunta)){
             this.btnEliminarPregunta.setVisible(true);        
         }else{
             this.btnEliminarPregunta.setVisible(false);
         }
-        
         this.lblAutorPregunta.setText(unaPregunta.getUsuario().getNombre() + " " + unaPregunta.getUsuario().getApellido());
-        
-        
-        
+        this.btnMeGusta.setEnabled(false);
+        this.btnNoMeGusta.setEnabled(false); 
     }
 
     @SuppressWarnings("unchecked")
@@ -81,7 +78,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
         lblUsuario = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         lblRol = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblCerrarSesion = new javax.swing.JLabel();
         btnMeGusta = new javax.swing.JToggleButton();
         btnNoMeGusta = new javax.swing.JToggleButton();
         btnEliminarRespuesta = new javax.swing.JButton();
@@ -165,7 +162,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
             }
         });
 
-        btnEliminarPregunta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-basura-40.png"))); // NOI18N
+        btnEliminarPregunta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-basura-24.png"))); // NOI18N
         btnEliminarPregunta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarPreguntaActionPerformed(evt);
@@ -175,6 +172,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
         jPanel3.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.focus"));
 
         lblUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/user_person_people_6100.png"))); // NOI18N
+        lblUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblUsuarioMouseClicked(evt);
@@ -187,10 +185,11 @@ public class VistaPreguntas extends javax.swing.JFrame {
         lblRol.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblRol.setText("rol aca");
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-salida-40.png"))); // NOI18N
-        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-salida-40.png"))); // NOI18N
+        lblCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel6MouseClicked(evt);
+                lblCerrarSesionMouseClicked(evt);
             }
         });
 
@@ -206,14 +205,14 @@ public class VistaPreguntas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblUsuario)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel6))
+                .addComponent(lblCerrarSesion))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
+                    .addComponent(lblCerrarSesion)
                     .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(lblNombre)
@@ -236,7 +235,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
             }
         });
 
-        btnEliminarRespuesta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-basura-40.png"))); // NOI18N
+        btnEliminarRespuesta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-basura-24.png"))); // NOI18N
         btnEliminarRespuesta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarRespuestaActionPerformed(evt);
@@ -329,7 +328,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(lblAutorPregunta))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -337,12 +336,12 @@ public class VistaPreguntas extends javax.swing.JFrame {
                         .addComponent(btnMeGusta)
                         .addGap(4, 4, 4)
                         .addComponent(btnNoMeGusta))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(lblAutorRespuesta))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnEliminarRespuesta)
@@ -377,13 +376,16 @@ public class VistaPreguntas extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnReportarPreguntaActionPerformed
 
-    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+    private void lblCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarSesionMouseClicked
         VistaLogin vl = new VistaLogin(this.c);
+        this.usuarioActual=null;
         this.dispose();
-    }//GEN-LAST:event_jLabel6MouseClicked
+    }//GEN-LAST:event_lblCerrarSesionMouseClicked
 
     private void listaRespuestaValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaRespuestaValueChanged
         if(!this.listaRespuesta.isSelectionEmpty()){
+            this.btnMeGusta.setEnabled(true);
+            this.btnNoMeGusta.setEnabled(true);
             Respuesta unaRespuesta= (Respuesta) this.listaRespuesta.getSelectedValue();
             this.txtRespuesta.setText(unaRespuesta.getRespuesta());
             this.lblAutorRespuesta.setText(((Respuesta)this.listaRespuesta.getSelectedValue()).getUsuario().getNombre() + " " + ((Respuesta)this.listaRespuesta.getSelectedValue()).getUsuario().getApellido());
@@ -434,6 +436,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
                     this.c.puntuarRespuesta(unaRespuesta, this.usuarioActual, false);
                 }                
                 this.c.puntuarRespuesta(unaRespuesta, this.usuarioActual, true);
+                this.listaRespuesta.setListData(this.verPreguntasActivas(this.unaPregunta).toArray());
         }   
     }//GEN-LAST:event_btnMeGustaActionPerformed
     
@@ -457,6 +460,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
                     this.c.puntuarRespuesta(unaRespuesta, this.usuarioActual, true);
                 }                
                 this.c.puntuarRespuesta(unaRespuesta, this.usuarioActual, false);
+                this.listaRespuesta.setListData(this.verPreguntasActivas(this.unaPregunta).toArray());
         }
     }//GEN-LAST:event_btnNoMeGustaActionPerformed
 
@@ -508,7 +512,6 @@ public class VistaPreguntas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
@@ -518,6 +521,7 @@ public class VistaPreguntas extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JLabel lblAutorPregunta;
     private javax.swing.JLabel lblAutorRespuesta;
+    private javax.swing.JLabel lblCerrarSesion;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblRol;
     private javax.swing.JLabel lblTituloPregunta;

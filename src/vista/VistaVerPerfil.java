@@ -19,7 +19,7 @@ public class VistaVerPerfil extends javax.swing.JFrame {
         this.c=c;
         this.vistaAnterior=vistaAnterior;
         this.usuarioActual=usuarioActual;
-        if(this.usuarioActual.getRol().toString().compareTo("Administrador")==0 || this.usuarioActual.getRol().toString().compareTo("Registrador")==0){
+        if(this.usuarioActual.getRol().toString().compareTo("Registrador")==0){
             this.combito.setEnabled(false);
             this.listita.setEnabled(false);
             this.lblReputacion.setText("...");

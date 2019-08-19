@@ -82,32 +82,22 @@ public class Controlador {
                     int i=0;
                     int sizeForo = foro.size();
                     while(i<sizeForo){
-                        //System.out.println("F"+i);
                         Foro unForo = foro.get(i);
-                        List<Pregunta> pregunta=unForo.getPreguntas();
+                        List<Pregunta> preguntas=unForo.getPreguntas();
                         int j=0;
-                        //System.out.println("tamanio> "+pregunta.size());
-                        int size = pregunta.size();
+                        int size = preguntas.size();
                         while(j<size){
-                           // System.out.println("vuelta n: "+ j);
-                            Pregunta unaPregunta = pregunta.get(j);
+                            Pregunta unaPregunta = preguntas.get(j);
                             if(!unaPregunta.isBorrado()){
                                 boolean retorno1=unaPregunta.compararPregunta(unaBusqueda);
                                 boolean retorno2=unaPregunta.compararDescripcion(unaBusqueda);
                                 if(retorno1||retorno2){
-                                    System.out.println("encontre "+j);
                                     ResultadoPregunta.add(unaPregunta);
                                 }
                             }
                             j++;
                         } 
                         i++;
-                    }
-                    if(ResultadoPregunta.isEmpty()){
-                        JOptionPane.showMessageDialog(null,"No se encontraron coincidencias de Preguntas");
-                        //return null;
-                    }else{
-                        return ResultadoPregunta;
                     }
                     return ResultadoPregunta;
 
@@ -325,28 +315,23 @@ public class Controlador {
          * @return 
 	 */
 	public List<Usuario> buscarUsuario(String unaBusqueda) {
-		//no esta igual en el diagrama, hay que actualizar DSD
                 try{
-                    List<Usuario>ListaUsuario=new ArrayList<>();
-                    List<Usuario> usuario = this.p.buscarActivos(Usuario.class);//no esta en dsd
-                    int i = 0;
-                    int size = usuario.size();
+                    List<Usuario> listaUsuario = this.p.buscarActivos(Usuario.class);
+                    int i =0;
+                    int size=listaUsuario.size();
                     while(i<size){
-                        Usuario unUsuario=usuario.get(i);
+                        Usuario unUsuario = listaUsuario.get(i);
                         boolean retorno1=unUsuario.compararNombre(unaBusqueda);
                         boolean retorno2=unUsuario.compararApellido(unaBusqueda);
-                        if(retorno1||retorno2){
-                            ListaUsuario.add(unUsuario);
+                        if(!(retorno1||retorno2)){
+                            listaUsuario.remove(unUsuario);
+                            size--;
+                        }else{
+                            i++;
+
                         }
-                        i++;
                     }
-                    
-                    if(ListaUsuario.isEmpty()){//a partir de aca no esta en dsd
-                        JOptionPane.showMessageDialog(null,"No se encontraron coincidencias en usuarios");
-                        return ListaUsuario;
-                    }else{
-                        return ListaUsuario;
-                    }
+                    return listaUsuario;
                 }catch(HeadlessException e){
                     System.out.println(e.getMessage());
                      return null;
@@ -432,24 +417,18 @@ public class Controlador {
                     List<Reporte>ListaReportes=new ArrayList<>();
                     List<Pregunta> preguntas = this.p.buscarActivos(Pregunta.class);//no esta en dsd
                     int i = 0;
-                    System.out.println("tamanio "+preguntas.size());
                     int size = preguntas.size();
                     while(i<size){
-                        System.out.println("vueltita n "+i);
                         Pregunta unaPregunta=preguntas.get(i);
-                        if(!unaPregunta.getReportes().isEmpty()){
-                            for (int j = 0;j < unaPregunta.getReportes().size(); j++) {
-                                Reporte reporte= unaPregunta.getReportes().get(j);
+                        for (int j = 0;j < unaPregunta.getReportes().size(); j++) {
+                            Reporte reporte= unaPregunta.getReportes().get(j);
+                            if(!reporte.isBorrado()){
                                 ListaReportes.add(reporte);
                             }
                         }
                         i++;
                     }
-                    if(ListaReportes.isEmpty()){
-                         return ListaReportes;
-                    }else{
-                        return ListaReportes;
-                    }
+                    return ListaReportes;
                 }catch(HeadlessException e){
                     System.out.println(e.getMessage());
                     List<Reporte> repo = new ArrayList<>();
@@ -480,22 +459,19 @@ public class Controlador {
                     List<Respuesta> respuestas = this.p.buscarActivos(Respuesta.class);//no esta en dsd
                     int i = 0;
                     int size = respuestas.size();
-                    while(i<size){
+                    while(i<size){//esto lo traduzco a un mientras haya respuesta en el dsd
                         Respuesta unaRespuesta=respuestas.get(i);
-                        if(!unaRespuesta.getReportes().isEmpty()){
-                            for (int j = 0; j < unaRespuesta.getReportes().size(); j++) {
+                        for (int j = 0; j < unaRespuesta.getReportes().size(); j++) {
+                            if(unaRespuesta.getReportes().get(j).isBorrado()){
+                                
+                            }else{
                                 Reporte Reportes=unaRespuesta.getReportes().get(j);
-                                ListaReportes.add(Reportes);
+                                ListaReportes.add(Reportes); 
                             }
                         }
-                        
                         i++;
                     }
-                    if(ListaReportes.isEmpty()){
-                        return ListaReportes;
-                    }else{
-                        return ListaReportes;
-                    }
+                    return ListaReportes;
                 }catch(Exception e){
                     System.out.println(e.getMessage());
                     List<Reporte> vacia = new ArrayList<>();

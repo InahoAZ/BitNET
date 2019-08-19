@@ -52,6 +52,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 this.btnAñadirPregunta.setVisible(false);
                 this.btnBuscar.setVisible(true);
                 this.btnEliminarForo.setVisible(false);
+                this.btnEditarForo.setVisible(false);
+                this.btnReportes.setVisible(false);
                 this.btnUsuarios.setVisible(true);
                 break;
             case "Estudiante":
@@ -62,6 +64,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 this.btnBuscar.setVisible(true);
                 this.btnEliminarForo.setVisible(false);
                 this.btnUsuarios.setVisible(false);
+                this.btnEditarForo.setVisible(false);
+                this.btnReportes.setVisible(false);
                 break;
             case "Profesor":
                 System.out.println(this.usuarioActual.getRol().getNombre());                                
@@ -71,6 +75,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 this.btnBuscar.setVisible(true);
                 this.btnEliminarForo.setVisible(false);
                 this.btnUsuarios.setVisible(false);
+                this.btnReportes.setVisible(false);
                 break;
         } 
         
@@ -108,7 +113,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         lblUsuario = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         lblRol = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblCerrarSesion = new javax.swing.JLabel();
         btnAgregarForo = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -183,6 +188,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jPanel3.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.focus"));
 
         lblUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/user_person_people_6100.png"))); // NOI18N
+        lblUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblUsuarioMouseClicked(evt);
@@ -195,11 +201,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         lblRol.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblRol.setText("rol aca");
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-salida-40.png"))); // NOI18N
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-salida-40.png"))); // NOI18N
+        lblCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
+                lblCerrarSesionMouseClicked(evt);
             }
         });
 
@@ -215,14 +221,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblUsuario)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel5))
+                .addComponent(lblCerrarSesion))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
+                    .addComponent(lblCerrarSesion)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(lblNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -396,32 +402,35 @@ public class VistaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ListaForosValueChanged
 
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+    private void lblCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarSesionMouseClicked
         VistaLogin vl = new VistaLogin(this.c);
         this.usuarioActual = null;
         this.dispose();
-    }//GEN-LAST:event_jLabel5MouseClicked
+    }//GEN-LAST:event_lblCerrarSesionMouseClicked
 
     private void ListaPreguntasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListaPreguntasMouseClicked
     }//GEN-LAST:event_ListaPreguntasMouseClicked
 
     private void ListaPreguntasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaPreguntasValueChanged
         if(!this.ListaPreguntas.isSelectionEmpty()){
-            int retorno = JOptionPane.showConfirmDialog(null,"Desea ver detalles de esta pregunta?");
-            if(retorno==JOptionPane.YES_OPTION){
+            //int retorno = JOptionPane.showConfirmDialog(null,"Desea ver detalles de esta pregunta?");
+            //if(retorno==JOptionPane.YES_OPTION){
                 Pregunta unaPregunta = (Pregunta) this.ListaPreguntas.getSelectedValue();
                 VistaPreguntas vp = new VistaPreguntas(this.c,this,this.usuarioActual,unaPregunta);
                 this.dispose();
-            }else{
-                this.ListaPreguntas.clearSelection();
-            }
+            //}else{
+               // this.ListaPreguntas.clearSelection();
+            //}
         }
     }//GEN-LAST:event_ListaPreguntasValueChanged
 
     private void btnEliminarForoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarForoActionPerformed
         if(!this.ListaForos.isSelectionEmpty()){
             Foro unForo = (Foro) this.ListaForos.getSelectedValue();
-            this.c.eliminarForo(unForo);
+            int reply = JOptionPane.showConfirmDialog(null, "Desea eliminar este Foro? ","Confirmar", JOptionPane.YES_NO_OPTION);
+            if(reply == JOptionPane.YES_OPTION){
+                this.c.eliminarForo(unForo);
+            }
         }else{
             JOptionPane.showMessageDialog(null,"Seleccione un Foro");
         }
@@ -494,7 +503,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenuItem jMenuItem1;
@@ -511,6 +519,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JLabel lblCerrarSesion;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblRol;
     private javax.swing.JLabel lblUsuario;

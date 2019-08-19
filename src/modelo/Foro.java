@@ -19,9 +19,10 @@ public class Foro {
 	private int idForo;
 	private String titulo;
 	private String descripcion;
+        private boolean borrado;
+        
         @OneToMany(mappedBy = "foro")
         private List<Pregunta> preguntas=new ArrayList<>();
-        private boolean borrado;
         
         public Foro() {
             this.preguntas = new ArrayList<>();

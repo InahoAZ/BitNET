@@ -28,6 +28,7 @@ public class VistaAgregarForo extends javax.swing.JFrame {
         this.txtTitulo.setText(unForo.getTitulo());
         this.txtDescripcion.setText(unForo.getDescripcion());
         this.unForo=unForo;
+        this.lblTitulo.setText("Editar Foro");
     }
 
     
@@ -42,7 +43,7 @@ public class VistaAgregarForo extends javax.swing.JFrame {
         btnAgregarForo = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,8 +81,8 @@ public class VistaAgregarForo extends javax.swing.JFrame {
 
         jLabel3.setText("Descripcion");
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel4.setText("Añadir Foro");
+        lblTitulo.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        lblTitulo.setText("Añadir Foro");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,13 +108,13 @@ public class VistaAgregarForo extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4)
+                .addComponent(lblTitulo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel4)
+                .addComponent(lblTitulo)
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -154,7 +155,7 @@ public class VistaAgregarForo extends javax.swing.JFrame {
 
     private void btnAgregarForoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarForoActionPerformed
        if(this.txtTitulo.getText().isEmpty()){
-           JOptionPane.showMessageDialog(null,"Complete todos los campos correctamente");
+           JOptionPane.showMessageDialog(null,"Complete el Titulo");
        }else{
             if(this.txtDescripcion.getText().isEmpty()){
                 if(this.unForo==null){
@@ -172,9 +173,10 @@ public class VistaAgregarForo extends javax.swing.JFrame {
                     this.unForo=null;
                 }
             }
-            int respuesta = JOptionPane.showConfirmDialog(null,"Desea cargar un nuevo foro?");
+            int respuesta = JOptionPane.showConfirmDialog(null,"Desea registrar un nuevo foro?");
             if(respuesta == JOptionPane.YES_OPTION){
                 this.limpiar();
+                this.lblTitulo.setText("Añadir Foro");
             }else{
                 if(respuesta == JOptionPane.NO_OPTION){
                     this.vistaAnterior.setVisible(true);
@@ -192,7 +194,7 @@ public class VistaAgregarForo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtTitulo;
     // End of variables declaration//GEN-END:variables

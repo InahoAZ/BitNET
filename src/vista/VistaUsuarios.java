@@ -60,7 +60,7 @@ public class VistaUsuarios extends javax.swing.JFrame {
         lblUsuario = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         lblRol = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        lblCerrarSesion = new javax.swing.JLabel();
         txtFNac1 = new javax.swing.JFormattedTextField();
         jLabel13 = new javax.swing.JLabel();
         txtPassword1 = new javax.swing.JTextField();
@@ -140,6 +140,7 @@ public class VistaUsuarios extends javax.swing.JFrame {
         jPanel3.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.focus"));
 
         lblUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/securityguard_person_man_avatar_segurida_2844 (1).png"))); // NOI18N
+        lblUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblUsuarioMouseClicked(evt);
@@ -152,10 +153,11 @@ public class VistaUsuarios extends javax.swing.JFrame {
         lblRol.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblRol.setText("rol aca");
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-salida-40.png"))); // NOI18N
-        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-salida-40.png"))); // NOI18N
+        lblCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel12MouseClicked(evt);
+                lblCerrarSesionMouseClicked(evt);
             }
         });
 
@@ -171,14 +173,14 @@ public class VistaUsuarios extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(lblUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel12))
+                .addComponent(lblCerrarSesion))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12)
+                    .addComponent(lblCerrarSesion)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(lblNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -459,10 +461,11 @@ public class VistaUsuarios extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnModificarActionPerformed
 
-    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+    private void lblCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarSesionMouseClicked
         VistaLogin vl = new VistaLogin(this.c);
+        this.usuarioActual=null;
         this.dispose();
-    }//GEN-LAST:event_jLabel12MouseClicked
+    }//GEN-LAST:event_lblCerrarSesionMouseClicked
 
     private void lblUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUsuarioMouseClicked
         VistaVerPerfil VVP = new VistaVerPerfil(this.c,this,this.usuarioActual);
@@ -478,7 +481,6 @@ public class VistaUsuarios extends javax.swing.JFrame {
     private javax.swing.JComboBox cbRol;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -489,6 +491,7 @@ public class VistaUsuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCerrarSesion;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblRol;
     private javax.swing.JLabel lblUsuario;

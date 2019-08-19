@@ -34,6 +34,8 @@ public class Usuario {
         
 	private String correo;
 	private float reputacion;
+        private boolean borrado;
+        
         
         @ManyToOne
         private Rol rol;
@@ -52,7 +54,6 @@ public class Usuario {
         @OneToMany(mappedBy="usuarioPuntuador")
         private List<Voto> respuestasPuntuadas;
         
-        private boolean borrado;
         
         public Usuario(){
             this.preguntas = new ArrayList<>();

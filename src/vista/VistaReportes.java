@@ -1,10 +1,13 @@
 package vista;
 
 import controlador.Controlador;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import modelo.Pregunta;
 import modelo.Reporte;
+import modelo.Respuesta;
 import modelo.Usuario;
 
 public class VistaReportes extends javax.swing.JFrame {
@@ -20,14 +23,36 @@ public class VistaReportes extends javax.swing.JFrame {
         this.lblNombre.setText(usuarioActual.getNombre() + usuarioActual.getApellido());
         this.lblRol.setText(usuarioActual.getRol().toString());
         this.c=c;
-        System.out.println("Lista repo preg "+this.c.verReportesPreguntas());
         this.actualizarListas();
     }
     public void actualizarListas(){
+        /*List<Pregunta> preguntas = new ArrayList<>();
+        for (int i = 0; i < this.c.verReportesPreguntas().size(); i++) {
+            preguntas.add(this.c.verReportesPreguntas().get(i).getPregunta());
+        }
+        List<Respuesta> respuestas = new ArrayList<>();
+        for (int i = 0; i < this.c.verReportesRespuestas().size(); i++) {
+            respuestas.add(this.c.verReportesRespuestas().get(i).getRespuesta());
+        }*/
         this.listaReportesPreguntas.setListData(this.c.verReportesPreguntas().toArray());
         this.listaReportesRespuestas.setListData(this.c.verReportesRespuestas().toArray());
     }
 
+    private void limpiar(){
+        //usuario reportado
+            this.lblNombre1.setText("...");
+            this.lblApellido.setText("...");
+            this.lblRol1.setText("...");
+            this.lblLegajo.setText("...");
+            this.lblReputacion.setText("...");
+            //usuario que reporto
+            this.lblNombre2.setText("...");
+            this.lblLegajo2.setText("...");
+            this.lblRol2.setText("...");
+            //causa del lio
+            this.lblCausa.setText("");
+            this.artReportado.setText("");
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -40,7 +65,7 @@ public class VistaReportes extends javax.swing.JFrame {
         lblUsuario = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         lblRol = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        lblCerrarSesion = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -95,6 +120,7 @@ public class VistaReportes extends javax.swing.JFrame {
         jPanel3.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.focus"));
 
         lblUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/user_person_people_6100.png"))); // NOI18N
+        lblUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblUsuarioMouseClicked(evt);
@@ -107,10 +133,11 @@ public class VistaReportes extends javax.swing.JFrame {
         lblRol.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblRol.setText("rol aca");
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-salida-40.png"))); // NOI18N
-        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-salida-40.png"))); // NOI18N
+        lblCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel12MouseClicked(evt);
+                lblCerrarSesionMouseClicked(evt);
             }
         });
 
@@ -126,14 +153,14 @@ public class VistaReportes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblUsuario)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel12))
+                .addComponent(lblCerrarSesion))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12)
+                    .addComponent(lblCerrarSesion)
                     .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(lblNombre)
@@ -169,7 +196,7 @@ public class VistaReportes extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
@@ -185,7 +212,7 @@ public class VistaReportes extends javax.swing.JFrame {
                                 .addComponent(lblApellido))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel9)
-                        .addGap(27, 27, 27)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblNombre1)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -348,7 +375,7 @@ public class VistaReportes extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel4)
-                                        .addGap(18, 18, 18)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel11)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(lblCausa)
@@ -419,10 +446,11 @@ public class VistaReportes extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
-    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+    private void lblCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarSesionMouseClicked
         VistaLogin vl = new VistaLogin(this.c);
+        this.usuarioActual=null;
         this.dispose();
-    }//GEN-LAST:event_jLabel12MouseClicked
+    }//GEN-LAST:event_lblCerrarSesionMouseClicked
 
     private void lblUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUsuarioMouseClicked
         VistaVerPerfil VVP = new VistaVerPerfil(this.c,this,this.usuarioActual);
@@ -441,6 +469,8 @@ public class VistaReportes extends javax.swing.JFrame {
                 this.c.eliminarRespuesta(unReporte.getRespuesta());
             }
             this.actualizarListas();
+            this.limpiar();
+            
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
@@ -459,7 +489,7 @@ public class VistaReportes extends javax.swing.JFrame {
             //usuario que reporto
             this.lblNombre2.setText(unReporte.getUsuario().getNombre());
             this.lblLegajo2.setText(unReporte.getUsuario().getLegajo());
-            this.lblRol2.setText(unReporte.getUsuario().getRol().toString());
+            this.lblRol2.setText(unReporte.getUsuario().getRol().getNombre());
             //causa del lio
             this.lblCausa.setText(unReporte.getCausa());
             this.artReportado.setText(unReporte.getPregunta().toString());
@@ -476,13 +506,13 @@ public class VistaReportes extends javax.swing.JFrame {
             //usuario reportado
             this.lblNombre1.setText(unReporte.getRespuesta().getUsuario().getNombre());
             this.lblApellido.setText(unReporte.getRespuesta().getUsuario().getApellido());
-            this.lblRol1.setText(unReporte.getRespuesta().getUsuario().getRol().toString());
+            this.lblRol1.setText(unReporte.getRespuesta().getUsuario().getRol().getNombre());
             this.lblLegajo.setText(unReporte.getRespuesta().getUsuario().getLegajo());
             this.lblReputacion.setText(Float.toString(unReporte.getRespuesta().getUsuario().getReputacion()));
             //usuario que reporto
             this.lblNombre2.setText(unReporte.getUsuario().getNombre());
             this.lblLegajo2.setText(unReporte.getUsuario().getLegajo());
-            this.lblRol2.setText(unReporte.getUsuario().getRol().toString());
+            this.lblRol2.setText(unReporte.getUsuario().getRol().getNombre());
             //causa del lio
             this.lblCausa.setText(unReporte.getCausa());
             this.artReportado.setText(unReporte.getRespuesta().toString());
@@ -490,7 +520,7 @@ public class VistaReportes extends javax.swing.JFrame {
     }//GEN-LAST:event_listaReportesRespuestasValueChanged
 
     private void btnRechazarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRechazarActionPerformed
-        if(this.listaReportesPreguntas.isSelectionEmpty()||this.listaReportesRespuestas.isSelectionEmpty()){
+        if(this.listaReportesPreguntas.isSelectionEmpty()&&this.listaReportesRespuestas.isSelectionEmpty()){
             JOptionPane.showMessageDialog(null,"Seleccione un Reporte");
         }else{
             if(!this.listaReportesPreguntas.isSelectionEmpty()){
@@ -502,6 +532,7 @@ public class VistaReportes extends javax.swing.JFrame {
             }
         }
         this.actualizarListas();
+        this.limpiar();
     }//GEN-LAST:event_btnRechazarActionPerformed
 
  
@@ -514,7 +545,6 @@ public class VistaReportes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel23;
@@ -535,6 +565,7 @@ public class VistaReportes extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblApellido;
     private javax.swing.JLabel lblCausa;
+    private javax.swing.JLabel lblCerrarSesion;
     private javax.swing.JLabel lblLegajo;
     private javax.swing.JLabel lblLegajo2;
     private javax.swing.JLabel lblNombre;

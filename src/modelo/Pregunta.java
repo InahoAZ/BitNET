@@ -23,9 +23,9 @@ public class Pregunta {
         @SequenceGenerator(name="sec_idpregunta", initialValue=1, allocationSize=1)
         @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="sec_idpregunta")
 	private int idPregunta;
-        
 	private String pregunta;
 	private String descripcion;
+        private boolean borrado;
         
         @Temporal(javax.persistence.TemporalType.DATE)
 	private Date fechaPublicacion;
@@ -42,7 +42,6 @@ public class Pregunta {
         @ManyToOne
         private Usuario usuario;
         
-        private boolean borrado;
 
         public Pregunta() {
             this.respuestas = new ArrayList<>();
